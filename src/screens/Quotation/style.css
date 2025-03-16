@@ -1,0 +1,134 @@
+.quotation {
+  align-items: flex-start;
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+  display: flex;
+  flex-direction: column;
+  height: 1024px;
+  position: relative;
+}
+
+.quotation .header-navigation-4 {
+  flex: 0 0 auto !important;
+  z-index: 1 !important;
+}
+
+.quotation .icon-instance-node-3 {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.quotation .main-3 {
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 40px 0px 0px 0px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: -44.00px;
+  padding: 24px 0px;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.quotation .section-3 {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.quotation .content-28 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: var(--3-spacing-spacing-xl);
+  position: relative;
+  width: 1280px;
+}
+
+.quotation .text-and-supporting-13 {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--3-spacing-spacing-xs);
+  min-width: 320px;
+  position: relative;
+}
+
+.quotation .text-44 {
+  align-self: stretch;
+  color: var(--1-color-modes-colors-text-text-primary-900);
+  font-family: var(--display-sm-semibold-font-family);
+  font-size: var(--display-sm-semibold-font-size);
+  font-style: var(--display-sm-semibold-font-style);
+  font-weight: var(--display-sm-semibold-font-weight);
+  letter-spacing: var(--display-sm-semibold-letter-spacing);
+  line-height: var(--display-sm-semibold-line-height);
+  margin-top: -1.00px;
+  position: relative;
+}
+
+.quotation .actions-12 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: var(--3-spacing-spacing-lg);
+  position: relative;
+}
+
+.quotation .button-10 {
+  flex: 0 0 auto !important;
+}
+
+.quotation .button-11 {
+  flex: 0 0 auto;
+  margin-bottom: -3.00px;
+  margin-right: -2.00px;
+  margin-top: -1.00px;
+  position: relative;
+}
+
+.quotation .form-4 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  width: 1280px;
+}
+
+.quotation .divider-6 {
+  align-self: stretch;
+  background-color: var(--1-color-modes-colors-border-border-secondary);
+  height: 1px;
+  position: relative;
+  width: 100%;
+}
+
+.quotation .frame-12 {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+}
+
+.quotation .PDF-format-3 {
+  height: 842px;
+  position: relative;
+  width: 595px;
+}

@@ -1,0 +1,53 @@
+.nav-item-button {
+  align-items: center;
+  border-radius: var(--2-radius-radius-sm);
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  padding: var(--3-spacing-spacing-md);
+  position: relative;
+}
+
+.nav-item-button .bell {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.nav-item-button.md {
+  height: 40px;
+  width: 40px;
+}
+
+.nav-item-button.lg {
+  height: 48px;
+  width: 48px;
+}
+
+.nav-item-button.state-0-focused {
+  box-shadow: var(--focus-rings-focus-ring);
+}
+
+.nav-item-button.state-0-hover.current-1-true {
+  background-color: var(--1-color-modes-colors-background-bg-secondary-hover);
+}
+
+.nav-item-button.state-0-hover.current-1-false {
+  background-color: var(--1-color-modes-colors-background-bg-primary-hover);
+}
+
+.nav-item-button.state-0-focused.current-1-false {
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+}
+
+.nav-item-button.state-0-default.current-1-true {
+  background-color: var(--1-color-modes-colors-background-bg-active);
+}
+
+.nav-item-button.state-0-default.current-1-false {
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+}
+
+.nav-item-button.state-0-focused.current-1-true {
+  background-color: var(--1-color-modes-colors-background-bg-active);
+}
