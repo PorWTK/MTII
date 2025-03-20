@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DatePickerDropdown } from "../../components/DatePickerDropdown";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
@@ -14,12 +14,25 @@ import { Check32 } from "../../icons/Check32";
 import { LogOut } from "../../icons/LogOut";
 import { ReverseLeft1 } from "../../icons/ReverseLeft1";
 import { XClose30 } from "../../icons/XClose30";
-import { FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { FormControl, InputLabel, Select, MenuItem, TextField } from '@mui/material';
 import "./style.css";
 import { useNavigate } from "react-router-dom";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+
+
+
 
 export const Analytics = () => {
   const navigate = useNavigate();
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [channel, setChannel] = useState("All");
+
+  const handleChannelChange = (event) => {
+    setChannel(event.target.value);
+  };
+
   return (
     <div className="analytics">
       <HeaderNavigationWrapper
@@ -44,44 +57,61 @@ export const Analytics = () => {
             <div className="actions-8" />
           </div>
 
-          <div className="tabs-and-filters">
+                    {/* Replace custom date picker & input dropdown with MUI components */}
+                    <div className="tabs-and-filters">
             <div className="frame">
               <div className="input-with-label-3">
                 <div className="label-wrapper-3">
                   <div className="label-3">Dates</div>
                 </div>
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <div style={{ display: "flex", gap: "8px", width: "100%" }}>
+                    <div style={{ flex: 1 }}>
+                      <DatePicker
+                        label="Start Date"
+                        value={startDate}
+                        onChange={(newValue) => setStartDate(newValue)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            size="small"
+                            fullWidth
+                            className="date-picker-input"
+                          />
+                        )}
+                      />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <DatePicker
+                        label="End Date"
+                        value={endDate}
+                        onChange={(newValue) => setEndDate(newValue)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            size="small"
+                            fullWidth
+                            className="date-picker-input"
+                          />
+                        )}
+                      />
+                    </div>
+                  </div>
+                </LocalizationProvider>
               </div>
-
-              <DatePickerDropdown
-                breakpoint="mobile"
-                buttonsButtonIcon={
-                  <Calendar29 className="icon-instance-node" />
-                }
-                buttonsButtonSizeMdHierarchyClassName="date-picker-dropdown-4"
-                buttonsButtonText="Select dates"
-                buttonsButtonTextClassName="date-picker-dropdown-3"
-                buttonsButtonTextPaddingClassName="date-picker-dropdown-2"
-                className="date-picker-dropdown-instance"
-                opened={false}
-                stateProp="active"
-                type="dual-dates"
-              />
             </div>
-
-            <InputDropdown
-              className="input-dropdown-2"
-              helpIcon={false}
-              hintText={false}
-              inputWithLabelClassName="input-dropdown-3"
-              required={false}
-              stateProp="default"
-              supportingText={false}
-              text="Channel"
-              text1="All"
-              type="default"
-            />
+            <FormControl variant="outlined" className="input-dropdown-2" size="small">
+              <InputLabel>Receiver</InputLabel>
+              <Select label="Receiver" value={channel} onChange={handleChannelChange}>
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="@PWPINN">@PWPINN</MenuItem>
+                <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
+                <MenuItem value="บร">บร</MenuItem>
+              </Select>
+            </FormControl>
           </div>
         </div>
+  
 
         <div className="metrics">
           <MetricItem

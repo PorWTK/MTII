@@ -1,1 +1,0 @@
-export { MetricItemWrapper } from "./MetricItemWrapper";
