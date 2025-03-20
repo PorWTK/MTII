@@ -12,7 +12,7 @@
   z-index: 1 !important;
 }
 
-.analytics .icon-instance-node-3 {
+.analytics .icon-instance-node {
   height: 20px !important;
   position: relative !important;
   width: 20px !important;
@@ -26,14 +26,14 @@
   flex: 0 0 auto;
   flex-direction: column;
   gap: 32px;
-  margin-bottom: -55.00px;
+  margin-bottom: -19.00px;
   padding: 24px 0px;
   position: relative;
   width: 100%;
   z-index: 0;
 }
 
-.analytics .section {
+.analytics .header {
   align-items: center;
   align-self: stretch;
   display: flex;
@@ -42,10 +42,10 @@
   gap: 24px;
   position: relative;
   width: 100%;
-  z-index: 0;
+  z-index: 2;
 }
 
-.analytics .content-23 {
+.analytics .header-2 {
   align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
@@ -55,7 +55,7 @@
   width: 1280px;
 }
 
-.analytics .text-and-supporting-11 {
+.analytics .text-and-supporting-12 {
   align-items: flex-start;
   display: flex;
   flex: 1;
@@ -66,7 +66,7 @@
   position: relative;
 }
 
-.analytics .text-39 {
+.analytics .text-44 {
   align-self: stretch;
   color: var(--1-color-modes-colors-text-text-primary-900);
   font-family: var(--display-sm-semibold-font-family);
@@ -79,7 +79,7 @@
   position: relative;
 }
 
-.analytics .supporting-text-8 {
+.analytics .supporting-text-14 {
   align-self: stretch;
   color: var(--1-color-modes-colors-text-text-tertiary-600);
   font-family: var(--text-sm-regular-font-family);
@@ -193,38 +193,37 @@
   justify-content: space-between !important;
 }
 
-.analytics .metric-group-wrapper {
-  align-items: center;
+.analytics .metrics {
+  align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
-  flex-direction: column;
-  gap: 24px;
+  justify-content: space-between;
   position: relative;
   width: 1280px;
-  z-index: -1;
-}
-
-.analytics .metric-group {
-  align-items: flex-start;
-  align-self: stretch;
-  display: flex;
-  flex: 0 0 auto;
-  flex-wrap: wrap;
-  gap: 24px 24px;
-  position: relative;
-  width: 100%;
-}
-
-.analytics .design-component-instance-node-2 {
-  flex: 0 0 auto !important;
+  z-index: 1;
 }
 
 .analytics .metric-item-instance {
-  height: 176px !important;
-  width: 410.67px !important;
+  width: 312px !important;
 }
 
-.analytics .frame-2 {
+.analytics .metric-item-2 {
+  color: #067647 !important;
+}
+
+.analytics .metric-item-3 {
+  color: #4f378a !important;
+}
+
+.analytics .metric-item-4 {
+  color: #b54708 !important;
+}
+
+.analytics .metric-item-5 {
+  color: #b42318 !important;
+}
+
+.analytics .section {
   align-items: flex-start;
   background-color: #ffffff;
   display: flex;
@@ -232,10 +231,10 @@
   gap: 24px;
   position: relative;
   width: 1280px;
-  z-index: -2;
+  z-index: 0;
 }
 
-.analytics .content-24 {
+.analytics .chart {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
@@ -385,14 +384,13 @@
   width: 8px;
 }
 
-.analytics .container-2 {
+.analytics .table {
   align-items: flex-start;
   display: flex;
   flex: 1;
   flex-direction: column;
   flex-grow: 1;
   gap: 24px;
-  width: 864;
   max-width: var(--5-containers-container-max-width-desktop);
   padding: 0px var(--5-containers-container-padding-desktop) 0px
     var(--5-containers-container-padding-desktop);
@@ -405,7 +403,7 @@
   width: 100% !important;
 }
 
-.analytics .table {
+.analytics .recent-table {
   align-items: flex-start;
   align-self: stretch;
   background-color: var(--1-color-modes-colors-background-bg-primary);
@@ -414,7 +412,6 @@
   border-radius: 0px var(--shape-corner-none) 12px 12px;
   box-shadow: var(--shadows-shadow-xs);
   display: flex;
-  width: 800px;
   flex: 0 0 auto;
   flex-direction: column;
   overflow: hidden;
@@ -422,7 +419,7 @@
   width: 100%;
 }
 
-.analytics .content-25 {
+.analytics .content-23 {
   align-items: flex-start;
   align-self: stretch;
   display: flex;
@@ -510,7 +507,7 @@
   position: relative;
 }
 
-.analytics .text-40 {
+.analytics .text-45 {
   color: var(--1-color-modes-colors-text-text-tertiary-600);
   font-family: var(--text-xs-medium-font-family);
   font-size: var(--text-xs-medium-font-size);
@@ -532,7 +529,7 @@
   position: relative;
 }
 
-.analytics .icon-instance-node-4 {
+.analytics .icon-instance-node-2 {
   height: 12px !important;
   position: relative !important;
   width: 12px !important;
@@ -621,6 +618,10 @@
   position: relative;
   width: 100%;
   z-index: 4;
+}
+
+.analytics .dropdown-5 {
+  flex: 0 0 auto !important;
 }
 
 .analytics .table-cell-13 {

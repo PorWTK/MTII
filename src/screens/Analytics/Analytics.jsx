@@ -3,7 +3,7 @@ import { DatePickerDropdown } from "../../components/DatePickerDropdown";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
 import { InputDropdown } from "../../components/InputDropdown";
-import { MetricItemWrapper } from "../../components/MetricItemWrapper";
+import { MetricItem } from "../../components/MetricItem";
 import { Pagination } from "../../components/Pagination";
 import { SectionHeader } from "../../components/SectionHeader";
 import { TableCell } from "../../components/TableCell";
@@ -27,18 +27,18 @@ export const Analytics = () => {
         headerNavigationNavItemBaseCurrent={false}
         headerNavigationNavItemBaseCurrent1
         headerNavigationNavItemButtonIcon={
-          <LogOut className="icon-instance-node-3" />
+          <LogOut className="icon-instance-node" />
         }
       />
       <div className="main">
-        <div className="section">
-          <div className="content-23">
-            <div className="text-and-supporting-11">
-              <p className="text-39">
+        <div className="header">
+          <div className="header-2">
+            <div className="text-and-supporting-12">
+              <p className="text-44">
                 Incomes Tracking &amp; Managing (Analytics)
               </p>
 
-              <div className="supporting-text-8">Analyze the incomes</div>
+              <div className="supporting-text-14">Analyze the incomes</div>
             </div>
 
             <div className="actions-8" />
@@ -55,7 +55,7 @@ export const Analytics = () => {
               <DatePickerDropdown
                 breakpoint="mobile"
                 buttonsButtonIcon={
-                  <Calendar29 className="icon-instance-node-3" />
+                  <Calendar29 className="icon-instance-node" />
                 }
                 buttonsButtonSizeMdHierarchyClassName="date-picker-dropdown-4"
                 buttonsButtonText="Select dates"
@@ -83,30 +83,63 @@ export const Analytics = () => {
           </div>
         </div>
 
-        <div className="metric-group-wrapper">
-          <div className="metric-group">
-            <MetricItemWrapper
-              className="design-component-instance-node-2"
-              metricItemActionsFalseTypeClassName="metric-item-instance"
-            />
-            <MetricItemWrapper
-              className="design-component-instance-node-2"
-              metricItemActionsFalseTypeClassName="metric-item-instance"
-              metricItemText="26.4k"
-              metricItemText1="Tax to pay"
-            />
-            <MetricItemWrapper
-              className="design-component-instance-node-2"
-              metricItemActionsFalseTypeClassName="metric-item-instance"
-              metricItemChangeTrend="negative"
-              metricItemText="10k"
-              metricItemText1="Total pending income"
-            />
-          </div>
+        <div className="metrics">
+          <MetricItem
+            actions={false}
+            breakpoint="desktop"
+            className="metric-item-instance"
+            dropdownIcon={false}
+            hasBadgeWrap={false}
+            hasChangeAndText={false}
+            headingClassName="metric-item-2"
+            numberClassName="metric-item-2"
+            text="Total income (baht)"
+            text1="220,000"
+            type="chart-01"
+          />
+          <MetricItem
+            actions={false}
+            breakpoint="desktop"
+            className="metric-item-instance"
+            dropdownIcon={false}
+            hasBadgeWrap={false}
+            hasChangeAndText={false}
+            headingClassName="metric-item-3"
+            numberClassName="metric-item-3"
+            text="Tax to pay (baht)"
+            text1="3,500"
+            type="chart-01"
+          />
+          <MetricItem
+            actions={false}
+            breakpoint="desktop"
+            className="metric-item-instance"
+            dropdownIcon={false}
+            hasBadgeWrap={false}
+            hasChangeAndText={false}
+            headingClassName="metric-item-4"
+            numberClassName="metric-item-4"
+            text="Total pending (baht)"
+            text1="56,000"
+            type="chart-01"
+          />
+          <MetricItem
+            actions={false}
+            breakpoint="desktop"
+            className="metric-item-instance"
+            dropdownIcon={false}
+            hasBadgeWrap={false}
+            hasChangeAndText={false}
+            headingClassName="metric-item-5"
+            numberClassName="metric-item-5"
+            text="Total overdue (baht)"
+            text1="9,900"
+            type="chart-01"
+          />
         </div>
 
-        <div className="frame-2">
-          <div className="content-24">
+        <div className="section">
+          <div className="chart">
             <SectionHeader
               actions={false}
               breakpoint="desktop"
@@ -185,7 +218,7 @@ export const Analytics = () => {
             </div>
           </div>
 
-          <div className="container-2">
+          <div className="table">
             <SectionHeader
               actions={false}
               breakpoint="desktop"
@@ -197,8 +230,8 @@ export const Analytics = () => {
               text="Recent activity"
               type="buttons"
             />
-            <div className="table">
-              <div className="content-25">
+            <div className="recent-table">
+              <div className="content-23">
                 <div className="column">
                   <TableHeaderCell
                     checkbox
@@ -254,7 +287,7 @@ export const Analytics = () => {
                 <div className="column-2">
                   <div className="table-header-wrapper">
                     <div className="table-header-2">
-                      <div className="text-40">Posting Date</div>
+                      <div className="text-45">Posting Date</div>
                     </div>
                   </div>
 
@@ -310,7 +343,7 @@ export const Analytics = () => {
                     className="table-cell-6"
                     override={
                       <ChatBubble1
-                        className="icon-instance-node-4"
+                        className="icon-instance-node-2"
                         color="#344054"
                       />
                     }
@@ -323,7 +356,7 @@ export const Analytics = () => {
                     badgeIcon="icon-leading"
                     badgeText="Paid"
                     className="table-cell-7"
-                    override={<Check32 className="icon-instance-node-4" />}
+                    override={<Check32 className="icon-instance-node-2" />}
                     stateProp="default"
                     style="badge"
                     supportingText={false}
@@ -333,7 +366,7 @@ export const Analytics = () => {
                     badgeIcon="icon-leading"
                     badgeText="Pending"
                     className="table-cell-8"
-                    override={<ReverseLeft1 className="icon-instance-node-4" />}
+                    override={<ReverseLeft1 className="icon-instance-node-2" />}
                     stateProp="default"
                     style="badge"
                     supportingText={false}
@@ -345,7 +378,7 @@ export const Analytics = () => {
                     className="table-cell-9"
                     override={
                       <XClose30
-                        className="icon-instance-node-4"
+                        className="icon-instance-node-2"
                         color="#F04438"
                       />
                     }
@@ -358,7 +391,7 @@ export const Analytics = () => {
                     badgeIcon="icon-leading"
                     badgeText="Paid"
                     className="table-cell-10"
-                    override={<Check32 className="icon-instance-node-4" />}
+                    override={<Check32 className="icon-instance-node-2" />}
                     stateProp="default"
                     style="badge"
                     supportingText={false}
@@ -513,38 +546,23 @@ export const Analytics = () => {
                     text={false}
                   />
                   <div className="table-cell-12">
-                    <DropdownWrapper
-                      className="design-component-instance-node-2"
-                      dropdownOpen={false}
-                    />
+                    <DropdownWrapper className="dropdown-5" />
                   </div>
 
                   <div className="table-cell-13">
-                    <DropdownWrapper
-                      className="design-component-instance-node-2"
-                      dropdownOpen={false}
-                    />
+                    <DropdownWrapper className="dropdown-5" />
                   </div>
 
                   <div className="table-cell-14">
-                    <DropdownWrapper
-                      className="design-component-instance-node-2"
-                      dropdownOpen={false}
-                    />
+                    <DropdownWrapper className="dropdown-5" />
                   </div>
 
                   <div className="table-cell-15">
-                    <DropdownWrapper
-                      className="design-component-instance-node-2"
-                      dropdownOpen={false}
-                    />
+                    <DropdownWrapper className="dropdown-5" />
                   </div>
 
                   <div className="table-cell-16">
-                    <DropdownWrapper
-                      className="design-component-instance-node-2"
-                      dropdownOpen={false}
-                    />
+                    <DropdownWrapper className="dropdown-5" />
                   </div>
                 </div>
               </div>

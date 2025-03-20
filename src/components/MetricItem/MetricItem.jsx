@@ -30,16 +30,16 @@ export const MetricItem = ({
   type,
   breakpoint,
   className,
+  headingClassName,
   text = "Views 24 hours",
+  numberClassName,
   text1 = "2,000",
-  changeText = "100%",
-  text2 = "vs last month",
+  hasChangeAndText = true,
   hasBadgeWrap = true,
-  changeTrend = "positive",
 }) => {
   return (
     <div
-      className={`metric-item breakpoint-8-${breakpoint} actions-${actions} ${type} ${className}`}
+      className={`metric-item breakpoint-1-${breakpoint} actions-${actions} ${type} ${className}`}
     >
       {((!actions && type === "chart-01") ||
         (!actions && type === "chart-02") ||
@@ -47,7 +47,7 @@ export const MetricItem = ({
         (!actions && type === "simple") ||
         actions) && (
         <>
-          <div className="heading">
+          <div className={`heading ${headingClassName}`}>
             {!actions && ["chart-01", "simple"].includes(type) && <>{text}</>}
 
             {((actions && type === "chart-01") ||
@@ -63,9 +63,9 @@ export const MetricItem = ({
                       color={type === "chart-02" ? "gray" : "brand"}
                       icon={
                         type === "chart-02" ? (
-                          <Eye className="instance-node-15" />
+                          <Eye className="instance-node-5" />
                         ) : (
-                          <Zap4 className="instance-node-15" color="#7F56D9" />
+                          <Zap4 className="instance-node-5" color="#7F56D9" />
                         )
                       }
                       size="lg"
@@ -85,7 +85,7 @@ export const MetricItem = ({
               <div className="number-and-badge">
                 {["chart-03", "icon-02", "simple"].includes(type) && (
                   <>
-                    <div className="number-20">
+                    <div className="number-18">
                       {["icon-02", "simple"].includes(type) && <>{text1}</>}
 
                       {type === "chart-03" && <>{text}</>}
@@ -94,7 +94,7 @@ export const MetricItem = ({
                     <div className="badge-wrap">
                       {type === "simple" && (
                         <Badge
-                          className="instance-node-16"
+                          className="instance-node-6"
                           color="success"
                           icon="icon-leading"
                           override={
@@ -109,27 +109,25 @@ export const MetricItem = ({
                       {type === "icon-02" && (
                         <>
                           <Change
-                            className="instance-node-16"
-                            text="100%"
+                            className="instance-node-6"
                             trend="positive"
                             type="one"
                           />
-                          <div className="text-22">{text2}</div>
+                          <div className="text-13">vs last month</div>
                         </>
                       )}
 
                       {type === "chart-03" && (
                         <>
-                          <div className="number-21">{text1}</div>
+                          <div className="number-19">{text1}</div>
 
                           <div className="change-and-text">
                             <Change
-                              className="instance-node-16"
-                              text="100%"
+                              className="instance-node-6"
                               trend="positive"
                               type="two"
                             />
-                            <div className="text-23">{text2}</div>
+                            <div className="text-14">vs last month</div>
                           </div>
                         </>
                       )}
@@ -139,11 +137,10 @@ export const MetricItem = ({
 
                 {type === "chart-02" && (
                   <div className="number-and-badge-2">
-                    <div className="number-22">{text1}</div>
+                    <div className="number-20">{text1}</div>
 
                     <Change
-                      className="instance-node-16"
-                      text="100%"
+                      className="instance-node-6"
                       trend="positive"
                       type="two"
                     />
@@ -156,22 +153,21 @@ export const MetricItem = ({
 
                 {type === "chart-01" && (
                   <div className="number-and-badge-3">
-                    <div className="number-23">{text1}</div>
+                    <div className="number-21">{text1}</div>
 
                     <div className="change-and-text-2">
                       <Change
-                        className="instance-node-16"
-                        text="100%"
+                        className="instance-node-6"
                         trend="positive"
                         type="one"
                       />
-                      <div className="text-22">{text2}</div>
+                      <div className="text-13">vs last month</div>
                     </div>
                   </div>
                 )}
 
                 {type === "chart-01" && breakpoint === "desktop" && (
-                  <ChartMini10 className="chart-mini-2" />
+                  <ChartMini9 className="chart-mini-2" />
                 )}
 
                 {breakpoint === "mobile" && type === "chart-02" && (
@@ -179,7 +175,7 @@ export const MetricItem = ({
                 )}
 
                 {type === "chart-01" && breakpoint === "mobile" && (
-                  <ChartMini5 className="chart-mini-3" />
+                  <ChartMini10 className="chart-mini-3" />
                 )}
               </div>
             )}
@@ -199,12 +195,12 @@ export const MetricItem = ({
                   }
                   icon={
                     type === "icon-02" ? (
-                      <Zap4 className="instance-node-15" color="#7F56D9" />
+                      <Zap4 className="instance-node-5" color="#7F56D9" />
                     ) : type === "chart-02" ? (
-                      <Eye className="instance-node-15" />
+                      <Eye className="instance-node-5" />
                     ) : (
                       <TrendUp01
-                        className="instance-node-15"
+                        className="instance-node-5"
                         color={
                           type === "icon-01"
                             ? "#079455"
@@ -226,12 +222,12 @@ export const MetricItem = ({
                       <div className="heading-4">{text}</div>
 
                       <div className="number-and-badge-4">
-                        <div className="number-24">{text1}</div>
+                        <div className="number-22">{text1}</div>
 
                         <div className="badge-wrap-2">
                           {type === "icon-01" && (
                             <Badge
-                              className="instance-node-16"
+                              className="instance-node-6"
                               color="success"
                               icon="icon-leading"
                               override={
@@ -249,12 +245,11 @@ export const MetricItem = ({
                           {type === "icon-03" && (
                             <>
                               <Change
-                                className="instance-node-16"
-                                text="100%"
+                                className="instance-node-6"
                                 trend="positive"
                                 type="two"
                               />
-                              <div className="text-23">{text2}</div>
+                              <div className="text-14">vs last month</div>
                             </>
                           )}
                         </div>
@@ -268,46 +263,52 @@ export const MetricItem = ({
             )}
 
             {type === "chart-03" && breakpoint === "desktop" && (
-              <ChartMini8 className="chart-mini-4" />
+              <ChartMini5 className="chart-mini-4" />
             )}
 
             {breakpoint === "mobile" && type === "chart-03" && (
-              <ChartMini11 className="chart-mini-4" />
+              <ChartMini6 className="chart-mini-4" />
             )}
           </div>
 
           <div className="number-and-badge-5">
             {!actions && (
               <>
-                <div className="number-25">
+                <div className="number-23">
                   {["icon-02", "simple"].includes(type) && <>{text1}</>}
 
-                  {type === "chart-02" && (
+                  {["chart-01", "chart-02"].includes(type) && (
                     <>
-                      <div className="number-26">{text1}</div>
-
-                      <Change
-                        className="instance-node-16"
-                        text="100%"
-                        trend="positive"
-                        type="two"
-                      />
-                    </>
-                  )}
-
-                  {type === "chart-01" && (
-                    <>
-                      <div className="number-27">{text1}</div>
-
-                      <div className="change-and-text-2">
-                        <Change
-                          className="instance-node-16"
-                          text={changeText}
-                          trend={changeTrend}
-                          type="one"
-                        />
-                        <div className="text-22">{text2}</div>
+                      <div className={`number-24 ${numberClassName}`}>
+                        {text1}
                       </div>
+
+                      <>
+                        {hasChangeAndText && (
+                          <>
+                            <>
+                              {type === "chart-02" && (
+                                <Change
+                                  className="instance-node-6"
+                                  trend="positive"
+                                  type="two"
+                                />
+                              )}
+
+                              {type === "chart-01" && (
+                                <div className="change-and-text-2">
+                                  <Change
+                                    className="instance-node-6"
+                                    trend="positive"
+                                    type="one"
+                                  />
+                                  <div className="text-13">vs last month</div>
+                                </div>
+                              )}
+                            </>
+                          </>
+                        )}
+                      </>
                     </>
                   )}
                 </div>
@@ -320,7 +321,7 @@ export const MetricItem = ({
                           <div className="badge-wrap-3">
                             {type === "simple" && (
                               <Badge
-                                className="instance-node-16"
+                                className="instance-node-6"
                                 color="success"
                                 icon="icon-leading"
                                 override={
@@ -338,12 +339,11 @@ export const MetricItem = ({
                             {type === "icon-02" && (
                               <>
                                 <Change
-                                  className="instance-node-16"
-                                  text="100%"
+                                  className="instance-node-6"
                                   trend="positive"
                                   type="one"
                                 />
-                                <div className="text-22">{text2}</div>
+                                <div className="text-13">vs last month</div>
                               </>
                             )}
                           </div>
@@ -354,11 +354,11 @@ export const MetricItem = ({
                         )}
 
                         {type === "chart-01" && breakpoint === "desktop" && (
-                          <ChartMini4 className="chart-mini-2" />
+                          <ChartMini7 className="chart-mini-2" />
                         )}
 
                         {type === "chart-01" && breakpoint === "mobile" && (
-                          <ChartMini9 className="chart-mini-3" />
+                          <ChartMini8 className="chart-mini-3" />
                         )}
 
                         {breakpoint === "mobile" && type === "chart-02" && (
@@ -372,10 +372,10 @@ export const MetricItem = ({
             )}
 
             {actions && (
-              <div className="content-15">
+              <div className="content-6">
                 {["chart-02", "chart-03", "icon-03"].includes(type) && (
                   <ButtonsButton
-                    className="instance-node-16"
+                    className="instance-node-6"
                     hierarchy="tertiary-gray"
                     icon="only"
                     icon1={<Settings01_7 className="settings" />}
@@ -385,7 +385,7 @@ export const MetricItem = ({
                 )}
 
                 <ButtonsButton
-                  className="instance-node-16"
+                  className="instance-node-6"
                   hierarchy={
                     ["chart-02", "chart-03", "icon-03"].includes(type)
                       ? "secondary-gray"
@@ -413,7 +413,7 @@ export const MetricItem = ({
           color={type === "icon-03" ? "gray" : "success"}
           icon={
             <TrendUp01
-              className="instance-node-15"
+              className="instance-node-5"
               color={
                 type === "icon-01"
                   ? "#079455"
@@ -440,7 +440,7 @@ export const MetricItem = ({
           <>
             {dropdownIcon && (
               <Dropdown
-                className={`${breakpoint === "mobile" ? "dropdown-2" : "class-42"}`}
+                className={`${breakpoint === "mobile" ? "dropdown-instance" : "class-38"}`}
                 open={false}
                 type="icon"
               />
@@ -449,23 +449,23 @@ export const MetricItem = ({
         </>
       )}
 
-      {!actions && ["chart-03", "icon-01", "icon-03"].includes(type) && (
+      {((!actions && breakpoint === "desktop" && type === "chart-03") ||
+        (!actions && type === "icon-01") ||
+        (!actions && type === "icon-03")) && (
         <div className="heading-and-number-2">
           <div className="heading-4">{text}</div>
 
-          {((breakpoint === "desktop" && type === "chart-03") ||
-            (breakpoint === "mobile" && type === "icon-01") ||
-            (breakpoint === "mobile" && type === "icon-03")) && (
+          {(breakpoint === "mobile" || type === "chart-03") && (
             <>
               <>
                 {hasBadgeWrap && (
                   <div className="number-and-badge-6">
-                    <div className="number-28">{text1}</div>
+                    <div className="number-25">{text1}</div>
 
                     <div className="badge-wrap-4">
                       {type === "icon-01" && (
                         <Badge
-                          className="instance-node-16"
+                          className="instance-node-6"
                           color="success"
                           icon="icon-leading"
                           override={
@@ -480,12 +480,11 @@ export const MetricItem = ({
                       {["chart-03", "icon-03"].includes(type) && (
                         <>
                           <Change
-                            className="instance-node-16"
-                            text="100%"
+                            className="instance-node-6"
                             trend="positive"
                             type="two"
                           />
-                          <div className="text-23">{text2}</div>
+                          <div className="text-14">vs last month</div>
                         </>
                       )}
                     </div>
@@ -495,46 +494,44 @@ export const MetricItem = ({
             </>
           )}
 
-          {((breakpoint === "desktop" && type === "icon-01") ||
-            (breakpoint === "desktop" && type === "icon-03") ||
-            (breakpoint === "mobile" && type === "chart-03")) && (
-            <div className="number-and-badge-7">
-              <div className="number-29">{text1}</div>
+          {breakpoint === "desktop" &&
+            ["icon-01", "icon-03"].includes(type) && (
+              <div className="number-and-badge-7">
+                <div className="number-26">{text1}</div>
 
-              <div className="change-and-text-3">
-                {["chart-03", "icon-03"].includes(type) && (
-                  <>
-                    <Change
-                      className="instance-node-16"
+                <div className="badge-wrap-5">
+                  {type === "icon-01" && (
+                    <Badge
+                      className="instance-node-6"
+                      color="success"
+                      icon="icon-leading"
+                      override={
+                        <ArrowUp12 className="arrow-up" color="#17B26A" />
+                      }
+                      size="md"
                       text="100%"
-                      trend="positive"
-                      type="two"
+                      type="pill-color"
                     />
-                    <div className="text-23">{text2}</div>
-                  </>
-                )}
+                  )}
 
-                {type === "icon-01" && (
-                  <Badge
-                    className="instance-node-16"
-                    color="success"
-                    icon="icon-leading"
-                    override={
-                      <ArrowUp12 className="arrow-up" color="#17B26A" />
-                    }
-                    size="md"
-                    text="100%"
-                    type="pill-color"
-                  />
-                )}
+                  {type === "icon-03" && (
+                    <>
+                      <Change
+                        className="instance-node-6"
+                        trend="positive"
+                        type="two"
+                      />
+                      <div className="text-14">vs last month</div>
+                    </>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       )}
 
       {!actions && type === "chart-03" && breakpoint === "desktop" && (
-        <ChartMini7 className="chart-mini-4" />
+        <ChartMini4 className="chart-mini-4" />
       )}
 
       {!actions &&
@@ -543,7 +540,11 @@ export const MetricItem = ({
           <>
             <>
               {dropdownIcon && (
-                <Dropdown className="dropdown-2" open={false} type="icon" />
+                <Dropdown
+                  className="dropdown-instance"
+                  open={false}
+                  type="icon"
+                />
               )}
             </>
           </>
@@ -551,11 +552,32 @@ export const MetricItem = ({
 
       {!actions && breakpoint === "mobile" && type === "chart-03" && (
         <>
-          <ChartMini6 className="chart-mini-4" />
+          <div className={`heading-and-number-2 ${headingClassName}`}>
+            <div className="heading-4">{text}</div>
+
+            <div className="number-and-badge-8">
+              <div className="number-27">{text1}</div>
+
+              <div className="change-and-text">
+                <Change
+                  className="instance-node-6"
+                  trend="positive"
+                  type="two"
+                />
+                <div className="text-14">vs last month</div>
+              </div>
+            </div>
+          </div>
+
+          <ChartMini11 className="chart-mini-4" />
 
           <>
             {dropdownIcon && (
-              <Dropdown className="dropdown-2" open={false} type="icon" />
+              <Dropdown
+                className="dropdown-instance"
+                open={false}
+                type="icon"
+              />
             )}
           </>
         </>
@@ -579,8 +601,6 @@ MetricItem.propTypes = {
   breakpoint: PropTypes.oneOf(["desktop", "mobile"]),
   text: PropTypes.string,
   text1: PropTypes.string,
-  changeText: PropTypes.string,
-  text2: PropTypes.string,
+  hasChangeAndText: PropTypes.bool,
   hasBadgeWrap: PropTypes.bool,
-  changeTrend: PropTypes.string,
 };
