@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DatePickerDropdown } from "../../components/DatePickerDropdown";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
@@ -14,14 +14,14 @@ import { Check32 } from "../../icons/Check32";
 import { LogOut } from "../../icons/LogOut";
 import { ReverseLeft1 } from "../../icons/ReverseLeft1";
 import { XClose30 } from "../../icons/XClose30";
-import { FormControl, InputLabel, Select, MenuItem, TextField } from '@mui/material';
+import { FormControl, Select, MenuItem, TextField } from "@mui/material";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
-
-
+// Recharts imports
+import { PieChart as RechartsPieChart, Pie, Cell, Tooltip } from "recharts";
 
 export const Analytics = () => {
   const navigate = useNavigate();
@@ -33,32 +33,84 @@ export const Analytics = () => {
     setChannel(event.target.value);
   };
 
+  const tableData = [
+    {
+      invoiceId: "IV3066",
+      postingDate: "6 Jan 2024",
+      status: "Draft",
+      paymentMethod: "Full Payment",
+      brand: "Eucerin Thailand",
+      platform: "TikTok",
+    },
+    {
+      invoiceId: "IV3065",
+      postingDate: "6 Jan 2024",
+      status: "Paid",
+      paymentMethod: "Deposit",
+      brand: "Oreo Rizz",
+      platform: "Instagram",
+    },
+    {
+      invoiceId: "IV3064",
+      postingDate: "6 Jan 2024",
+      status: "Pending",
+      paymentMethod: "Credit Term",
+      brand: "MAC Cosmetics",
+      platform: "TikTok",
+    },
+    {
+      invoiceId: "IV3063",
+      postingDate: "5 Jan 2024",
+      status: "Overdue",
+      paymentMethod: "Full Payment",
+      brand: "With that perfume",
+      platform: "TikTok",
+    },
+    {
+      invoiceId: "IV3062",
+      postingDate: "5 Jan 2024",
+      status: "Paid",
+      paymentMethod: "Full Payment",
+      brand: "Snacks Jumbo Th",
+      platform: "TikTok",
+    },
+  ];
+
+  // Pie chart data
+  const [pieData, setPieData] = useState([
+    { name: "Paid", value: 20 },
+    { name: "Pending", value: 30 },
+    { name: "Overdue", value: 8 },
+    { name: "Draft", value: 29 },
+  ]);
+
+  // Colors for each segment
+  const pieColors = ["#067647", "#DC8420", "#b42318", "#A0A6B2"];
+
+  useEffect(() => {
+    // Example: fetch('/api/pieChartData').then(...) -> setPieData(...)
+  }, []);
+
   return (
     <div className="analytics">
       <HeaderNavigationWrapper
         className="header-navigation-2"
         headerNavigationNavItemBaseCurrent={false}
         headerNavigationNavItemBaseCurrent1
-        headerNavigationNavItemButtonIcon={
-          <LogOut className="icon-instance-node" />
-        }
+        headerNavigationNavItemButtonIcon={<LogOut className="icon-instance-node" />}
       />
       <div className="main">
         <div className="header">
           <div className="header-2">
             <div className="text-and-supporting-12">
-              <p className="text-44">
-                Incomes Tracking &amp; Managing (Analytics)
-              </p>
-
+              <p className="text-44">Incomes Tracking &amp; Managing (Analytics)</p>
               <div className="supporting-text-14">Analyze the incomes</div>
             </div>
-
             <div className="actions-8" />
           </div>
 
-                    {/* Replace custom date picker & input dropdown with MUI components */}
-                    <div className="tabs-and-filters">
+          {/* Filters */}
+          <div className="tabs-and-filters">
             <div className="frame">
               <div className="input-with-label-3">
                 <div className="label-wrapper-3">
@@ -66,7 +118,7 @@ export const Analytics = () => {
                 </div>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <div style={{ display: "flex", gap: "8px", width: "100%" }}>
-                    <div style={{ flex: 1 }}>
+                    <div style={{ flex: "0 0 150px" }}>
                       <DatePicker
                         label="Start Date"
                         value={startDate}
@@ -81,7 +133,7 @@ export const Analytics = () => {
                         )}
                       />
                     </div>
-                    <div style={{ flex: 1 }}>
+                    <div style={{ flex: "0 0 150px" }}>
                       <DatePicker
                         label="End Date"
                         value={endDate}
@@ -98,21 +150,34 @@ export const Analytics = () => {
                     </div>
                   </div>
                 </LocalizationProvider>
+
               </div>
             </div>
-            <FormControl variant="outlined" className="input-dropdown-2" size="small">
-              <InputLabel>Receiver</InputLabel>
-              <Select label="Receiver" value={channel} onChange={handleChannelChange}>
-                <MenuItem value="All">All</MenuItem>
-                <MenuItem value="@PWPINN">@PWPINN</MenuItem>
-                <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
-                <MenuItem value="บร">บร</MenuItem>
-              </Select>
-            </FormControl>
+
+            <div className="frame">
+              <div className="input-with-label-3">
+                <div className="label-wrapper-3">
+                  <div className="label-3">Receiver</div>
+                </div>
+                <FormControl variant="outlined" className="input-dropdown-2" size="small">
+                  <Select
+                    value={channel}
+                    onChange={handleChannelChange}
+                    label=""
+                    inputProps={{ notched: false }}
+                  >
+                    <MenuItem value="All">All</MenuItem>
+                    <MenuItem value="@PWPINN">@PWPINN</MenuItem>
+                    <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
+                    <MenuItem value="บริษัทโชคชัย 9672 จำกัด">บริษัทโชคชัย 9672 จำกัด</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
           </div>
         </div>
-  
 
+        {/* Metrics */}
         <div className="metrics">
           <MetricItem
             actions={false}
@@ -168,6 +233,7 @@ export const Analytics = () => {
           />
         </div>
 
+        {/* Chart + Table */}
         <div className="section">
           <div className="chart">
             <SectionHeader
@@ -182,72 +248,56 @@ export const Analytics = () => {
               type="buttons"
             />
             <div className="pie-chart">
-              <div className="pie-chart-2">
-                <div className="overlap-group-10">
-                  <img
-                    className="series"
-                    alt="Series"
-                    src="/img/series-1-4.svg"
-                  />
-
-                  <img
-                    className="series-2"
-                    alt="Series"
-                    src="/img/series-2-7.svg"
-                  />
-
-                  <img
-                    className="series-3"
-                    alt="Series"
-                    src="/img/series-3-7.svg"
-                  />
-                </div>
+              {/* Container for the Recharts PieChart */}
+              <div className="pie-chart-2" style={{ backgroundColor: "transparent" }}>
+                <RechartsPieChart width={380} height={380}>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={170}
+                    dataKey="value"
+                    label={false}        // <--- no label text
+                    labelLine={false}    // <--- remove label line
+                    stroke="none"        // <--- no outer stroke
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={pieColors[index % pieColors.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </RechartsPieChart>
               </div>
 
+              {/* Legend */}
               <div className="legend">
-                <div className="legend-series">
-                  <div className="color-wrapper">
-                    <div className="color" />
+                {pieData.map((item, index) => (
+                  <div key={index} className="legend-series">
+                    <div className="color-wrapper">
+                      <div
+                        className={
+                          index === 0
+                            ? "color"
+                            : index === 1
+                            ? "color-2"
+                            : index === 2
+                            ? "color-3"
+                            : "color-4"
+                        }
+                      />
+                    </div>
+                    <div className="text-wrapper-8">{item.name}</div>
+                    <div className="text-wrapper-8">({item.value})</div>
                   </div>
-
-                  <div className="text-wrapper-8">Paid</div>
-
-                  <div className="text-wrapper-8">(20)</div>
-                </div>
-
-                <div className="legend-series">
-                  <div className="color-wrapper">
-                    <div className="color-2" />
-                  </div>
-
-                  <div className="text-wrapper-8">Pending</div>
-
-                  <div className="text-wrapper-8">(30)</div>
-                </div>
-
-                <div className="legend-series">
-                  <div className="color-wrapper">
-                    <div className="color-3" />
-                  </div>
-
-                  <div className="text-wrapper-8">Overdue</div>
-
-                  <div className="text-wrapper-8">(8)</div>
-                </div>
-
-                <div className="legend-series">
-                  <div className="color-wrapper">
-                    <div className="color-4" />
-                  </div>
-
-                  <div className="text-wrapper-8">Draft</div>
-
-                  <div className="text-wrapper-8">(29)</div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
 
+          {/* Recent activity table */}
           <div className="table">
             <SectionHeader
               actions={false}
@@ -262,6 +312,7 @@ export const Analytics = () => {
             />
             <div className="recent-table">
               <div className="content-23">
+                {/* Column 1: Invoice ID */}
                 <div className="column">
                   <TableHeaderCell
                     checkbox
@@ -272,92 +323,39 @@ export const Analytics = () => {
                     text
                     visible={false}
                   />
-                  <TableCell
-                    className="table-cell-instance"
-                    hasText={false}
-                    stateProp="default"
-                    style="lead-checkbox"
-                    supportingText={false}
-                    text="IV3066"
-                  />
-                  <TableCell
-                    className="table-cell-2"
-                    hasText={false}
-                    stateProp="default"
-                    style="lead-checkbox"
-                    supportingText={false}
-                    text="IV3065"
-                  />
-                  <TableCell
-                    className="table-cell-3"
-                    hasText={false}
-                    stateProp="default"
-                    style="lead-checkbox"
-                    supportingText={false}
-                    text="IV3064"
-                  />
-                  <TableCell
-                    className="table-cell-4"
-                    hasText={false}
-                    stateProp="default"
-                    style="lead-checkbox"
-                    supportingText={false}
-                    text="IV3063"
-                  />
-                  <TableCell
-                    className="table-cell-5"
-                    hasText={false}
-                    stateProp="default"
-                    style="lead-checkbox"
-                    supportingText={false}
-                    text="IV3062"
-                  />
+                  {tableData.map((row, idx) => (
+                    <TableCell
+                      key={idx}
+                      className="table-cell-instance"
+                      hasText={false}
+                      stateProp="default"
+                      style="lead-checkbox"
+                      supportingText={false}
+                      text={row.invoiceId}
+                    />
+                  ))}
                 </div>
 
+                {/* Column 2: Posting Date */}
                 <div className="column-2">
                   <div className="table-header-wrapper">
                     <div className="table-header-2">
                       <div className="text-45">Posting Date</div>
                     </div>
                   </div>
-
-                  <TableCell
-                    className="table-cell-instance"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="6 Jan 2024"
-                  />
-                  <TableCell
-                    className="table-cell-2"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="6 Jan 2024"
-                  />
-                  <TableCell
-                    className="table-cell-3"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="6 Jan 2024"
-                  />
-                  <TableCell
-                    className="table-cell-4"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="5 Jan 2024"
-                  />
-                  <TableCell
-                    className="table-cell-5"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="5 Jan 2024"
-                  />
+                  {tableData.map((row, idx) => (
+                    <TableCell
+                      key={idx}
+                      className="table-cell-instance"
+                      stateProp="default"
+                      style="text"
+                      supportingText={false}
+                      text={row.postingDate}
+                    />
+                  ))}
                 </div>
 
+                {/* Column 3: Status */}
                 <div className="column-3">
                   <TableHeaderCell
                     checkbox={false}
@@ -366,68 +364,41 @@ export const Analytics = () => {
                     tableHeaderText1="Status"
                     text
                   />
-                  <TableCell
-                    badgeColor="gray"
-                    badgeIcon="icon-leading"
-                    badgeText="Draft"
-                    className="table-cell-6"
-                    override={
-                      <ChatBubble1
-                        className="icon-instance-node-2"
-                        color="#344054"
-                      />
+                  {tableData.map((row, idx) => {
+                    let iconOverride = null;
+                    let badgeColor = "gray";
+
+                    if (row.status === "Paid") {
+                      iconOverride = <Check32 className="icon-instance-node-2" />;
+                      badgeColor = "success";
+                    } else if (row.status === "Pending") {
+                      iconOverride = <ReverseLeft1 className="icon-instance-node-2" />;
+                      badgeColor = "warning";
+                    } else if (row.status === "Overdue") {
+                      iconOverride = <XClose30 className="icon-instance-node-2" color="#F04438" />;
+                      badgeColor = "error";
+                    } else if (row.status === "Draft") {
+                      iconOverride = <ChatBubble1 className="icon-instance-node-2" color="#344054" />;
+                      badgeColor = "gray";
                     }
-                    stateProp="default"
-                    style="badge"
-                    supportingText={false}
-                  />
-                  <TableCell
-                    badgeColor="success"
-                    badgeIcon="icon-leading"
-                    badgeText="Paid"
-                    className="table-cell-7"
-                    override={<Check32 className="icon-instance-node-2" />}
-                    stateProp="default"
-                    style="badge"
-                    supportingText={false}
-                  />
-                  <TableCell
-                    badgeColor="warning"
-                    badgeIcon="icon-leading"
-                    badgeText="Pending"
-                    className="table-cell-8"
-                    override={<ReverseLeft1 className="icon-instance-node-2" />}
-                    stateProp="default"
-                    style="badge"
-                    supportingText={false}
-                  />
-                  <TableCell
-                    badgeColor="error"
-                    badgeIcon="icon-leading"
-                    badgeText="Overdue"
-                    className="table-cell-9"
-                    override={
-                      <XClose30
-                        className="icon-instance-node-2"
-                        color="#F04438"
+
+                    return (
+                      <TableCell
+                        key={idx}
+                        badgeColor={badgeColor}
+                        badgeIcon="icon-leading"
+                        badgeText={row.status}
+                        className={`table-cell-${6 + idx}`}
+                        override={iconOverride}
+                        stateProp="default"
+                        style="badge"
+                        supportingText={false}
                       />
-                    }
-                    stateProp="default"
-                    style="badge"
-                    supportingText={false}
-                  />
-                  <TableCell
-                    badgeColor="success"
-                    badgeIcon="icon-leading"
-                    badgeText="Paid"
-                    className="table-cell-10"
-                    override={<Check32 className="icon-instance-node-2" />}
-                    stateProp="default"
-                    style="badge"
-                    supportingText={false}
-                  />
+                    );
+                  })}
                 </div>
 
+                {/* Column 4: Payment Method */}
                 <div className="column-3">
                   <TableHeaderCell
                     checkbox={false}
@@ -436,43 +407,19 @@ export const Analytics = () => {
                     tableHeaderText1="Payment Method"
                     text
                   />
-                  <TableCell
-                    className="table-cell-instance"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Full Payment"
-                  />
-                  <TableCell
-                    className="table-cell-2"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Deposit"
-                  />
-                  <TableCell
-                    className="table-cell-3"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Credit Term"
-                  />
-                  <TableCell
-                    className="table-cell-4"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Full Payment"
-                  />
-                  <TableCell
-                    className="table-cell-5"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Full Payment"
-                  />
+                  {tableData.map((row, idx) => (
+                    <TableCell
+                      key={idx}
+                      className="table-cell-instance"
+                      stateProp="default"
+                      style="text"
+                      supportingText={false}
+                      text={row.paymentMethod}
+                    />
+                  ))}
                 </div>
 
+                {/* Column 5: Brand */}
                 <div className="column-4">
                   <TableHeaderCell
                     checkbox={false}
@@ -481,48 +428,19 @@ export const Analytics = () => {
                     tableHeaderText1="Brand"
                     text
                   />
-                  <TableCell
-                    className="table-cell-instance"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Eucerin Thailand"
-                    textAndSupportingClassName="table-cell-11"
-                  />
-                  <TableCell
-                    className="table-cell-2"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Oreo Rizz"
-                    textAndSupportingClassName="table-cell-11"
-                  />
-                  <TableCell
-                    className="table-cell-3"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="MAC Cosmetics"
-                    textAndSupportingClassName="table-cell-11"
-                  />
-                  <TableCell
-                    className="table-cell-4"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="With that perfume"
-                    textAndSupportingClassName="table-cell-11"
-                  />
-                  <TableCell
-                    className="table-cell-5"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Snacks Jumbo Th"
-                    textAndSupportingClassName="table-cell-11"
-                  />
+                  {tableData.map((row, idx) => (
+                    <TableCell
+                      key={idx}
+                      className="table-cell-instance"
+                      stateProp="default"
+                      style="text"
+                      supportingText={false}
+                      text={row.brand}
+                    />
+                  ))}
                 </div>
 
+                {/* Column 6: Platform */}
                 <div className="column-5">
                   <TableHeaderCell
                     checkbox={false}
@@ -531,43 +449,19 @@ export const Analytics = () => {
                     tableHeaderText1="Platform"
                     text
                   />
-                  <TableCell
-                    className="table-cell-instance"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="TikTok"
-                  />
-                  <TableCell
-                    className="table-cell-2"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="Instagram"
-                  />
-                  <TableCell
-                    className="table-cell-3"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="TikTok"
-                  />
-                  <TableCell
-                    className="table-cell-4"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="TikTok"
-                  />
-                  <TableCell
-                    className="table-cell-5"
-                    stateProp="default"
-                    style="text"
-                    supportingText={false}
-                    text="TikTok"
-                  />
+                  {tableData.map((row, idx) => (
+                    <TableCell
+                      key={idx}
+                      className="table-cell-instance"
+                      stateProp="default"
+                      style="text"
+                      supportingText={false}
+                      text={row.platform}
+                    />
+                  ))}
                 </div>
 
+                {/* Column 7: Actions */}
                 <div className="column-3">
                   <TableHeaderCell
                     checkbox={false}
@@ -575,28 +469,13 @@ export const Analytics = () => {
                     color="gray"
                     text={false}
                   />
-                  <div className="table-cell-12">
-                    <DropdownWrapper className="dropdown-5" />
-                  </div>
-
-                  <div className="table-cell-13">
-                    <DropdownWrapper className="dropdown-5" />
-                  </div>
-
-                  <div className="table-cell-14">
-                    <DropdownWrapper className="dropdown-5" />
-                  </div>
-
-                  <div className="table-cell-15">
-                    <DropdownWrapper className="dropdown-5" />
-                  </div>
-
-                  <div className="table-cell-16">
-                    <DropdownWrapper className="dropdown-5" />
-                  </div>
+                  {tableData.map((_, idx) => (
+                    <div key={idx} className="table-cell-12">
+                      <DropdownWrapper className="dropdown-5" />
+                    </div>
+                  ))}
                 </div>
               </div>
-
               <div onClick={() => navigate("/data")}>
                 <Pagination
                   breakpoint="desktop"

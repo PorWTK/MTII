@@ -7,6 +7,12 @@
   position: relative;
 }
 
+.input-dropdown-2 .MuiOutlinedInput-root {
+  min-height: 56px !important;
+  height: 56px !important;
+  box-sizing: border-box;
+}
+
 .analytics .header-navigation-2 {
   flex: 0 0 auto !important;
   z-index: 1 !important;
@@ -103,7 +109,7 @@
   align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
-  gap: 16px;
+  gap: 24px;
   position: relative;
   width: 1280px;
 }
@@ -115,7 +121,7 @@
   gap: 12px;
   justify-content: center;
   position: relative;
-  width: 208px;
+  width: 300px;
 }
 
 .analytics .input-with-label-3 {
@@ -331,9 +337,10 @@
 }
 
 .analytics .color {
-  background-color: var(
+  /* background-color: var(
     --1-color-modes-component-colors-utility-brand-utility-brand-600
-  );
+  ); */
+  background-color: #067647;
   border-radius: 4px;
   height: 8px;
   position: relative;
@@ -355,9 +362,10 @@
 }
 
 .analytics .color-2 {
-  background-color: var(
+  /* background-color: var(
     --1-color-modes-component-colors-utility-brand-utility-brand-500
-  );
+  ); */
+  background-color: #DC8420;
   border-radius: 4px;
   height: 8px;
   position: relative;
@@ -365,9 +373,10 @@
 }
 
 .analytics .color-3 {
-  background-color: var(
+  /* background-color: var(
     --1-color-modes-component-colors-utility-brand-utility-brand-400
-  );
+  ); */
+  background-color: #b42318;
   border-radius: 4px;
   height: 8px;
   position: relative;
@@ -375,9 +384,7 @@
 }
 
 .analytics .color-4 {
-  background-color: var(
-    --1-color-modes-component-colors-utility-gray-utility-gray-200
-  );
+  background-color: #A0A6B2;
   border-radius: 4px;
   height: 8px;
   position: relative;

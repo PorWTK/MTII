@@ -107,7 +107,11 @@
 }
 
 .data .design-component-instance-node-2 {
+  align-items: center;
+  display: inline-flex;
   flex: 0 0 auto !important;
+  gap: var(--3-spacing-spacing-lg);
+  position: relative;
 }
 
 .data .button-12 {
