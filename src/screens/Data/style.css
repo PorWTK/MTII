@@ -7,9 +7,30 @@
   position: relative;
 }
 
+.data .label-3 {
+  color: var(--1-color-modes-colors-text-text-secondary-700);
+  font-family: var(--text-sm-medium-font-family);
+  font-size: var(--text-sm-medium-font-size);
+  font-style: var(--text-sm-medium-font-style);
+  font-weight: var(--text-sm-medium-font-weight);
+  letter-spacing: var(--text-sm-medium-letter-spacing);
+  line-height: var(--text-sm-medium-line-height);
+  margin-top: -1.00px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
 .filters-bar .MuiFormControl-root,
 .filters-bar .MuiTextField-root {
   height: 40px;
+}
+
+.input-dropdown-8 .MuiOutlinedInput-root {
+  min-height: 56px !important;
+  width: 140px !important;
+  height: 56px !important;
+  box-sizing: border-box;
 }
 .data .header-navigation-5 {
   flex: 0 0 auto !important;
@@ -118,7 +139,7 @@
   flex: 0 0 auto;
   position: relative;
   width: 102px; /* or any appropriate value */
-  height: 40px;
+  height: 46px;
   
 }
 
@@ -150,7 +171,7 @@
 }
 
 .data .filters-bar {
-  align-items: flex-start;
+  align-items: center; /* Centers the items vertically */
   align-self: stretch;
   background-color: var(--1-color-modes-colors-background-bg-secondary-alt);
   border: 1px solid;
@@ -159,10 +180,12 @@
   flex: 0 0 auto;
   gap: 16px;
   padding: 20px;
+  height: 120px; /* Sets the container height */
   position: relative;
   width: 100%;
   z-index: 3;
 }
+
 
 .data .actions-14 {
   align-items: center;
@@ -193,13 +216,13 @@
   width: 100%;
 }
 
-.data .label-wrapper-5 {
+/* .data .label-wrapper-5 {
   align-items: center;
   display: inline-flex;
   flex: 0 0 auto;
   gap: var(--3-spacing-spacing-xxs);
   position: relative;
-}
+} */
 
 .data .label-5 {
   color: var(--1-color-modes-colors-text-text-secondary-700);
@@ -274,7 +297,7 @@
   gap: 12px;
   justify-content: center;
   position: relative;
-  width: 200px;
+  width: 300px;
 }
 
 .data .input-with-label-6 {
@@ -317,9 +340,15 @@
   justify-content: unset !important;
 }
 
-.data .input-dropdown-8 {
-  width: 165px !important;
-}
+/* .data .input-dropdown-8 {
+  width: 140px !important;
+} */
+
+/* .data .input-dropdown-8 .MuiOutlinedInput-root {
+  width: 140px !important;
+  min-height: 40px !important;
+  height: 40px !important;
+} */
 
 .data .table-2 {
   align-items: flex-start;
@@ -331,7 +360,8 @@
   box-shadow: var(--shadows-shadow-xs);
   display: flex;
   flex-direction: column;
-  height: 828px;
+  height: 100%;
+  max-height: 828px;
   overflow: hidden;
   position: relative;
   width: 100%;
@@ -348,10 +378,12 @@
   z-index: 1;
 }
 
-.data .column {
+.data .column-1 {
   align-items: flex-start;
   display: flex;
+  flex: 1;
   flex-direction: column;
+  flex-grow: 1;
   position: relative;
   width: 130px;
 }
@@ -494,6 +526,7 @@
   flex-direction: column;
   flex-grow: 1;
   position: relative;
+  width: 110px;
 }
 
 .data .icon-instance-node-5 {
@@ -587,7 +620,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 180px;
+  width: 146px;
 }
 
 .data .column-5 {
@@ -595,7 +628,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 170px;
+  width: 190px;
 }
 
 .data .table-cell-24 {
@@ -620,7 +653,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 150px;
+  width: 178px;
 }
 
 .data .table-cell-26 {
@@ -639,7 +672,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 126px;
+  width: 120px;
 }
 
 .data .table-header-3 {
@@ -655,15 +688,25 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 114px;
+  width: 120px;
 }
 
 .data .column-9 {
   align-items: flex-start;
-  display: inline-flex;
-  flex: 0 0 auto;
+  display: flex;
+  /* flex: 0 0 auto; */
   flex-direction: column;
   position: relative;
+  width: 114px;
+}
+
+.data .column-10 {
+  align-items: flex-start;
+  display: flex;
+  /* flex: 0 0 auto; */
+  flex-direction: column;
+  position: relative;
+  width: 52px;
 }
 
 .data .table-header-cell-2 {

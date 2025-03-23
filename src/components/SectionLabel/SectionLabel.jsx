@@ -7,7 +7,7 @@ import "./style.css";
 export const SectionLabel = ({
   helpIcon = true,
   supportingText = true,
-  required = true,
+  required,
   size,
   actions,
   className,

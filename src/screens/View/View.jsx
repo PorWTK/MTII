@@ -51,6 +51,7 @@ export const View = () => {
           </div>
 
           <Form
+            mode="view"
             buttonsButtonStateProp="disabled"
             className="design-component-instance-node-5"
             datePickerDropdownButtonsButtonDivClassName="form-8"

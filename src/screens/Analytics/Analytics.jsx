@@ -214,7 +214,7 @@ export const Analytics = () => {
             hasChangeAndText={false}
             headingClassName="metric-item-4"
             numberClassName="metric-item-4"
-            text="Total pending (baht)"
+            text="Total pending amount (baht)"
             text1="56,000"
             type="chart-01"
           />
@@ -227,7 +227,7 @@ export const Analytics = () => {
             hasChangeAndText={false}
             headingClassName="metric-item-5"
             numberClassName="metric-item-5"
-            text="Total overdue (baht)"
+            text="Total overdue amount(baht)"
             text1="9,900"
             type="chart-01"
           />
