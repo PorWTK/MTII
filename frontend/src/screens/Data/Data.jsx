@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { ButtonsButton } from "../../components/ButtonsButton";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
@@ -26,17 +27,11 @@ export const Data = () => {
   
   const [searchValue, setSearchValue] = React.useState("");
   
-  // const [selectedStatus, setSelectedStatus] = useState('All');
-  // const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('All');
-  // const [selectedChannel, setSelectedChannel] = useState('All');
-  // const [selectedPlatform, setSelectedPlatform] = useState('All');
-  
-  // const filteredData = tableData.filter(row => (
-  //   (selectedStatus === 'All' || row.status === selectedStatus) &&
-  //   (selectedPaymentMethod === 'All' || row.paymentMethod === selectedPaymentMethod) &&
-  //   (selectedChannel === 'All' || row.channel === selectedChannel) &&
-  //   (selectedPlatform === 'All' || row.platform === selectedPlatform)
-  // ));
+  const [selectedStatus, setSelectedStatus] = React.useState("All");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = React.useState("All");
+  const [selectedChannel, setSelectedChannel] = React.useState("All");
+  const [selectedPlatform, setSelectedPlatform] = React.useState("All");
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       // Implement your search logic here
@@ -134,6 +129,17 @@ export const Data = () => {
       platform: "TikTok"
     }
   ];
+
+  const filteredData = tableData.filter((row) => (
+    (selectedStatus === "All" || row.status === selectedStatus) &&
+    (selectedPaymentMethod === "All" || row.paymentMethod === selectedPaymentMethod) &&
+    (selectedChannel === "All" || row.channel === selectedChannel) &&
+    (selectedPlatform === "All" || row.platform === selectedPlatform) &&
+    (searchValue === "" ||
+      row.invoiceId.toLowerCase().includes(searchValue.toLowerCase()) ||
+      row.client.name.toLowerCase().includes(searchValue.toLowerCase()))
+  ));
+
 
   return (
     <div className="data">
@@ -242,7 +248,12 @@ export const Data = () => {
                       <div className="label-3">Status</div>
                     </div>
                     <FormControl variant="outlined" className="input-dropdown-8" size="small" >
-                      <Select defaultValue="All" label="" inputProps={{ notched: false }}>
+                      <Select
+                        value={selectedStatus}
+                        onChange={(e) => setSelectedStatus(e.target.value)}
+                        label=""
+                        inputProps={{ notched: false }}
+                      >
                         <MenuItem value="All">All</MenuItem>
                         <MenuItem value="Draft">Draft</MenuItem>
                         <MenuItem value="Paid">Paid</MenuItem>
@@ -258,7 +269,12 @@ export const Data = () => {
                       <div className="label-3">Payment method</div>
                     </div>
                     <FormControl variant="outlined" className="input-dropdown-8" size="small">
-                      <Select defaultValue="All" label="" inputProps={{ notched: false }}>
+                      <Select
+                        value={selectedPaymentMethod}
+                        onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                        label=""
+                        inputProps={{ notched: false }}
+                      >
                         <MenuItem value="All">All</MenuItem>
                         <MenuItem value="Full Payment">Full Payment</MenuItem>
                         <MenuItem value="Deposit">Deposit</MenuItem>
@@ -273,9 +289,15 @@ export const Data = () => {
                       <div className="label-3">Channel</div>
                     </div>
                     <FormControl variant="outlined" className="input-dropdown-8" size="small">
-                      <Select defaultValue="All" label="" inputProps={{ notched: false }}>
+                      <Select
+                        value={selectedChannel}
+                        onChange={(e) => setSelectedChannel(e.target.value)}
+                        label=""
+                        inputProps={{ notched: false }}
+                      >
                         <MenuItem value="All">All</MenuItem>
                         <MenuItem value="@PWPINN">@PWPINN</MenuItem>
+                        <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
                         <MenuItem value="@Porpagin">@Porpagin</MenuItem>
                       </Select>
                     </FormControl>
@@ -287,7 +309,12 @@ export const Data = () => {
                       <div className="label-3">Platform</div>
                     </div>
                     <FormControl variant="outlined" className="input-dropdown-8" size="small">
-                      <Select defaultValue="All" label="" inputProps={{ notched: false }}>
+                      <Select
+                        value={selectedPlatform}
+                        onChange={(e) => setSelectedPlatform(e.target.value)}
+                        label=""
+                        inputProps={{ notched: false }}
+                      >
                         <MenuItem value="All">All</MenuItem>
                         <MenuItem value="TikTok">TikTok</MenuItem>
                         <MenuItem value="Instagram">Instagram</MenuItem>
@@ -308,7 +335,7 @@ export const Data = () => {
                         {/* <ArrowDown10 className="arrow-down" /> */}
                       </div>
                     </div>
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -330,7 +357,7 @@ export const Data = () => {
                       text
                       visible={false}
                     />
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -351,7 +378,7 @@ export const Data = () => {
                       tableHeaderText1="Status"
                       text
                     />
-                    {tableData.map((row, idx) => {
+                    {filteredData.map((row, idx) => {
                       let iconOverride = null;
                       let badgeColor = "gray";
                       if (row.status === "Paid") {
@@ -391,7 +418,7 @@ export const Data = () => {
                       tableHeaderText1="Payment Method"
                       text
                     />
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -411,7 +438,7 @@ export const Data = () => {
                       tableHeaderText1="Client"
                       text
                     />
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         hasText={false}
@@ -436,7 +463,7 @@ export const Data = () => {
                       tableHeaderText1="Brand"
                       text
                     />
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -455,7 +482,7 @@ export const Data = () => {
                         <div className="text-47">Total Balance</div>
                       </div>
                     </div>
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -475,7 +502,7 @@ export const Data = () => {
                       tableHeaderText1="Channel"
                       text
                     />
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -496,7 +523,7 @@ export const Data = () => {
                       tableHeaderText1="Platform"
                       text
                     />
-                    {tableData.map((row, idx) => (
+                    {filteredData.map((row, idx) => (
                       <TableCell
                         key={idx}
                         stateProp="default"
@@ -515,7 +542,7 @@ export const Data = () => {
                       color="gray"
                       text={false}
                     />
-                    {tableData.map((_, idx) => (
+                    {filteredData.map((_, idx) => (
                       <div key={idx} className="table-cell" style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <DropdownWrapper className="design-component-instance-node-2" />
                       </div>
