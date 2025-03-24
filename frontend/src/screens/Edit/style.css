@@ -1,0 +1,104 @@
+.edit-screen {
+  align-items: flex-start;
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+  display: flex;
+  flex-direction: column;
+  height: 1024px;
+  position: relative;
+}
+
+.edit-screen .header-navigation-7 {
+  flex: 0 0 auto !important;
+  z-index: 1 !important;
+}
+
+.edit-screen .icon-instance-node-8 {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.edit-screen .main-6 {
+  align-items: flex-start;
+  align-self: stretch;
+  background-color: #ffffff;
+  border-radius: 40px 0px 0px 0px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: -1638.00px;
+  padding: 24px 0px;
+  position: relative;
+  width: 100%;
+  z-index: 0;
+}
+
+.edit-screen .section-7 {
+  align-items: center;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.edit-screen .content-40 {
+  align-items: flex-start;
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: wrap;
+  gap: var(--3-spacing-spacing-xl);
+  position: relative;
+  width: 1280px;
+}
+
+.edit-screen .text-and-supporting-18 {
+  align-items: flex-start;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: var(--3-spacing-spacing-xs);
+  min-width: 320px;
+  position: relative;
+}
+
+.edit-screen .text-52 {
+  align-self: stretch;
+  color: var(--1-color-modes-colors-text-text-primary-900);
+  font-family: var(--display-sm-semibold-font-family);
+  font-size: var(--display-sm-semibold-font-size);
+  font-style: var(--display-sm-semibold-font-style);
+  font-weight: var(--display-sm-semibold-font-weight);
+  letter-spacing: var(--display-sm-semibold-letter-spacing);
+  line-height: var(--display-sm-semibold-line-height);
+  margin-top: -1.00px;
+  position: relative;
+}
+
+.edit-screen .actions-17 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: var(--3-spacing-spacing-lg);
+  position: relative;
+}
+
+.edit-screen .design-component-instance-node-4 {
+  flex: 0 0 auto !important;
+}
+
+.edit-screen .button-13 {
+  flex: 0 0 auto;
+  margin-bottom: -3.00px;
+  margin-right: -2.00px;
+  margin-top: -1.00px;
+  position: relative;
+}
+
+.edit-screen .form-instance {
+  color: var(--1-color-modes-colors-text-text-primary-900) !important;
+}

@@ -1,0 +1,469 @@
+.progress-bar {
+  display: flex;
+  position: relative;
+  width: 320px;
+}
+
+.progress-bar .div-5 {
+  background-color: var(--1-color-modes-colors-background-bg-quaternary);
+  border-radius: var(--2-radius-radius-full);
+  height: 8px;
+  position: relative;
+}
+
+.progress-bar .progress {
+  background-color: var(--1-color-modes-colors-foreground-fg-brand-primary-600);
+  border-radius: var(--2-radius-radius-full);
+  height: 8px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 8px;
+}
+
+.progress-bar .tooltip-5 {
+  align-items: center;
+  box-shadow: var(--shadows-shadow-lg);
+  display: inline-flex;
+  flex-direction: column;
+  left: -18px;
+  position: absolute;
+}
+
+.progress-bar .content-23 {
+  align-items: flex-start;
+  align-self: stretch;
+  background-color: var(--1-color-modes-colors-background-bg-primary-alt);
+  border: 1px solid;
+  border-color: var(--1-color-modes-colors-border-border-secondary);
+  border-radius: var(--2-radius-radius-md);
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: var(--3-spacing-spacing-md) var(--3-spacing-spacing-lg)
+    var(--3-spacing-spacing-md) var(--3-spacing-spacing-lg);
+  position: relative;
+  width: 100%;
+}
+
+.progress-bar .text-41 {
+  color: var(--1-color-modes-colors-text-text-secondary-700);
+  font-family: var(--text-xs-semibold-font-family);
+  font-size: var(--text-xs-semibold-font-size);
+  font-style: var(--text-xs-semibold-font-style);
+  font-weight: var(--text-xs-semibold-font-weight);
+  letter-spacing: var(--text-xs-semibold-letter-spacing);
+  line-height: var(--text-xs-semibold-line-height);
+  margin-top: -1.00px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.progress-bar .progress-2 {
+  background-color: var(--1-color-modes-colors-foreground-fg-brand-primary-600);
+  height: 8px;
+}
+
+.progress-bar .tooltip-6 {
+  align-items: center;
+  box-shadow: var(--shadows-shadow-lg);
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.progress-bar .percentage {
+  color: var(--1-color-modes-colors-text-text-secondary-700);
+  font-family: var(--text-sm-medium-font-family);
+  font-size: var(--text-sm-medium-font-size);
+  font-style: var(--text-sm-medium-font-style);
+  font-weight: var(--text-sm-medium-font-weight);
+  letter-spacing: var(--text-sm-medium-letter-spacing);
+  line-height: var(--text-sm-medium-line-height);
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.progress-bar.label-top-floating {
+  align-items: flex-end;
+  flex-direction: column;
+  gap: var(--3-spacing-spacing-md);
+}
+
+.progress-bar.label-bottom-floating {
+  align-items: flex-end;
+  flex-direction: column;
+  gap: var(--3-spacing-spacing-md);
+}
+
+.progress-bar.label-bottom {
+  align-items: flex-end;
+  flex-direction: column;
+  gap: var(--3-spacing-spacing-md);
+}
+
+.progress-bar.label-right {
+  align-items: center;
+  gap: var(--3-spacing-spacing-lg);
+}
+
+.progress-bar.label-false {
+  align-items: center;
+  gap: var(--3-spacing-spacing-lg);
+}
+
+.progress-bar .label-2-top-floating {
+  border-radius: var(--3-spacing-spacing-xs);
+}
+
+.progress-bar .label-2-bottom {
+  border-radius: var(--2-radius-radius-full);
+}
+
+.progress-bar .label-2-bottom-floating {
+  border-radius: var(--3-spacing-spacing-xs);
+}
+
+.progress-bar .label-2-false {
+  border-radius: var(--2-radius-radius-full);
+}
+
+.progress-bar .label-2-right {
+  border-radius: var(--2-radius-radius-full);
+}
+
+.progress-bar .eighty.label-2-false {
+  width: 267px;
+}
+
+.progress-bar .label-2-top-floating.ninety {
+  width: 288px;
+}
+
+.progress-bar .label-2-bottom-floating.zero {
+  width: 224px;
+}
+
+.progress-bar .forty.label-2-right {
+  width: 112px;
+}
+
+.progress-bar .eighty.label-2-bottom-floating {
+  width: 256px;
+}
+
+.progress-bar .label-2-bottom.sixty {
+  width: 192px;
+}
+
+.progress-bar .twenty.label-2-bottom-floating {
+  width: 64px;
+}
+
+.progress-bar .label-2-right.fifty {
+  width: 140px;
+}
+
+.progress-bar .one-hundred.label-2-top-floating {
+  width: 320px;
+}
+
+.progress-bar .ten.label-2-bottom-floating {
+  width: 32px;
+}
+
+.progress-bar .label-2-top-floating.thirty {
+  width: 96px;
+}
+
+.progress-bar .seventy.label-2-top-floating {
+  width: 224px;
+}
+
+.progress-bar .label-2-right.zero {
+  width: 8px;
+}
+
+.progress-bar .label-2-bottom.thirty {
+  width: 96px;
+}
+
+.progress-bar .label-2-right.eighty {
+  width: 224px;
+}
+
+.progress-bar .twenty.label-2-right {
+  width: 56px;
+}
+
+.progress-bar .fifty.label-2-bottom-floating {
+  width: 160px;
+}
+
+.progress-bar .label-2-top-floating.sixty {
+  width: 192px;
+}
+
+.progress-bar .fifty.label-2-false {
+  width: 184px;
+}
+
+.progress-bar .one-hundred.label-2-false {
+  width: 320px;
+}
+
+.progress-bar .ninety.label-2-bottom {
+  width: 288px;
+}
+
+.progress-bar .seventy.label-2-false {
+  width: 239px;
+}
+
+.progress-bar .label-2-false.zero {
+  width: 44px;
+}
+
+.progress-bar .twenty.label-2-false {
+  width: 101px;
+}
+
+.progress-bar .forty.label-2-top-floating {
+  width: 128px;
+}
+
+.progress-bar .one-hundred.label-2-bottom {
+  width: 320px;
+}
+
+.progress-bar .ninety.label-2-false {
+  width: 294px;
+}
+
+.progress-bar .seventy.label-2-bottom {
+  width: 224px;
+}
+
+.progress-bar .one-hundred.label-2-right {
+  width: 271px;
+}
+
+.progress-bar .seventy.label-2-right {
+  width: 197px;
+}
+
+.progress-bar .ninety.label-2-bottom-floating {
+  width: 288px;
+}
+
+.progress-bar .label-2-top-floating.zero {
+  width: 224px;
+}
+
+.progress-bar .label-2-false.thirty {
+  width: 129px;
+}
+
+.progress-bar .label-2-top-floating.eighty {
+  width: 256px;
+}
+
+.progress-bar .twenty.label-2-top-floating {
+  width: 64px;
+}
+
+.progress-bar .one-hundred.label-2-bottom-floating {
+  width: 320px;
+}
+
+.progress-bar .label-2-top-floating.ten {
+  width: 32px;
+}
+
+.progress-bar .label-2-bottom-floating.thirty {
+  width: 96px;
+}
+
+.progress-bar .seventy.label-2-bottom-floating {
+  width: 224px;
+}
+
+.progress-bar .label-2-right.ninety {
+  width: 252px;
+}
+
+.progress-bar .label-2-false.sixty {
+  width: 212px;
+}
+
+.progress-bar .label-2-top-floating.fifty {
+  width: 160px;
+}
+
+.progress-bar .label-2-bottom-floating.sixty {
+  width: 192px;
+}
+
+.progress-bar .eighty.label-2-bottom {
+  width: 256px;
+}
+
+.progress-bar .label-2-right.thirty {
+  width: 84px;
+}
+
+.progress-bar .twenty.label-2-bottom {
+  width: 64px;
+}
+
+.progress-bar .label-2-bottom.zero {
+  width: 8px;
+}
+
+.progress-bar .ten.label-2-false {
+  width: 72px;
+}
+
+.progress-bar .fifty.label-2-bottom {
+  width: 160px;
+}
+
+.progress-bar .label-2-right.sixty {
+  width: 168px;
+}
+
+.progress-bar .forty.label-2-false {
+  width: 157px;
+}
+
+.progress-bar .forty.label-2-bottom {
+  width: 128px;
+}
+
+.progress-bar .forty.label-2-bottom-floating {
+  width: 128px;
+}
+
+.progress-bar .ten.label-2-bottom {
+  width: 32px;
+}
+
+.progress-bar .label-2-right.ten {
+  width: 28px;
+}
+
+.progress-bar.label-top-floating .div-5 {
+  align-self: stretch;
+  width: 100%;
+}
+
+.progress-bar.label-bottom-floating .div-5 {
+  align-self: stretch;
+  width: 100%;
+}
+
+.progress-bar.label-bottom .div-5 {
+  align-self: stretch;
+  width: 100%;
+}
+
+.progress-bar.label-right .div-5 {
+  flex: 1;
+  flex-grow: 1;
+}
+
+.progress-bar.label-false .div-5 {
+  flex: 1;
+  flex-grow: 1;
+}
+
+.progress-bar.label-top-floating .tooltip-5 {
+  top: -42px;
+}
+
+.progress-bar.label-bottom-floating .tooltip-5 {
+  top: 16px;
+}
+
+.progress-bar.label-bottom .tooltip-5 {
+  top: -42px;
+}
+
+.progress-bar.label-right .tooltip-5 {
+  top: -42px;
+}
+
+.progress-bar.label-false .tooltip-5 {
+  top: -42px;
+}
+
+.progress-bar .progress-2.eighty .tooltip-6 {
+  left: 227px;
+}
+
+.progress-bar .progress-2.forty .tooltip-6 {
+  left: 98px;
+}
+
+.progress-bar .progress-2.label-2-top-floating .tooltip-6 {
+  top: -42px;
+}
+
+.progress-bar .progress-2.one-hundred .tooltip-6 {
+  left: 288px;
+}
+
+.progress-bar .progress-2.ten .tooltip-6 {
+  left: 4px;
+}
+
+.progress-bar .progress-2.fifty .tooltip-6 {
+  left: 131px;
+}
+
+.progress-bar .progress-2.seventy .tooltip-6 {
+  left: 195px;
+}
+
+.progress-bar .progress-2.label-2-bottom .tooltip-6 {
+  top: -42px;
+}
+
+.progress-bar .progress-2.label-2-bottom-floating .tooltip-6 {
+  top: 16px;
+}
+
+.progress-bar .progress-2.label-2-false .tooltip-6 {
+  top: -42px;
+}
+
+.progress-bar .progress-2.ninety .tooltip-6 {
+  left: 259px;
+}
+
+.progress-bar .progress-2.label-2-right .tooltip-6 {
+  top: -42px;
+}
+
+.progress-bar .progress-2.sixty .tooltip-6 {
+  left: 163px;
+}
+
+.progress-bar .progress-2.twenty .tooltip-6 {
+  left: 35px;
+}
+
+.progress-bar .progress-2.thirty .tooltip-6 {
+  left: 67px;
+}
+
+.progress-bar .progress-2.zero .tooltip-6 {
+  left: 4px;
+}
+
+.progress-bar.label-right .percentage {
+  margin-top: -1.00px;
+}

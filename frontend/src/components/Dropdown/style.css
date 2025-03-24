@@ -1,0 +1,112 @@
+.dropdown {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.dropdown .menu-2 {
+  align-items: flex-start;
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+  border: 1px solid;
+  border-color: var(--1-color-modes-colors-border-border-secondary);
+  border-radius: var(--2-radius-radius-md);
+  box-shadow: var(--shadows-shadow-lg);
+  display: inline-flex;
+  flex-direction: column;
+  left: -220px;
+  overflow: hidden;
+  position: absolute;
+  top: 28px;
+}
+
+.dropdown .instance-node-13 {
+  flex: 0 0 auto !important;
+}
+
+.dropdown .menu-items-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  padding: var(--3-spacing-spacing-xs) 0px var(--3-spacing-spacing-xs) 0px;
+  position: relative;
+  width: 100%;
+}
+
+.dropdown .dropdown-list-item {
+  align-self: stretch !important;
+  flex: 0 0 auto !important;
+  width: 100% !important;
+}
+
+.dropdown .dropdown-list-item-instance {
+  align-self: stretch !important;
+  flex: 0 0 auto !important;
+  position: relative !important;
+  width: 100% !important;
+}
+
+.dropdown .instance-node-14 {
+  height: 16px !important;
+  position: relative !important;
+  width: 16px !important;
+}
+
+.dropdown .instance-node-15 {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.dropdown .focus-ring {
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+  border-radius: var(--2-radius-radius-full);
+  box-shadow: var(--focus-rings-focus-ring);
+  height: 40px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 40px;
+}
+
+.dropdown .avatar-7 {
+  position: relative !important;
+}
+
+.dropdown .menu-3 {
+  align-items: flex-start;
+  background-color: var(--1-color-modes-colors-background-bg-primary);
+  border: 1px solid;
+  border-color: var(--1-color-modes-colors-border-border-secondary);
+  border-radius: var(--2-radius-radius-md);
+  box-shadow: var(--shadows-shadow-lg);
+  display: inline-flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: absolute;
+  top: 48px;
+}
+
+.dropdown .dots-vertical {
+  height: 28px !important;
+  margin-bottom: -4.00px !important;
+  margin-left: -4.00px !important;
+  margin-right: -4.00px !important;
+  margin-top: -4.00px !important;
+  position: relative !important;
+  width: 28px !important;
+}
+
+.dropdown.type-icon.open-true {
+  border-radius: 9999px;
+}
+
+.dropdown.type-avatar .menu-3 {
+  left: -200px;
+}
+
+.dropdown.type-button .menu-3 {
+  left: -127px;
+}

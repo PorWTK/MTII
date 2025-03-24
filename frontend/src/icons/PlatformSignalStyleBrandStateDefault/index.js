@@ -1,0 +1,1 @@
+export { PlatformSignalStyleBrandStateDefault } from "./PlatformSignalStyleBrandStateDefault";

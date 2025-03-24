@@ -1,0 +1,1 @@
+export { PlatformPinterestStyleGrayStateHover } from "./PlatformPinterestStyleGrayStateHover";

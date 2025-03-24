@@ -1,0 +1,50 @@
+.change {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  position: relative;
+}
+
+.change .instance-node-14 {
+  height: 20px !important;
+  position: relative !important;
+  width: 20px !important;
+}
+
+.change .text-wrapper-4 {
+  color: var(--1-color-modes-colors-text-text-success-primary-600);
+  font-family: var(--text-sm-medium-font-family);
+  font-size: var(--text-sm-medium-font-size);
+  font-style: var(--text-sm-medium-font-style);
+  font-weight: var(--text-sm-medium-font-weight);
+  letter-spacing: var(--text-sm-medium-letter-spacing);
+  line-height: var(--text-sm-medium-line-height);
+  margin-top: -1.00px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.change .text-wrapper-5 {
+  color: var(--1-color-modes-colors-text-text-error-primary-600);
+  font-family: var(--text-sm-medium-font-family);
+  font-size: var(--text-sm-medium-font-size);
+  font-style: var(--text-sm-medium-font-style);
+  font-weight: var(--text-sm-medium-font-weight);
+  letter-spacing: var(--text-sm-medium-letter-spacing);
+  line-height: var(--text-sm-medium-line-height);
+  margin-top: -1.00px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.change.one {
+  gap: var(--3-spacing-spacing-xxs);
+}
+
+.change.two {
+  gap: var(--3-spacing-spacing-xs);
+}

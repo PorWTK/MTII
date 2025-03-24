@@ -1,0 +1,141 @@
+.avatar-group {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: var(--3-spacing-spacing-md);
+  position: relative;
+}
+
+.avatar-group .avatars {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  position: relative;
+}
+
+.avatar-group .class-129 {
+  width: 32px !important;
+}
+
+.avatar-group .class-130 {
+  width: 40px !important;
+}
+
+.avatar-group .class-131 {
+  width: 24px !important;
+}
+
+.avatar-group .class-132 {
+  border: 1.5px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 35px !important;
+  margin-bottom: -1.50px !important;
+  margin-left: -1.50px !important;
+  margin-top: -1.50px !important;
+  position: relative !important;
+  width: 35px !important;
+}
+
+.avatar-group .class-133 {
+  border: 1.5px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 43px !important;
+  margin-bottom: -1.50px !important;
+  margin-left: -1.50px !important;
+  margin-top: -1.50px !important;
+  position: relative !important;
+  width: 43px !important;
+}
+
+.avatar-group .class-134 {
+  border: 1.5px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 27px !important;
+  margin-bottom: -1.50px !important;
+  margin-left: -1.50px !important;
+  margin-top: -1.50px !important;
+  position: relative !important;
+  width: 27px !important;
+}
+
+.avatar-group .class-135 {
+  border: 1.5px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 35px !important;
+  margin-bottom: -1.50px !important;
+  margin-left: -8px !important;
+  margin-top: -1.50px !important;
+  position: relative !important;
+  width: 35px !important;
+}
+
+.avatar-group .class-136 {
+  border: 1.5px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 43px !important;
+  margin-bottom: -1.50px !important;
+  margin-left: -12px !important;
+  margin-top: -1.50px !important;
+  position: relative !important;
+  width: 43px !important;
+}
+
+.avatar-group .class-137 {
+  border: 1.5px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 27px !important;
+  margin-bottom: -1.50px !important;
+  margin-left: -4px !important;
+  margin-top: -1.50px !important;
+  position: relative !important;
+  width: 27px !important;
+}
+
+.avatar-group .avatar-7 {
+  color: var(--1-color-modes-colors-text-text-tertiary-600) !important;
+}
+
+.avatar-group .class-138 {
+  background-color: var(--1-color-modes-colors-background-bg-tertiary) !important;
+  border: 2px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 36px !important;
+  margin-bottom: -2.00px !important;
+  margin-left: -8px !important;
+  margin-right: -2.00px !important;
+  margin-top: -2.00px !important;
+  position: relative !important;
+  width: 36px !important;
+}
+
+.avatar-group .class-139 {
+  background-color: var(--1-color-modes-colors-background-bg-tertiary) !important;
+  border: 2px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 44px !important;
+  margin-bottom: -2.00px !important;
+  margin-left: -12px !important;
+  margin-right: -2.00px !important;
+  margin-top: -2.00px !important;
+  position: relative !important;
+  width: 44px !important;
+}
+
+.avatar-group .class-140 {
+  background-color: var(--1-color-modes-colors-background-bg-tertiary) !important;
+  border: 2px solid !important;
+  border-color: var(--1-color-modes-colors-background-bg-primary) !important;
+  height: 28px !important;
+  margin-bottom: -2.00px !important;
+  margin-left: -4px !important;
+  margin-right: -2.00px !important;
+  margin-top: -2.00px !important;
+  position: relative !important;
+  width: 28px !important;
+}
+
+.avatar-group .avatar-add-button-instance {
+  margin-bottom: -1.00px !important;
+  margin-right: -1.00px !important;
+  margin-top: -1.00px !important;
+  position: relative !important;
+}
