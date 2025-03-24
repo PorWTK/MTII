@@ -143,7 +143,7 @@ export const Data = () => {
                       </div>
                       <TextField
                         id="search-field"
-                        placeholder="Invoice ID, Brand, Client name"
+                        placeholder="Invoice ID, Client name, Brand"
                         value={searchValue}
                         onChange={(e) => setSearchValue(e.target.value)}
                         onKeyDown={handleKeyDown}

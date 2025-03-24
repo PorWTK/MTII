@@ -1041,589 +1041,589 @@ Form.propTypes = {
 
 <div className="divider-2" />
 
-{/* Receiver Section */}
-<div className="content-19">
+// {/* Receiver Section */}
+// <div className="content-19">
 
-  <SectionLabel
-    actions={false}
-    className="section-label-instance"
-    helpIcon={false}
-    size="sm"
-    supportingText={false}
-    text="Receiver"
-  />
-  <div className="input-fields-3">
-   <div className="input-with-label-4">
-      <div className="label-wrapper-4">
-        <div className="label-3">Receiver</div>
-      </div>
-    </div>
-    <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
-      <InputLabel id="receiver-label" sx={{ display: "none" }}>
-        Receiver
-      </InputLabel>
-      <Select labelId="receiver-label" defaultValue="">
-        <MenuItem value="All">All</MenuItem>
-        <MenuItem value="@PinnPW">@PinnPW</MenuItem>
-        <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
-        <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัท โชคชัย 9672 จำกัด</MenuItem>
-      </Select>
-    </FormControl>
-  </div>
-</div>
+//   <SectionLabel
+//     actions={false}
+//     className="section-label-instance"
+//     helpIcon={false}
+//     size="sm"
+//     supportingText={false}
+//     text="Receiver"
+//   />
+//   <div className="input-fields-3">
+//    <div className="input-with-label-4">
+//       <div className="label-wrapper-4">
+//         <div className="label-3">Receiver</div>
+//       </div>
+//     </div>
+//     <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
+//       <InputLabel id="receiver-label" sx={{ display: "none" }}>
+//         Receiver
+//       </InputLabel>
+//       <Select labelId="receiver-label" defaultValue="">
+//         <MenuItem value="All">All</MenuItem>
+//         <MenuItem value="@PinnPW">@PinnPW</MenuItem>
+//         <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
+//         <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัท โชคชัย 9672 จำกัด</MenuItem>
+//       </Select>
+//     </FormControl>
+//   </div>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Influencer Section */}
-<div className="content-19">
-  <SectionLabel
-    actions={false}
-    className="section-label-instance"
-    helpIcon={false}
-    size="sm"
-    supportingText={false}
-    text="Influencer"
-  />
-  <div className="input-fields-3">
-    <div className="frame-3">
-      <div className="input-fields-3">
-      <div className="input-with-label-4">
-          <div className="label-wrapper-4">
-            <div className="label-3">Receiver</div>
-          </div>
-        </div>
-        <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
-          <InputLabel id="receiver-label" sx={{ display: "none" }}>
-            Receiver
-          </InputLabel>
-          <Select labelId="receiver-label" defaultValue="">
-            <MenuItem value="All">All</MenuItem>
-            <MenuItem value="@PinnPW">@PinnPW</MenuItem>
-            <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
-            <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัท โชคชัย 9672 จำกัด</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
-        <InputLabel id="channel-label">Channel</InputLabel>
-        <Select labelId="channel-label" label="Channel" defaultValue="">
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Option1">Option1</MenuItem>
-          {/* Add other options */}
-        </Select>
-      </FormControl>
+// {/* Influencer Section */}
+// <div className="content-19">
+//   <SectionLabel
+//     actions={false}
+//     className="section-label-instance"
+//     helpIcon={false}
+//     size="sm"
+//     supportingText={false}
+//     text="Influencer"
+//   />
+//   <div className="input-fields-3">
+//     <div className="frame-3">
+//       <div className="input-fields-3">
+//       <div className="input-with-label-4">
+//           <div className="label-wrapper-4">
+//             <div className="label-3">Receiver</div>
+//           </div>
+//         </div>
+//         <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
+//           <InputLabel id="receiver-label" sx={{ display: "none" }}>
+//             Receiver
+//           </InputLabel>
+//           <Select labelId="receiver-label" defaultValue="">
+//             <MenuItem value="All">All</MenuItem>
+//             <MenuItem value="@PinnPW">@PinnPW</MenuItem>
+//             <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
+//             <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัท โชคชัย 9672 จำกัด</MenuItem>
+//           </Select>
+//         </FormControl>
+//       </div>
+//       <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
+//         <InputLabel id="channel-label">Channel</InputLabel>
+//         <Select labelId="channel-label" label="Channel" defaultValue="">
+//           <MenuItem value="">
+//             <em>None</em>
+//           </MenuItem>
+//           <MenuItem value="Option1">Option1</MenuItem>
+//           {/* Add other options */}
+//         </Select>
+//       </FormControl>
 
-      <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
-        <InputLabel id="platform-label">Platform</InputLabel>
-        <Select labelId="platform-label" label="Platform" defaultValue="">
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Option1">Option1</MenuItem>
-          {/* Add other options */}
-        </Select>
-      </FormControl>
-    </div>
+//       <FormControl fullWidth sx={{ width: "479px" }} disabled={isDisabled}>
+//         <InputLabel id="platform-label">Platform</InputLabel>
+//         <Select labelId="platform-label" label="Platform" defaultValue="">
+//           <MenuItem value="">
+//             <em>None</em>
+//           </MenuItem>
+//           <MenuItem value="Option1">Option1</MenuItem>
+//           {/* Add other options */}
+//         </Select>
+//       </FormControl>
+//     </div>
 
-    <div className="frame-4">
-      <div className="input-with-label-4">
-        <div className="label-wrapper-4">
-          <div className="label-3">Posting Date</div>
-        </div>
-      </div>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <DatePicker
-          value={postingDate}
-          onChange={(newValue) => setPostingDate(newValue)}
-          disabled={isDisabled}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              fullWidth
-              sx={{ height: "44px", width: "476px" }}
-            />
-          )}
-        />
-      </LocalizationProvider>
-    </div>
-  </div>
-</div>
+//     <div className="frame-4">
+//       <div className="input-with-label-4">
+//         <div className="label-wrapper-4">
+//           <div className="label-3">Posting Date</div>
+//         </div>
+//       </div>
+//       <LocalizationProvider dateAdapter={AdapterDateFns}>
+//         <DatePicker
+//           value={postingDate}
+//           onChange={(newValue) => setPostingDate(newValue)}
+//           disabled={isDisabled}
+//           renderInput={(params) => (
+//             <TextField
+//               {...params}
+//               fullWidth
+//               sx={{ height: "44px", width: "476px" }}
+//             />
+//           )}
+//         />
+//       </LocalizationProvider>
+//     </div>
+//   </div>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Client (Agency) Section */}
-<div className="content-19">
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="agency-name">
-      Agency Name
-    </InputLabel>
-    <TextField
-      id="agency-name"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="taxpayer-id">
-      Tax Payer ID number
-    </InputLabel>
-    <TextField
-      id="taxpayer-id"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-</div>
-<div className="frame-3">
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="address">
-      Address
-    </InputLabel>
-    <TextField
-      id="address"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="phone-agency">
-      Phone number
-    </InputLabel>
-    <TextField
-      id="phone-agency"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      type="tel"
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-</div>
+// {/* Client (Agency) Section */}
+// <div className="content-19">
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="agency-name">
+//       Agency Name
+//     </InputLabel>
+//     <TextField
+//       id="agency-name"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="taxpayer-id">
+//       Tax Payer ID number
+//     </InputLabel>
+//     <TextField
+//       id="taxpayer-id"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+// </div>
+// <div className="frame-3">
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="address">
+//       Address
+//     </InputLabel>
+//     <TextField
+//       id="address"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="phone-agency">
+//       Phone number
+//     </InputLabel>
+//     <TextField
+//       id="phone-agency"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       type="tel"
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Client (Contactor) Section */}
-<div className="content-19">
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="contacter-name">
-      Contacter Name
-    </InputLabel>
-    <TextField
-      id="contacter-name"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="phone-contacter">
-      Phone number
-    </InputLabel>
-    <TextField
-      id="phone-contacter"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      type="tel"
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-</div>
-<div className="frame-3">
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="line">
-      Line
-    </InputLabel>
-    <TextField
-      id="line"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-  <FormControl fullWidth>
-    <InputLabel shrink htmlFor="email">
-      Email
-    </InputLabel>
-    <TextField
-      id="email"
-      variant="outlined"
-      fullWidth
-      disabled={isDisabled}
-      type="email"
-      sx={{ height: "44px" }}
-    />
-  </FormControl>
-</div>
+// {/* Client (Contactor) Section */}
+// <div className="content-19">
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="contacter-name">
+//       Contacter Name
+//     </InputLabel>
+//     <TextField
+//       id="contacter-name"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="phone-contacter">
+//       Phone number
+//     </InputLabel>
+//     <TextField
+//       id="phone-contacter"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       type="tel"
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+// </div>
+// <div className="frame-3">
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="line">
+//       Line
+//     </InputLabel>
+//     <TextField
+//       id="line"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+//   <FormControl fullWidth>
+//     <InputLabel shrink htmlFor="email">
+//       Email
+//     </InputLabel>
+//     <TextField
+//       id="email"
+//       variant="outlined"
+//       fullWidth
+//       disabled={isDisabled}
+//       type="email"
+//       sx={{ height: "44px" }}
+//     />
+//   </FormControl>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Brand Section */}
-<div className="content-19">
-  <div className="frame-3">
-    <FormControl fullWidth>
-      <InputLabel shrink htmlFor="brand-name">
-        Brand name
-      </InputLabel>
-      <TextField
-        id="brand-name"
-        variant="outlined"
-        fullWidth
-        disabled={isDisabled}
-        sx={{ height: "44px" }}
-      />
-    </FormControl>
-    <FormControl fullWidth>
-      <InputLabel shrink htmlFor="product">
-        Product
-      </InputLabel>
-      <TextField
-        id="product"
-        variant="outlined"
-        fullWidth
-        disabled={isDisabled}
-        sx={{ height: "44px" }}
-      />
-    </FormControl>
-  </div>
-</div>
+// {/* Brand Section */}
+// <div className="content-19">
+//   <div className="frame-3">
+//     <FormControl fullWidth>
+//       <InputLabel shrink htmlFor="brand-name">
+//         Brand name
+//       </InputLabel>
+//       <TextField
+//         id="brand-name"
+//         variant="outlined"
+//         fullWidth
+//         disabled={isDisabled}
+//         sx={{ height: "44px" }}
+//       />
+//     </FormControl>
+//     <FormControl fullWidth>
+//       <InputLabel shrink htmlFor="product">
+//         Product
+//       </InputLabel>
+//       <TextField
+//         id="product"
+//         variant="outlined"
+//         fullWidth
+//         disabled={isDisabled}
+//         sx={{ height: "44px" }}
+//       />
+//     </FormControl>
+//   </div>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Details Section */}
-<div className="frame-5">
-  <div className="content-19">
-    <div className="section-label-instance">Details</div>
-    <div className="frame-6">
-      <div className="div-3">
-        <div className="frame-3">
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="description-1">
-              Description
-            </InputLabel>
-            <TextField
-              id="description-1"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="notes-1">Notes</InputLabel>
-            <TextField
-              id="notes-1"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-        </div>
-        <div className="frame-3">
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="quantity-1">
-              Quantity
-            </InputLabel>
-            <TextField
-              id="quantity-1"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="unit-price-1">
-              Unit price
-            </InputLabel>
-            <TextField
-              id="unit-price-1"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-        </div>
-        <div className="divider-3" />
-      </div>
-      <div className="div-3">
-        <div className="frame-3">
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="description-2">
-              Description
-            </InputLabel>
-            <TextField
-              id="description-2"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="notes-2">Notes</InputLabel>
-            <TextField
-              id="notes-2"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-        </div>
-        <div className="frame-3">
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="quantity-2">
-              Quantity
-            </InputLabel>
-            <TextField
-              id="quantity-2"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-          <FormControl fullWidth>
-            <InputLabel shrink htmlFor="unit-price-2">
-              Unit price
-            </InputLabel>
-            <TextField
-              id="unit-price-2"
-              variant="outlined"
-              fullWidth
-              disabled={isDisabled}
-              sx={{ height: "44px" }}
-            />
-          </FormControl>
-        </div>
-        <div className="divider-3" />
-      </div>
-      <div className="div-3">
-        <div className="actions-9">
-          <Button variant="contained" color="secondary" disabled={isDisabled}>
-            Delete
-          </Button>
-          <Button variant="contained" disabled={isDisabled}>
-            Submit
-          </Button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+// {/* Details Section */}
+// <div className="frame-5">
+//   <div className="content-19">
+//     <div className="section-label-instance">Details</div>
+//     <div className="frame-6">
+//       <div className="div-3">
+//         <div className="frame-3">
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="description-1">
+//               Description
+//             </InputLabel>
+//             <TextField
+//               id="description-1"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="notes-1">Notes</InputLabel>
+//             <TextField
+//               id="notes-1"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//         </div>
+//         <div className="frame-3">
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="quantity-1">
+//               Quantity
+//             </InputLabel>
+//             <TextField
+//               id="quantity-1"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="unit-price-1">
+//               Unit price
+//             </InputLabel>
+//             <TextField
+//               id="unit-price-1"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//         </div>
+//         <div className="divider-3" />
+//       </div>
+//       <div className="div-3">
+//         <div className="frame-3">
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="description-2">
+//               Description
+//             </InputLabel>
+//             <TextField
+//               id="description-2"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="notes-2">Notes</InputLabel>
+//             <TextField
+//               id="notes-2"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//         </div>
+//         <div className="frame-3">
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="quantity-2">
+//               Quantity
+//             </InputLabel>
+//             <TextField
+//               id="quantity-2"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//           <FormControl fullWidth>
+//             <InputLabel shrink htmlFor="unit-price-2">
+//               Unit price
+//             </InputLabel>
+//             <TextField
+//               id="unit-price-2"
+//               variant="outlined"
+//               fullWidth
+//               disabled={isDisabled}
+//               sx={{ height: "44px" }}
+//             />
+//           </FormControl>
+//         </div>
+//         <div className="divider-3" />
+//       </div>
+//       <div className="div-3">
+//         <div className="actions-9">
+//           <Button variant="contained" color="secondary" disabled={isDisabled}>
+//             Delete
+//           </Button>
+//           <Button variant="contained" disabled={isDisabled}>
+//             Submit
+//           </Button>
+//         </div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Payment Section */}
-<div className="content-19">
-  <div className="section-label-instance">Payment</div>
-  <div className="frame-7">
-    <div className="frame-8">
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="bank">
-          Bank
-        </InputLabel>
-        <TextField
-          id="bank"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="transaction-ref">
-          Transaction Reference number
-        </InputLabel>
-        <TextField
-          id="transaction-ref"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-    </div>
-    <div className="frame-9">
-      <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
-        <InputLabel id="status-label">Status</InputLabel>
-        <Select labelId="status-label" label="Status" defaultValue="">
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Paid">Paid</MenuItem>
-          <MenuItem value="Unpaid">Unpaid</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
-        <InputLabel id="payment-method-label">Payment method</InputLabel>
-        <Select labelId="payment-method-label" label="Payment method" defaultValue="">
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Credit Card">Credit Card</MenuItem>
-          <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
-        </Select>
-      </FormControl>
-    </div>
-    <div className="frame-3">
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="terms-conditions">
-          Terms and conditions
-        </InputLabel>
-        <TextField
-          id="terms-conditions"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-    </div>
-    <div className="frame-3">
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="total-payment">
-          Total Payment Amount
-        </InputLabel>
-        <TextField
-          id="total-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="notes-total-payment">
-          Notes for the total payment
-        </InputLabel>
-        <TextField
-          id="notes-total-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-    </div>
-    <div className="frame-3">
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="first-payment">
-          First Payment
-        </InputLabel>
-        <TextField
-          id="first-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="notes-first-payment">
-          Notes for the first payment
-        </InputLabel>
-        <TextField
-          id="notes-first-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-    </div>
-    <div className="frame-3">
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="second-payment">
-          Second Payment
-        </InputLabel>
-        <TextField
-          id="second-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="notes-second-payment">
-          Notes for the second payment
-        </InputLabel>
-        <TextField
-          id="notes-second-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-    </div>
-    <div className="frame-3">
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="unpaid-payment">
-          Unpaid payment amount
-        </InputLabel>
-        <TextField
-          id="unpaid-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-      <FormControl fullWidth>
-        <InputLabel shrink htmlFor="notes-unpaid-payment">
-          Notes for the unpaid payment
-        </InputLabel>
-        <TextField
-          id="notes-unpaid-payment"
-          variant="outlined"
-          fullWidth
-          disabled={isDisabled}
-          sx={{ height: "44px" }}
-        />
-      </FormControl>
-    </div>
-  </div>
-</div>
+// {/* Payment Section */}
+// <div className="content-19">
+//   <div className="section-label-instance">Payment</div>
+//   <div className="frame-7">
+//     <div className="frame-8">
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="bank">
+//           Bank
+//         </InputLabel>
+//         <TextField
+//           id="bank"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="transaction-ref">
+//           Transaction Reference number
+//         </InputLabel>
+//         <TextField
+//           id="transaction-ref"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//     </div>
+//     <div className="frame-9">
+//       <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
+//         <InputLabel id="status-label">Status</InputLabel>
+//         <Select labelId="status-label" label="Status" defaultValue="">
+//           <MenuItem value="">
+//             <em>None</em>
+//           </MenuItem>
+//           <MenuItem value="Paid">Paid</MenuItem>
+//           <MenuItem value="Unpaid">Unpaid</MenuItem>
+//         </Select>
+//       </FormControl>
+//       <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
+//         <InputLabel id="payment-method-label">Payment method</InputLabel>
+//         <Select labelId="payment-method-label" label="Payment method" defaultValue="">
+//           <MenuItem value="">
+//             <em>None</em>
+//           </MenuItem>
+//           <MenuItem value="Credit Card">Credit Card</MenuItem>
+//           <MenuItem value="Bank Transfer">Bank Transfer</MenuItem>
+//         </Select>
+//       </FormControl>
+//     </div>
+//     <div className="frame-3">
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="terms-conditions">
+//           Terms and conditions
+//         </InputLabel>
+//         <TextField
+//           id="terms-conditions"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//     </div>
+//     <div className="frame-3">
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="total-payment">
+//           Total Payment Amount
+//         </InputLabel>
+//         <TextField
+//           id="total-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="notes-total-payment">
+//           Notes for the total payment
+//         </InputLabel>
+//         <TextField
+//           id="notes-total-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//     </div>
+//     <div className="frame-3">
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="first-payment">
+//           First Payment
+//         </InputLabel>
+//         <TextField
+//           id="first-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="notes-first-payment">
+//           Notes for the first payment
+//         </InputLabel>
+//         <TextField
+//           id="notes-first-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//     </div>
+//     <div className="frame-3">
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="second-payment">
+//           Second Payment
+//         </InputLabel>
+//         <TextField
+//           id="second-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="notes-second-payment">
+//           Notes for the second payment
+//         </InputLabel>
+//         <TextField
+//           id="notes-second-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//     </div>
+//     <div className="frame-3">
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="unpaid-payment">
+//           Unpaid payment amount
+//         </InputLabel>
+//         <TextField
+//           id="unpaid-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//       <FormControl fullWidth>
+//         <InputLabel shrink htmlFor="notes-unpaid-payment">
+//           Notes for the unpaid payment
+//         </InputLabel>
+//         <TextField
+//           id="notes-unpaid-payment"
+//           variant="outlined"
+//           fullWidth
+//           disabled={isDisabled}
+//           sx={{ height: "44px" }}
+//         />
+//       </FormControl>
+//     </div>
+//   </div>
+// </div>
 
-<div className="divider-2" />
+// <div className="divider-2" />
 
-{/* Sale Person Section */}
-<div className="content-19">
-  <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
-    <InputLabel id="sale-person-label">Sale Person</InputLabel>
-    <Select labelId="sale-person-label" label="Sale Person" defaultValue="">
-      <MenuItem value="">
-        <em>None</em>
-      </MenuItem>
-      <MenuItem value="Person1">Person1</MenuItem>
-      {/* Additional options can be added here */}
-    </Select>
-  </FormControl>
-</div>
+// {/* Sale Person Section */}
+// <div className="content-19">
+//   <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
+//     <InputLabel id="sale-person-label">Sale Person</InputLabel>
+//     <Select labelId="sale-person-label" label="Sale Person" defaultValue="">
+//       <MenuItem value="">
+//         <em>None</em>
+//       </MenuItem>
+//       <MenuItem value="Person1">Person1</MenuItem>
+//       {/* Additional options can be added here */}
+//     </Select>
+//   </FormControl>
+// </div>
 
-<div className="divider-2" />
-</div>
-);
-};
+// <div className="divider-2" />
+// </div>
+// );
+// };
 
-Form.propTypes = {
-mode: PropTypes.oneOf(["create", "edit", "view"]),
-className: PropTypes.string,
-};
+// Form.propTypes = {
+// mode: PropTypes.oneOf(["create", "edit", "view"]),
+// className: PropTypes.string,
+// };
 
-export default Form;
+// export default Form;
