@@ -1,1 +1,0 @@
-export { PlatformAngellistStyleGrayStateDefault } from "./PlatformAngellistStyleGrayStateDefault";

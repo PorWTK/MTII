@@ -1,1 +1,0 @@
-export { AvatarAddButton } from "./AvatarAddButton";

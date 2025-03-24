@@ -1,1 +1,0 @@
-export { PlatformGoogleStyleGrayStateHover } from "./PlatformGoogleStyleGrayStateHover";

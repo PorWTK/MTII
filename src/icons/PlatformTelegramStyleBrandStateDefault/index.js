@@ -1,1 +1,0 @@
-export { PlatformTelegramStyleBrandStateDefault } from "./PlatformTelegramStyleBrandStateDefault";

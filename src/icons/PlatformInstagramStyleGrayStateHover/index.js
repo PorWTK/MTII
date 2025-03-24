@@ -1,1 +1,0 @@
-export { PlatformInstagramStyleGrayStateHover } from "./PlatformInstagramStyleGrayStateHover";

@@ -1,1 +1,0 @@
-export { MessageSmileCircle } from "./MessageSmileCircle";

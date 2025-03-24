@@ -1,1 +1,0 @@
-export { SearchLg } from "./SearchLg";

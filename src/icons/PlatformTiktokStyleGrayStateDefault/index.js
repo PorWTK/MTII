@@ -1,1 +1,0 @@
-export { PlatformTiktokStyleGrayStateDefault } from "./PlatformTiktokStyleGrayStateDefault";

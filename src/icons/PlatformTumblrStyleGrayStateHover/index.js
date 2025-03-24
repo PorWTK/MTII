@@ -1,1 +1,0 @@
-export { PlatformTumblrStyleGrayStateHover } from "./PlatformTumblrStyleGrayStateHover";

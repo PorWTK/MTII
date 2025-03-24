@@ -1,1 +1,0 @@
-export { PlatformLinkedinStyleGrayStateHover } from "./PlatformLinkedinStyleGrayStateHover";
