@@ -1,11 +1,9 @@
 import React from "react";
-import { useState } from "react";
 import { ButtonsButton } from "../../components/ButtonsButton";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
 import { TableCell } from "../../components/TableCell";
 import { TableHeaderCell } from "../../components/TableHeaderCell";
-import { ArrowDown10 } from "../../icons/ArrowDown10";
 import { ChatBubble1 } from "../../icons/ChatBubble1";
 import { Check32 } from "../../icons/Check32";
 import { LogOut } from "../../icons/LogOut";
@@ -127,18 +125,45 @@ export const Data = () => {
       totalBalance: "10,000",
       channel: "@PWPINN",
       platform: "TikTok"
+    },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3062",
+      status: "Pending",
+      paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
+      brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@Porpyyy_",
+      platform: "TikTok"
     }
   ];
 
-  const filteredData = tableData.filter((row) => (
+
+const filteredData = tableData.filter((row) => {
+  // Convert the postingDate string to a Date object.
+  const rowDate = new Date(row.postingDate);
+  let isDateMatch = true;
+  if (startDate) {
+    isDateMatch = isDateMatch && rowDate >= startDate;
+  }
+  if (endDate) {
+    isDateMatch = isDateMatch && rowDate <= endDate;
+  }
+  
+  return (
+    isDateMatch &&
     (selectedStatus === "All" || row.status === selectedStatus) &&
     (selectedPaymentMethod === "All" || row.paymentMethod === selectedPaymentMethod) &&
     (selectedChannel === "All" || row.channel === selectedChannel) &&
     (selectedPlatform === "All" || row.platform === selectedPlatform) &&
     (searchValue === "" ||
       row.invoiceId.toLowerCase().includes(searchValue.toLowerCase()) ||
-      row.client.name.toLowerCase().includes(searchValue.toLowerCase()))
-  ));
+      row.client.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+      row.brand.toLowerCase().includes(searchValue.toLowerCase()))
+  );
+});
+
 
 
   return (
@@ -549,12 +574,6 @@ export const Data = () => {
                     ))}
                   </div>
                 </div>
-                {/* <Pagination
-                  breakpoint="desktop"
-                  className="pagination-instance"
-                  shape="square"
-                  type="card-minimal-center-aligned"
-                /> */}
               </div>
             </div>
           </div>

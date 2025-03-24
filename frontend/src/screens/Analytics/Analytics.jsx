@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { DatePickerDropdown } from "../../components/DatePickerDropdown";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
-import { InputDropdown } from "../../components/InputDropdown";
 import { MetricItem } from "../../components/MetricItem";
 import { Pagination } from "../../components/Pagination";
 import { SectionHeader } from "../../components/SectionHeader";
 import { TableCell } from "../../components/TableCell";
 import { TableHeaderCell } from "../../components/TableHeaderCell";
-import { Calendar29 } from "../../icons/Calendar29";
 import { ChatBubble1 } from "../../icons/ChatBubble1";
 import { Check32 } from "../../icons/Check32";
 import { LogOut } from "../../icons/LogOut";
@@ -27,54 +24,141 @@ export const Analytics = () => {
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
-  const [channel, setChannel] = useState("All");
+  const [receiver, setReceiver] = useState("All");
 
-  const handleChannelChange = (event) => {
-    setChannel(event.target.value);
+  const handleReceiverChange = (event) => {
+    setReceiver(event.target.value);
   };
 
   const tableData = [
     {
+      postingDate: "Jan 6, 2024",
       invoiceId: "IV3066",
-      postingDate: "6 Jan 2024",
       status: "Draft",
       paymentMethod: "Full Payment",
+      client: { name: "Agent Name", contact: "Contacter Line" },
       brand: "Eucerin Thailand",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
       platform: "TikTok",
+      receiver: "@PWPINN"
     },
     {
+      postingDate: "Jan 6, 2024",
       invoiceId: "IV3065",
-      postingDate: "6 Jan 2024",
       status: "Paid",
       paymentMethod: "Deposit",
+      client: { name: "Phoenix Baker", contact: "phoenix@untitledui.com" },
       brand: "Oreo Rizz",
+      totalBalance: "10,000",
+      channel: "@Porpagin",
       platform: "Instagram",
+      receiver: "@PWPINN"
     },
     {
+      postingDate: "Jan 6, 2024",
       invoiceId: "IV3064",
-      postingDate: "6 Jan 2024",
       status: "Pending",
       paymentMethod: "Credit Term",
+      client: { name: "Lana Steiner", contact: "lana@untitledui.com" },
       brand: "MAC Cosmetics",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
       platform: "TikTok",
+      receiver: "@PWPINN"
     },
     {
+      postingDate: "Jan 5, 2024",
       invoiceId: "IV3063",
-      postingDate: "5 Jan 2024",
       status: "Overdue",
       paymentMethod: "Full Payment",
+      client: { name: "Demi Wilkinson", contact: "demi@untitledui.com" },
       brand: "With that perfume",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
       platform: "TikTok",
+      receiver: "@PWPINN"
     },
     {
+      postingDate: "Jan 5, 2024",
       invoiceId: "IV3062",
-      postingDate: "5 Jan 2024",
       status: "Paid",
       paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
       brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
       platform: "TikTok",
+      receiver: "@PWPINN"
     },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3062",
+      status: "Paid",
+      paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
+      brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+      receiver: "@PWPINN"
+    },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3062",
+      status: "Paid",
+      paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
+      brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+      receiver: "@PWPINN"
+    },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3062",
+      status: "Paid",
+      paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
+      brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+      receiver: "@PWPINN"
+    },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3062",
+      status: "Pending",
+      paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
+      brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@Porpyyy_",
+      platform: "TikTok",
+      receiver: "@Porpyyy_"
+    }
   ];
+    // Filter the data by date range and receiver dropdown
+    const filteredData = tableData.filter((row) => {
+      const rowDate = new Date(row.postingDate);
+      let isWithinDateRange = true;
+      if (startDate) {
+        isWithinDateRange = isWithinDateRange && rowDate >= startDate;
+      }
+      if (endDate) {
+        isWithinDateRange = isWithinDateRange && rowDate <= endDate;
+      }
+      const isReceiverMatch = receiver === "All" || row.receiver === receiver;
+      return isWithinDateRange && isReceiverMatch;
+    });
+
+    const sortedData = [...filteredData].sort(
+      (a, b) => new Date(b.postingDate) - new Date(a.postingDate)
+    );
+
+    const recentData = sortedData.slice(0, 5);
 
   // Pie chart data
   const [pieData, setPieData] = useState([
@@ -161,8 +245,8 @@ export const Analytics = () => {
                 </div>
                 <FormControl variant="outlined" className="input-dropdown-2" size="small">
                   <Select
-                    value={channel}
-                    onChange={handleChannelChange}
+                    value={receiver}
+                    onChange={handleReceiverChange}
                     label=""
                     inputProps={{ notched: false }}
                   >
@@ -323,7 +407,7 @@ export const Analytics = () => {
                     text
                     visible={false}
                   />
-                  {tableData.map((row, idx) => (
+                  {recentData.map((row, idx) => (
                     <TableCell
                       key={idx}
                       className="table-cell-instance"
@@ -343,7 +427,7 @@ export const Analytics = () => {
                       <div className="text-45">Posting Date</div>
                     </div>
                   </div>
-                  {tableData.map((row, idx) => (
+                  {recentData.map((row, idx) => (
                     <TableCell
                       key={idx}
                       className="table-cell-instance"
@@ -364,7 +448,7 @@ export const Analytics = () => {
                     tableHeaderText1="Status"
                     text
                   />
-                  {tableData.map((row, idx) => {
+                  {recentData.map((row, idx) => {
                     let iconOverride = null;
                     let badgeColor = "gray";
 
@@ -407,7 +491,7 @@ export const Analytics = () => {
                     tableHeaderText1="Payment Method"
                     text
                   />
-                  {tableData.map((row, idx) => (
+                  {recentData.map((row, idx) => (
                     <TableCell
                       key={idx}
                       className="table-cell-instance"
@@ -428,7 +512,7 @@ export const Analytics = () => {
                     tableHeaderText1="Brand"
                     text
                   />
-                  {tableData.map((row, idx) => (
+                  {recentData.map((row, idx) => (
                     <TableCell
                       key={idx}
                       className="table-cell-instance"
@@ -449,7 +533,7 @@ export const Analytics = () => {
                     tableHeaderText1="Platform"
                     text
                   />
-                  {tableData.map((row, idx) => (
+                  {recentData.map((row, idx) => (
                     <TableCell
                       key={idx}
                       className="table-cell-instance"
@@ -469,7 +553,7 @@ export const Analytics = () => {
                     color="gray"
                     text={false}
                   />
-                  {tableData.map((_, idx) => (
+                  {recentData.map((_, idx) => (
                     <div key={idx} className="table-cell-12">
                       <DropdownWrapper className="dropdown-5" />
                     </div>
