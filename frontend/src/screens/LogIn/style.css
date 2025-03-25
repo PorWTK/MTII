@@ -330,3 +330,15 @@
   position: relative;
   width: 100%;
 }
+
+.login-button {
+  border: none;
+  outline: none;
+  background: none; /* Remove any background if needed */
+  padding: 0;
+  cursor: pointer;
+}
+
+.login-button:focus {
+  outline: none;
+}

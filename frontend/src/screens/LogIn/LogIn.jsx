@@ -1,19 +1,50 @@
-import React from "react";
-import { Link } from "react-router-dom"; // Import Link
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 export const LogIn = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8888/api/user/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (!response.ok) {
+        setError("Login failed. Please check your credentials.");
+        return;
+      }
+
+      const data = await response.json();
+      // Save the token if returned by the API (e.g., data.token)
+      localStorage.setItem("token", data.token);
+      // Redirect to the next page (e.g., dashboard)
+      navigate("/data");
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("An error occurred. Please try again.");
+    }
+  };
+
   return (
     <div className="log-in">
       <div className="quote-image-bottom-wrapper">
         <div className="quote-image-bottom">
           <div className="content-35">
             <img className="stars" alt="Stars" src="/img/stars.svg" />
-
             <div className="text-and-supporting-16">
               <p className="text-50">
-                Web Application for Managing &amp; Tracking Influencer Income
-                (MTII)
+                Web Application for Managing &amp; Tracking Influencer Income (MTII)
               </p>
             </div>
           </div>
@@ -29,10 +60,8 @@ export const LogIn = () => {
                   <img className="star-5" alt="Star" src="/img/star-39.svg" />
                 </div>
               </div>
-
               <div className="text-and-supporting-17">
                 <div className="text-51">Welcome back</div>
-
                 <p className="supporting-text-12">
                   Welcome back! Please enter your details.
                 </p>
@@ -40,23 +69,23 @@ export const LogIn = () => {
             </header>
 
             <div className="content-38">
-              <div className="form-5">
+              {/* Wrap inputs in a form with an onSubmit handler */}
+              <form onSubmit={handleLogin} className="form-5">
                 <div className="div-6">
                   <div className="div-6">
                     <div className="label-wrapper-7">
-                      <input
-                        className="label-7"
-                        htmlFor="input-1"
-                        placeholder="Username"
-                        type="text"
-                      />
+                      <label className="label-7" htmlFor="username">
+                        Username
+                      </label>
                     </div>
-
                     <div className="input-6">
                       <input
                         className="content-39"
-                        id="input-1"
+                        id="username"
                         placeholder="Enter your username"
+                        type="text"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                       />
                     </div>
                   </div>
@@ -65,31 +94,35 @@ export const LogIn = () => {
                 <div className="div-6">
                   <div className="div-6">
                     <div className="label-wrapper-7">
-                      <label className="label-8" htmlFor="input-3">
+                      <label className="label-8" htmlFor="password">
                         Password
                       </label>
                     </div>
-
                     <div className="input-6">
                       <input
                         className="content-39"
-                        id="input-3"
+                        id="password"
                         placeholder="Enter Your Password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="actions-16">
-              <Link to="/data">
-                  <img
-                    className="buttons-button-8"
-                    alt="Buttons button"
-                    src="/img/buttons-button-8.svg"
-                  />
-                </Link>
-              </div>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+
+                <div className="actions-16">
+                  <button type="submit" className="login-button">
+                    <img
+                      className="buttons-button-8"
+                      alt="Login"
+                      src="/img/buttons-button-8.svg"
+                    />
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
