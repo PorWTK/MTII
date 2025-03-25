@@ -778,17 +778,49 @@ export const Form = ({ mode, className, ...props }) => {
                 </div>
               </div>
               <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
-                <InputLabel id="bank-label" sx={{ display: "none" }}>
+                <InputLabel id="status-label" sx={{ display: "none" }}>
                   Bank
                 </InputLabel>
-                <TextField
-                  id="bank"
-                  variant="outlined"
-                  fullWidth
-                  disabled={isDisabled}
-                  sx={{ height: "44px" }}
-                />
+                <Select labelId="status-label" defaultValue="">
+                  <MenuItem value="">เลือกธนาคาร</MenuItem>
+
+                  {/* Thai Commercial Banks */}
+                  <MenuItem value="bbl">ธนาคารกรุงเทพ (BBL)</MenuItem>
+                  <MenuItem value="ktb">ธนาคารกรุงไทย (KTB)</MenuItem>
+                  <MenuItem value="kbank">ธนาคารกสิกรไทย (KBank)</MenuItem>
+                  <MenuItem value="scb">ธนาคารไทยพาณิชย์ (SCB)</MenuItem>
+                  <MenuItem value="bay">ธนาคารกรุงศรีอยุธยา (Krungsri / BAY)</MenuItem>
+                  <MenuItem value="ttb">ธนาคารทหารไทยธนชาต (TTB)</MenuItem>
+                  <MenuItem value="uob">ธนาคารยูโอบี (UOB)</MenuItem>
+                  <MenuItem value="cimb">ธนาคารซีไอเอ็มบี ไทย (CIMB)</MenuItem>
+                  <MenuItem value="tisco">ธนาคารทิสโก้ (TISCO)</MenuItem>
+                  <MenuItem value="kkp">ธนาคารเกียรตินาคินภัทร (KKP)</MenuItem>
+                  <MenuItem value="lhb">ธนาคารแลนด์แอนด์เฮ้าส์ (LH Bank)</MenuItem>
+
+                  {/* State-owned / Specialized Financial Institutions (SFIs) */}
+                  <MenuItem value="gsb">ธนาคารออมสิน (GSB)</MenuItem>
+                  <MenuItem value="baac">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (BAAC)</MenuItem>
+                  <MenuItem value="ghb">ธนาคารอาคารสงเคราะห์ (GH Bank)</MenuItem>
+                  <MenuItem value="exim">ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย (EXIM Bank)</MenuItem>
+                  <MenuItem value="smebank">ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย (SME D Bank)</MenuItem>
+                  <MenuItem value="ibank">ธนาคารอิสลามแห่งประเทศไทย (Islamic Bank)</MenuItem>
+
+                  {/* Foreign Bank Branches in Thailand */}
+                  <MenuItem value="scbt">ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย) (SCBT)</MenuItem>
+                  <MenuItem value="hsbc">ธนาคารเอชเอสบีซี (HSBC)</MenuItem>
+                  <MenuItem value="mizuho">ธนาคารมิซูโฮ คอร์ปอเรต (Mizuho Bank)</MenuItem>
+                  <MenuItem value="mufg">ธนาคารแห่งโตเกียว-มิตซูบิชิ ยูเอฟเจ (MUFG Bank)</MenuItem>
+                  <MenuItem value="smbc">ธนาคารซูมิโตโม มิตซุย แบงกิ้ง คอร์ปอเรชั่น (SMBC)</MenuItem>
+                  <MenuItem value="icbc">ธนาคารไอซีบีซี (Industrial and Commercial Bank of China)</MenuItem>
+                  <MenuItem value="boc">ธนาคารแห่งประเทศจีน (Bank of China)</MenuItem>
+                  <MenuItem value="deutsche">ธนาคารดอยช์แบงก์ (Deutsche Bank)</MenuItem>
+                  <MenuItem value="anz">ธนาคาร ANZ (Australia and New Zealand Banking Group)</MenuItem>
+                  <MenuItem value="indianbank">ธนาคารอินเดีย (Indian Bank)</MenuItem>
+                  <MenuItem value="mega">ธนาคารเมกะ อินเตอร์เนชันแนล (Mega International Commercial Bank)</MenuItem>
+                </Select>
               </FormControl>
+
+
             </div>
             <div className="inputbox">
               <div className="label-for-input">
