@@ -280,10 +280,10 @@ const filteredData = tableData.filter((row) => {
                         inputProps={{ notched: false }}
                       >
                         <MenuItem value="All">All</MenuItem>
-                        <MenuItem value="Draft">Draft</MenuItem>
                         <MenuItem value="Paid">Paid</MenuItem>
                         <MenuItem value="Pending">Pending</MenuItem>
                         <MenuItem value="Overdue">Overdue</MenuItem>
+                        <MenuItem value="Draft">Draft</MenuItem>
                       </Select>
                     </FormControl>
                   </div>

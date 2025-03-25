@@ -823,9 +823,9 @@ export const Form = ({ mode, className, ...props }) => {
                 </InputLabel>
                 <Select labelId="status-label" defaultValue="">
                   <MenuItem value="Paid">Paid</MenuItem>
-                  <MenuItem value="Draft">Draft</MenuItem>
                   <MenuItem value="Pending">Pending</MenuItem>
                   <MenuItem value="Overdue">Overdue</MenuItem>
+                  <MenuItem value="Draft">Draft</MenuItem>
                 </Select>
               </FormControl>
             </div>
@@ -1056,7 +1056,6 @@ export const Form = ({ mode, className, ...props }) => {
                   Sale Person
                 </InputLabel>
                 <Select labelId="sale-person-label" defaultValue="">
-                  <MenuItem value="All">All</MenuItem>
                   <MenuItem value="MissFah">Miss Fah</MenuItem>
                   <MenuItem value="MissKan">Miss Kan</MenuItem>
                 </Select>

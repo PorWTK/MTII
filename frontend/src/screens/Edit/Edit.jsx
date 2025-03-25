@@ -52,53 +52,7 @@ export const Edit = () => {
           <Form
             button="/img/button-34.svg"
             className="design-component-instance-node-4"
-            datePickerDropdownButtonsButtonIcon={
-              <Calendar29 className="icon-instance-node-8" />
-            }
-            datePickerDropdownButtonsButtonIcon1={
-              <Calendar29 className="icon-instance-node-8" />
-            }
-            datePickerDropdownButtonsButtonIcon2={
-              <Calendar29 className="icon-instance-node-8" />
-            }
-            datePickerDropdownButtonsButtonIcon3={
-              <Calendar29 className="icon-instance-node-8" />
-            }
-            datePickerDropdownButtonsButtonIcon4={
-              <Calendar29 className="icon-instance-node-8" />
-            }
-            datePickerDropdownButtonsButtonText="1 January 2024"
-            datePickerDropdownButtonsButtonText1="8 January 2024"
-            datePickerDropdownButtonsButtonText2="7 January 2024"
-            datePickerDropdownButtonsButtonText3="7 February 2024"
-            datePickerDropdownButtonsButtonText4="9 February 2024"
-            datePickerDropdownButtonsButtonText5="30 January 2024"
-            inputClassName="form-instance"
-            inputClassNameOverride="form-instance"
-            inputDropdownStateProp="default"
-            inputDropdownStateProp1="default"
-            inputDropdownStateProp2="default"
-            inputDropdownSupportingText={false}
-            inputDropdownSupportingText1={false}
-            inputDropdownSupportingText2={false}
-            inputDropdownText="@Pinnnnn"
-            inputDropdownText1="@Pinnnnn"
-            inputDropdownText2="Tiktok"
-            inputDropdownText3="Pending"
-            inputDropdownText4="Credit Term"
-            inputDropdownText5="ฟาใส"
-            override={<Calendar29 className="icon-instance-node-8" />}
-            textClassName="form-instance"
-            textClassName1="form-instance"
-            textClassName2="form-instance"
-            textClassName3="form-instance"
-            textClassName4="form-instance"
-            textClassName5="form-instance"
-            textClassName6="form-instance"
-            textClassName7="form-instance"
-            textClassName8="form-instance"
-            textClassName9="form-instance"
-            textClassNameOverride="form-instance"
+            mode = "edit"
           />
         </div>
       </div>
