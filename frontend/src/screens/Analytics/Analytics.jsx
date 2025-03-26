@@ -1,24 +1,60 @@
 import React, { useState, useEffect } from "react";
-import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
 import { MetricItem } from "../../components/MetricItem";
 import { Pagination } from "../../components/Pagination";
 import { SectionHeader } from "../../components/SectionHeader";
-import { TableCell } from "../../components/TableCell";
-import { TableHeaderCell } from "../../components/TableHeaderCell";
 import { ChatBubble1 } from "../../icons/ChatBubble1";
 import { Check32 } from "../../icons/Check32";
 import { LogOut } from "../../icons/LogOut";
 import { ReverseLeft1 } from "../../icons/ReverseLeft1";
 import { XClose30 } from "../../icons/XClose30";
-import { FormControl, Select, MenuItem, TextField } from "@mui/material";
+import { FormControl, Select, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton, Menu as MuiMenu, MenuItem as MuiMenuItem } from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-
-// Recharts imports
 import { PieChart as RechartsPieChart, Pie, Cell, Tooltip } from "recharts";
+
+// Action menu component for each row
+const ActionMenu = ({ rowId, onDelete }) => {
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
+  const handleView = () => {
+    // navigate(`/view/${rowId}`);
+    navigate(`/view`);
+    handleClose();
+  };
+
+  const handleEdit = () => {
+    // navigate(`/edit/${rowId}`);
+    navigate(`/edit`);
+    handleClose();
+  };
+
+  const handleDelete = () => {
+    onDelete(rowId);
+    handleClose();
+  };
+
+  return (
+    <>
+      <IconButton onClick={handleOpen}>
+        <MoreVertIcon />
+      </IconButton>
+      <MuiMenu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <MuiMenuItem onClick={handleView}>View</MuiMenuItem>
+        <MuiMenuItem onClick={handleEdit}>Edit</MuiMenuItem>
+        <MuiMenuItem onClick={handleDelete}>Delete</MuiMenuItem>
+      </MuiMenu>
+    </>
+  );
+};
 
 export const Analytics = () => {
   const navigate = useNavigate();
@@ -26,9 +62,7 @@ export const Analytics = () => {
   const [endDate, setEndDate] = useState(null);
   const [receiver, setReceiver] = useState("All");
 
-  const handleReceiverChange = (event) => {
-    setReceiver(event.target.value);
-  };
+  const handleReceiverChange = (event) => setReceiver(event.target.value);
 
   const tableData = [
     {
@@ -36,144 +70,115 @@ export const Analytics = () => {
       invoiceId: "IV3066",
       status: "Draft",
       paymentMethod: "Full Payment",
-      client: { name: "Agent Name", contact: "Contacter Line" },
       brand: "Eucerin Thailand",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
       platform: "TikTok",
-      receiver: "@PWPINN"
+      receiver: "@PWPINN",
     },
     {
       postingDate: "Jan 6, 2024",
       invoiceId: "IV3065",
       status: "Paid",
       paymentMethod: "Deposit",
-      client: { name: "Phoenix Baker", contact: "phoenix@untitledui.com" },
       brand: "Oreo Rizz",
-      totalBalance: "10,000",
-      channel: "@Porpagin",
       platform: "Instagram",
-      receiver: "@PWPINN"
+      receiver: "@PWPINN",
     },
     {
       postingDate: "Jan 6, 2024",
       invoiceId: "IV3064",
       status: "Pending",
       paymentMethod: "Credit Term",
-      client: { name: "Lana Steiner", contact: "lana@untitledui.com" },
       brand: "MAC Cosmetics",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
       platform: "TikTok",
-      receiver: "@PWPINN"
+      receiver: "@PWPINN",
     },
     {
       postingDate: "Jan 5, 2024",
       invoiceId: "IV3063",
       status: "Overdue",
       paymentMethod: "Full Payment",
-      client: { name: "Demi Wilkinson", contact: "demi@untitledui.com" },
       brand: "With that perfume",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
       platform: "TikTok",
-      receiver: "@PWPINN"
+      receiver: "@PWPINN",
     },
     {
       postingDate: "Jan 5, 2024",
       invoiceId: "IV3062",
       status: "Paid",
       paymentMethod: "Full Payment",
-      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
       brand: "Snacks Jumbo Th",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
       platform: "TikTok",
-      receiver: "@PWPINN"
+      receiver: "@PWPINN",
     },
-    {
-      postingDate: "Jan 5, 2024",
-      invoiceId: "IV3062",
-      status: "Paid",
-      paymentMethod: "Full Payment",
-      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
-      brand: "Snacks Jumbo Th",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
-      platform: "TikTok",
-      receiver: "@PWPINN"
-    },
-    {
-      postingDate: "Jan 5, 2024",
-      invoiceId: "IV3062",
-      status: "Paid",
-      paymentMethod: "Full Payment",
-      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
-      brand: "Snacks Jumbo Th",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
-      platform: "TikTok",
-      receiver: "@PWPINN"
-    },
-    {
-      postingDate: "Jan 5, 2024",
-      invoiceId: "IV3062",
-      status: "Paid",
-      paymentMethod: "Full Payment",
-      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
-      brand: "Snacks Jumbo Th",
-      totalBalance: "10,000",
-      channel: "@PWPINN",
-      platform: "TikTok",
-      receiver: "@PWPINN"
-    },
-    {
-      postingDate: "Jan 5, 2024",
-      invoiceId: "IV3062",
-      status: "Pending",
-      paymentMethod: "Full Payment",
-      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
-      brand: "Snacks Jumbo Th",
-      totalBalance: "10,000",
-      channel: "@Porpyyy_",
-      platform: "TikTok",
-      receiver: "@Porpyyy_"
-    }
+    // ... additional rows if needed
   ];
-    // Filter the data by date range and receiver dropdown
-    const filteredData = tableData.filter((row) => {
-      const rowDate = new Date(row.postingDate);
-      let isWithinDateRange = true;
-      if (startDate) {
-        isWithinDateRange = isWithinDateRange && rowDate >= startDate;
-      }
-      if (endDate) {
-        isWithinDateRange = isWithinDateRange && rowDate <= endDate;
-      }
-      const isReceiverMatch = receiver === "All" || row.receiver === receiver;
-      return isWithinDateRange && isReceiverMatch;
-    });
 
-    const sortedData = [...filteredData].sort(
-      (a, b) => new Date(b.postingDate) - new Date(a.postingDate)
-    );
+  // Filter the data by date range and receiver
+  const filteredData = tableData.filter((row) => {
+    const rowDate = new Date(row.postingDate);
+    let isWithinDateRange = true;
+    if (startDate) isWithinDateRange = isWithinDateRange && rowDate >= startDate;
+    if (endDate) isWithinDateRange = isWithinDateRange && rowDate <= endDate;
+    const isReceiverMatch = receiver === "All" || row.receiver === receiver;
+    return isWithinDateRange && isReceiverMatch;
+  });
 
-    const recentData = sortedData.slice(0, 5);
+  // Sort the data by posting date (newest first)
+  const sortedData = [...filteredData].sort(
+    (a, b) => new Date(b.postingDate) - new Date(a.postingDate)
+  );
+  // Use only the recent 5 rows for the sub table
+  const recentData = sortedData.slice(0, 5);
 
-  // Pie chart data
+  // Pie chart data (if needed)
   const [pieData, setPieData] = useState([
     { name: "Paid", value: 20 },
     { name: "Pending", value: 30 },
     { name: "Overdue", value: 8 },
     { name: "Draft", value: 29 },
   ]);
-
-  // Colors for each segment
   const pieColors = ["#067647", "#DC8420", "#b42318", "#A0A6B2"];
-
   useEffect(() => {
-    // Example: fetch('/api/pieChartData').then(...) -> setPieData(...)
+    // fetch('/api/pieChartData').then(...) -> setPieData(...)
   }, []);
+
+  // Helper to render the status cell as a Chip with border and regular text
+  const renderStatusCell = (status) => {
+    let iconOverride = null;
+    let badgeColorKey = "gray";
+    if (status === "Paid") {
+      iconOverride = <Check32 className="icon-instance-node-5" />;
+      badgeColorKey = "success";
+    } else if (status === "Pending") {
+      iconOverride = <ReverseLeft1 className="icon-instance-node-5" />;
+      badgeColorKey = "warning";
+    } else if (status === "Overdue") {
+      iconOverride = <XClose30 className="icon-instance-node-5" color="#F04438" />;
+      badgeColorKey = "error";
+    } else if (status === "Draft") {
+      // Add an extra CSS class 'draft-icon' so we can force it to 12x12 via CSS
+      iconOverride = <ChatBubble1 className="draft-icon" color="#344054" />;
+      badgeColorKey = "gray";
+    }
+    const chipStyles = {
+      success: { backgroundColor: "#ECFDF5", color: "#027A48" },
+      warning: { backgroundColor: "#FEF3C7", color: "#B45309" },
+      error: { backgroundColor: "#FEE2E2", color: "#B91C1C" },
+      gray: { backgroundColor: "#F3F4F6", color: "#374151" },
+    };
+    return (
+      <Chip
+        icon={iconOverride}
+        label={status}
+        size="small"
+        sx={{
+          ...chipStyles[badgeColorKey],
+          border: `1px solid ${chipStyles[badgeColorKey].color}`,
+          fontWeight: "normal",
+        }}
+      />
+    );
+  };
 
   return (
     <div className="analytics">
@@ -208,12 +213,7 @@ export const Analytics = () => {
                         value={startDate}
                         onChange={(newValue) => setStartDate(newValue)}
                         renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            size="small"
-                            fullWidth
-                            className="date-picker-input"
-                          />
+                          <TextField {...params} size="small" fullWidth className="date-picker-input" />
                         )}
                       />
                     </div>
@@ -223,18 +223,12 @@ export const Analytics = () => {
                         value={endDate}
                         onChange={(newValue) => setEndDate(newValue)}
                         renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            size="small"
-                            fullWidth
-                            className="date-picker-input"
-                          />
+                          <TextField {...params} size="small" fullWidth className="date-picker-input" />
                         )}
                       />
                     </div>
                   </div>
                 </LocalizationProvider>
-
               </div>
             </div>
 
@@ -332,7 +326,6 @@ export const Analytics = () => {
               type="buttons"
             />
             <div className="pie-chart">
-              {/* Container for the Recharts PieChart */}
               <div className="pie-chart-2" style={{ backgroundColor: "transparent" }}>
                 <RechartsPieChart width={380} height={380}>
                   <Pie
@@ -341,22 +334,18 @@ export const Analytics = () => {
                     cy="50%"
                     outerRadius={170}
                     dataKey="value"
-                    label={false}        // <--- no label text
-                    labelLine={false}    // <--- remove label line
-                    stroke="none"        // <--- no outer stroke
+                    label={false}
+                    labelLine={false}
+                    stroke="none"
                   >
                     {pieData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={pieColors[index % pieColors.length]}
-                      />
+                      <Cell key={`cell-${index}`} fill={pieColors[index % pieColors.length]} />
                     ))}
                   </Pie>
                   <Tooltip />
                 </RechartsPieChart>
               </div>
 
-              {/* Legend */}
               <div className="legend">
                 {pieData.map((item, index) => (
                   <div key={index} className="legend-series">
@@ -381,7 +370,7 @@ export const Analytics = () => {
             </div>
           </div>
 
-          {/* Recent activity table */}
+          {/* Recent activity table with Action column */}
           <div className="table">
             <SectionHeader
               actions={false}
@@ -394,183 +383,56 @@ export const Analytics = () => {
               text="Recent activity"
               type="buttons"
             />
-            <div className="recent-table">
-              <div className="content-23">
-                {/* Column 1: Invoice ID */}
-                <div className="column">
-                  <TableHeaderCell
-                    checkbox
-                    className="table-header-cell-instance"
-                    color="gray"
-                    tableHeaderText="Invoice ID"
-                    tableHeaderVisible={false}
-                    text
-                    visible={false}
-                  />
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead
+                  sx={{
+                    position: "sticky",
+                    top: 0,
+                    backgroundColor: "#F9FAFB",
+                    zIndex: 1,
+                  }}
+                >
+                  <TableRow>
+                    <TableCell>Invoice ID</TableCell>
+                    <TableCell>Posting Date</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Payment Method</TableCell>
+                    <TableCell>Brand</TableCell>
+                    <TableCell>Platform</TableCell>
+                    <TableCell>Actions</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
                   {recentData.map((row, idx) => (
-                    <TableCell
-                      key={idx}
-                      className="table-cell-instance"
-                      hasText={false}
-                      stateProp="default"
-                      style="lead-checkbox"
-                      supportingText={false}
-                      text={row.invoiceId}
-                    />
+                    <TableRow key={idx}>
+                      <TableCell>{row.invoiceId}</TableCell>
+                      <TableCell>{row.postingDate}</TableCell>
+                      <TableCell>{renderStatusCell(row.status)}</TableCell>
+                      <TableCell>{row.paymentMethod}</TableCell>
+                      <TableCell>{row.brand}</TableCell>
+                      <TableCell>{row.platform}</TableCell>
+                      <TableCell>
+                        <ActionMenu rowId={row.invoiceId} onDelete={(id) => {
+                          // Optionally, add deletion logic for Analytics table rows here
+                          console.log("Delete", id);
+                        }} />
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </div>
-
-                {/* Column 2: Posting Date */}
-                <div className="column-2">
-                  <div className="table-header-wrapper">
-                    <div className="table-header-2">
-                      <div className="text-45">Posting Date</div>
-                    </div>
-                  </div>
-                  {recentData.map((row, idx) => (
-                    <TableCell
-                      key={idx}
-                      className="table-cell-instance"
-                      stateProp="default"
-                      style="text"
-                      supportingText={false}
-                      text={row.postingDate}
-                    />
-                  ))}
-                </div>
-
-                {/* Column 3: Status */}
-                <div className="column-3">
-                  <TableHeaderCell
-                    checkbox={false}
-                    className="table-header-cell-instance"
-                    color="gray"
-                    tableHeaderText1="Status"
-                    text
-                  />
-                  {recentData.map((row, idx) => {
-                    let iconOverride = null;
-                    let badgeColor = "gray";
-
-                    if (row.status === "Paid") {
-                      iconOverride = <Check32 className="icon-instance-node-2" />;
-                      badgeColor = "success";
-                    } else if (row.status === "Pending") {
-                      iconOverride = <ReverseLeft1 className="icon-instance-node-2" />;
-                      badgeColor = "warning";
-                    } else if (row.status === "Overdue") {
-                      iconOverride = <XClose30 className="icon-instance-node-2" color="#F04438" />;
-                      badgeColor = "error";
-                    } else if (row.status === "Draft") {
-                      iconOverride = <ChatBubble1 className="icon-instance-node-2" color="#344054" />;
-                      badgeColor = "gray";
-                    }
-
-                    return (
-                      <TableCell
-                        key={idx}
-                        badgeColor={badgeColor}
-                        badgeIcon="icon-leading"
-                        badgeText={row.status}
-                        className={`table-cell-${6 + idx}`}
-                        override={iconOverride}
-                        stateProp="default"
-                        style="badge"
-                        supportingText={false}
-                      />
-                    );
-                  })}
-                </div>
-
-                {/* Column 4: Payment Method */}
-                <div className="column-3">
-                  <TableHeaderCell
-                    checkbox={false}
-                    className="table-header-cell-instance"
-                    color="gray"
-                    tableHeaderText1="Payment Method"
-                    text
-                  />
-                  {recentData.map((row, idx) => (
-                    <TableCell
-                      key={idx}
-                      className="table-cell-instance"
-                      stateProp="default"
-                      style="text"
-                      supportingText={false}
-                      text={row.paymentMethod}
-                    />
-                  ))}
-                </div>
-
-                {/* Column 5: Brand */}
-                <div className="column-4">
-                  <TableHeaderCell
-                    checkbox={false}
-                    className="table-header-cell-instance"
-                    color="gray"
-                    tableHeaderText1="Brand"
-                    text
-                  />
-                  {recentData.map((row, idx) => (
-                    <TableCell
-                      key={idx}
-                      className="table-cell-instance"
-                      stateProp="default"
-                      style="text"
-                      supportingText={false}
-                      text={row.brand}
-                    />
-                  ))}
-                </div>
-
-                {/* Column 6: Platform */}
-                <div className="column-5">
-                  <TableHeaderCell
-                    checkbox={false}
-                    className="table-header-cell-instance"
-                    color="gray"
-                    tableHeaderText1="Platform"
-                    text
-                  />
-                  {recentData.map((row, idx) => (
-                    <TableCell
-                      key={idx}
-                      className="table-cell-instance"
-                      stateProp="default"
-                      style="text"
-                      supportingText={false}
-                      text={row.platform}
-                    />
-                  ))}
-                </div>
-
-                {/* Column 7: Actions */}
-                <div className="column-3">
-                  <TableHeaderCell
-                    checkbox={false}
-                    className="table-header-cell-2"
-                    color="gray"
-                    text={false}
-                  />
-                  {recentData.map((_, idx) => (
-                    <div key={idx} className="table-cell-12">
-                      <DropdownWrapper className="dropdown-5" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div onClick={() => navigate("/data")}>
-                <Pagination
-                  breakpoint="desktop"
-                  buttonsButtonText="View all"
-                  className="pagination-instance"
-                  hasButtonWrap={false}
-                  hasPaginationNumbers={false}
-                  shape="square"
-                  type="card-minimal-center-aligned"
-                />
-              </div>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <div onClick={() => navigate("/data")}>
+              <Pagination
+                breakpoint="desktop"
+                buttonsButtonText="View all"
+                className="pagination-instance"
+                hasButtonWrap={false}
+                hasPaginationNumbers={false}
+                shape="square"
+                type="card-minimal-center-aligned"
+              />
             </div>
           </div>
         </div>
