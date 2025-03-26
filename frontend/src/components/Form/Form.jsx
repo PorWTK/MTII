@@ -1,4 +1,3 @@
-
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 // Material‑UI components
@@ -7,14 +6,17 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { SectionLabel } from "../SectionLabel";
-
+import { ButtonsButton } from "../ButtonsButton";
+import { Trash2 } from "../../icons/Trash2";
+import { ChevronLeft } from "../../icons/ChevronLeft";
+import { Link } from "react-router-dom";
 import "./style.css";
 
 export const Form = ({ mode, className, ...props }) => {
   // In view mode, disable all inputs
   const isDisabled = mode === "view";
 
-  // States for date fields (adjust as needed)
+  // States for date fields
   const [quotationIssueDate, setQuotationIssueDate] = useState(null);
   const [quotationDueDate, setQuotationDueDate] = useState(null);
   const [invoiceIssueDate, setInvoiceIssueDate] = useState(null);
@@ -22,19 +24,46 @@ export const Form = ({ mode, className, ...props }) => {
   const [receiptIssueDate, setReceiptIssueDate] = useState(null);
   const [postingDate, setPostingDate] = useState(null);
 
+  // Details section dynamic state (min 1, max 4 sets)
   const [detailSets, setDetailSets] = useState([
     { description: "", notes: "", quantity: "", unitPrice: "" }
   ]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (mode === "create") {
+      // Gather data from your form state
+      const formData = { /* ... your data ... */ };
+      saveNewOrder(formData)
+        .then(() => {
+          // After saving, navigate to the view page
+          navigate("/view");
+        })
+        .catch((error) => {
+          console.error("Error saving new order:", error);
+        });
+    } else if (mode === "edit") {
+      const formData = { /* ... your updated data ... */ };
+      updateOrder(invoiceId, formData)
+        .then(() => {
+          navigate(`/view/${invoiceId}`);
+        })
+        .catch((error) => {
+          console.error("Error updating order:", error);
+        });
+    }
+  };
+  
+
   return (
-    <div className={`form ${className || ""}`}>
+    <form className={`form ${className || ""}`} onSubmit={handleSubmit}>
       <div className="divider-2" />
 
       {/* Quotation / Invoice / Receipt Section */}
       <div className="content-19">
         <div className="QIR-tab">
+          {/* ---------- Example: Quotation ---------- */}
           <div className="frameQIR">
-            {/* Quotation ID number */}
             <div className="input-field-3">
               <div className="input-with-label-3">
                 <div className="label-wrapper-3">
@@ -44,7 +73,6 @@ export const Form = ({ mode, className, ...props }) => {
                 <TextField
                   variant="outlined"
                   fullWidth
-                  fullHeight
                   disabled={isDisabled}
                   InputProps={{
                     startAdornment: (
@@ -54,9 +82,7 @@ export const Form = ({ mode, className, ...props }) => {
                     ),
                   }}
                   className="text-input-4"
-                  sx={{
-                    "& .MuiOutlinedInput-root": { height: "44px" },
-                  }}
+                  sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
                 />
               </div>
             </div>
@@ -76,7 +102,7 @@ export const Form = ({ mode, className, ...props }) => {
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      sx={{ height: "44px", width: "100% !important"}}
+                      sx={{ height: "44px", width: "100% !important" }}
                     />
                   )}
                 />
@@ -86,7 +112,7 @@ export const Form = ({ mode, className, ...props }) => {
             {/* Quotation due date */}
             <div className="frame-2">
               <div className="input-with-label-4">
-                <div className="label-wrapper-4"> 
+                <div className="label-wrapper-4">
                   <div className="label-3">Quotation due date</div>
                 </div>
               </div>
@@ -107,6 +133,7 @@ export const Form = ({ mode, className, ...props }) => {
             </div>
           </div>
 
+          {/* Invoice Section */}
           <div className="frameQIR">
             {/* Invoice ID number */}
             <div className="input-field-3">
@@ -134,7 +161,7 @@ export const Form = ({ mode, className, ...props }) => {
 
             {/* Invoice issue date */}
             <div className="frame-2">
-              <div className="input-with-label-4">
+              <div className="input-with-label-3">
                 <div className="label-wrapper-4">
                   <div className="label-3">Invoice issue date</div>
                 </div>
@@ -157,7 +184,7 @@ export const Form = ({ mode, className, ...props }) => {
 
             {/* Invoice due date */}
             <div className="frame-2">
-              <div className="input-with-label-4">
+              <div className="input-with-label-3">
                 <div className="label-wrapper-4">
                   <div className="label-3">Invoice due date</div>
                 </div>
@@ -179,6 +206,7 @@ export const Form = ({ mode, className, ...props }) => {
             </div>
           </div>
 
+          {/* Receipt Section */}
           <div className="frameQIR">
             {/* Receipt ID number */}
             <div className="input-field-3">
@@ -206,7 +234,7 @@ export const Form = ({ mode, className, ...props }) => {
 
             {/* Receipt issue date */}
             <div className="frame-2">
-              <div className="input-with-label-4">
+              <div className="input-with-label-3">
                 <div className="label-wrapper-4">
                   <div className="label-3">Receipt issue date</div>
                 </div>
@@ -228,11 +256,73 @@ export const Form = ({ mode, className, ...props }) => {
             </div>
           </div>
         </div>
+        <div className="action-buttons-container">
+          {/* Action Buttons Section */}
+          <div className="actions-9" style={{ margin: "20px 0" }}>
+            {mode === "create" ? (
+              <div className="actions-19">
+                <div className="actions-19">
+                  <ButtonsButton
+                    className="design-component-instance-node-6"
+                    hierarchy="secondary-gray"
+                    icon="default"
+                    iconLeading={false}
+                    iconTrailing={false}
+                    size="md"
+                    stateProp="default"
+                    text="Cancel"
+                    to="/data"
+                  />
+                  <Link to="/view">
+                    <img className="button-15" alt="Button" src="/img/button-36.svg" />
+                  </Link>
+                </div>
+              </div>
+            ) : mode === "edit" ? (
+              <div className="actions-17">
+                <ButtonsButton
+                  className="design-component-instance-node-4"
+                  hierarchy="secondary-gray"
+                  icon="default"
+                  iconTrailing={false}
+                  override={<Trash2 className="icon-instance-node-8" />}
+                  size="md"
+                  stateProp="default"
+                  text="Delete"
+                />
+                <Link to="/view">
+                  <img className="button-13" alt="Button" src="/img/button-33.svg" />
+                </Link>
+              </div>
+            ) : mode === "view" ? (
+              <div className="actions-18">
+                <ButtonsButton
+                  className="design-component-instance-node-5"
+                  hierarchy="secondary-gray"
+                  icon="default"
+                  iconTrailing={false}
+                  override={<ChevronLeft className="icon-instance-node-9" />}
+                  size="md"
+                  stateProp="default"
+                  text="Back"
+                  to="/data"
+                />
+                <Link to="/edit">
+                  <img className="button-14" alt="Button" src="/img/button-35.svg" />
+                </Link>
+              </div>
+            ) : (
+              <Button type="submit" variant="contained" disabled={isDisabled}>
+                Submit
+              </Button>
+            )}
+          </div>
+        </div>
       </div>
 
       <div className="divider-2" />
 
-      {/* --- Receiver Section --- */}
+      {/* Receiver Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -269,7 +359,7 @@ export const Form = ({ mode, className, ...props }) => {
 
       <div className="divider-2" />
 
-      {/* --- Influencer Section --- */}
+      {/* Influencer Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -343,7 +433,7 @@ export const Form = ({ mode, className, ...props }) => {
 
       <div className="divider-2" />
 
-      {/* --- Client (Agency) Section --- */}
+      {/* Client (Agency) Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -440,7 +530,7 @@ export const Form = ({ mode, className, ...props }) => {
 
       <div className="divider-2" />
 
-      {/* --- Client (Contactor) Section --- */}
+      {/* Client (Contactor) Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -538,7 +628,7 @@ export const Form = ({ mode, className, ...props }) => {
 
       <div className="divider-2" />
 
-      {/* --- Brand Section --- */}
+      {/* Brand Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -594,7 +684,7 @@ export const Form = ({ mode, className, ...props }) => {
 
       <div className="divider-2" />
 
-      {/* --- Details Section --- */}
+      {/* Details Section */}
       <div className="frame-5">
         <div className="content-19">
           <SectionLabel
@@ -712,21 +802,18 @@ export const Form = ({ mode, className, ...props }) => {
                     </FormControl>
                   </div>
                 </div>
-                {/* Optionally render a divider except after the last set */}
                 {index < detailSets.length - 1 && <div className="divider-3" />}
               </div>
             ))}
 
-            {/* Action buttons */}
             <div className="div-3">
               <div className="actions-9">
                 <Button
                   variant="contained"
-                  // color="secondary"
                   disabled={isDisabled || detailSets.length === 1}
                   sx={{
-                    backgroundColor: "#ff4d4d",  // your custom red color for Delete
-                    "&:hover": { backgroundColor: "#e60000" }
+                    backgroundColor: "#ff4d4d",
+                    "&:hover": { backgroundColor: "#e60000" },
                   }}
                   onClick={() =>
                     setDetailSets(detailSets.slice(0, detailSets.length - 1))
@@ -738,8 +825,8 @@ export const Form = ({ mode, className, ...props }) => {
                   variant="contained"
                   disabled={isDisabled || detailSets.length === 4}
                   sx={{
-                    backgroundColor: "#7F56D9",  // your custom green color for Add
-                    "&:hover": { backgroundColor: "#8B5FED" }
+                    backgroundColor: "#7F56D9",
+                    "&:hover": { backgroundColor: "#8B5FED" },
                   }}
                   onClick={() =>
                     setDetailSets([
@@ -756,10 +843,9 @@ export const Form = ({ mode, className, ...props }) => {
         </div>
       </div>
 
-
       <div className="divider-2" />
 
-      {/* --- Payment Section --- */}
+      {/* Payment Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -778,48 +864,15 @@ export const Form = ({ mode, className, ...props }) => {
                 </div>
               </div>
               <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
-                <InputLabel id="status-label" sx={{ display: "none" }}>
+                <InputLabel id="bank-label" sx={{ display: "none" }}>
                   Bank
                 </InputLabel>
-                <Select labelId="status-label" defaultValue="">
-
-                  {/* Thai Commercial Banks */}
+                <Select labelId="bank-label" defaultValue="">
                   <MenuItem value="bbl">ธนาคารกรุงเทพ (BBL)</MenuItem>
                   <MenuItem value="ktb">ธนาคารกรุงไทย (KTB)</MenuItem>
-                  <MenuItem value="kbank">ธนาคารกสิกรไทย (KBank)</MenuItem>
-                  <MenuItem value="scb">ธนาคารไทยพาณิชย์ (SCB)</MenuItem>
-                  <MenuItem value="bay">ธนาคารกรุงศรีอยุธยา (Krungsri / BAY)</MenuItem>
-                  <MenuItem value="ttb">ธนาคารทหารไทยธนชาต (TTB)</MenuItem>
-                  <MenuItem value="uob">ธนาคารยูโอบี (UOB)</MenuItem>
-                  <MenuItem value="cimb">ธนาคารซีไอเอ็มบี ไทย (CIMB)</MenuItem>
-                  <MenuItem value="tisco">ธนาคารทิสโก้ (TISCO)</MenuItem>
-                  <MenuItem value="kkp">ธนาคารเกียรตินาคินภัทร (KKP)</MenuItem>
-                  <MenuItem value="lhb">ธนาคารแลนด์แอนด์เฮ้าส์ (LH Bank)</MenuItem>
-
-                  {/* State-owned / Specialized Financial Institutions (SFIs) */}
-                  <MenuItem value="gsb">ธนาคารออมสิน (GSB)</MenuItem>
-                  <MenuItem value="baac">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (BAAC)</MenuItem>
-                  <MenuItem value="ghb">ธนาคารอาคารสงเคราะห์ (GH Bank)</MenuItem>
-                  <MenuItem value="exim">ธนาคารเพื่อการส่งออกและนำเข้าแห่งประเทศไทย (EXIM Bank)</MenuItem>
-                  <MenuItem value="smebank">ธนาคารพัฒนาวิสาหกิจขนาดกลางและขนาดย่อมแห่งประเทศไทย (SME D Bank)</MenuItem>
-                  <MenuItem value="ibank">ธนาคารอิสลามแห่งประเทศไทย (Islamic Bank)</MenuItem>
-
-                  {/* Foreign Bank Branches in Thailand */}
-                  <MenuItem value="scbt">ธนาคารสแตนดาร์ดชาร์เตอร์ด (ไทย) (SCBT)</MenuItem>
-                  <MenuItem value="hsbc">ธนาคารเอชเอสบีซี (HSBC)</MenuItem>
-                  <MenuItem value="mizuho">ธนาคารมิซูโฮ คอร์ปอเรต (Mizuho Bank)</MenuItem>
-                  <MenuItem value="mufg">ธนาคารแห่งโตเกียว-มิตซูบิชิ ยูเอฟเจ (MUFG Bank)</MenuItem>
-                  <MenuItem value="smbc">ธนาคารซูมิโตโม มิตซุย แบงกิ้ง คอร์ปอเรชั่น (SMBC)</MenuItem>
-                  <MenuItem value="icbc">ธนาคารไอซีบีซี (Industrial and Commercial Bank of China)</MenuItem>
-                  <MenuItem value="boc">ธนาคารแห่งประเทศจีน (Bank of China)</MenuItem>
-                  <MenuItem value="deutsche">ธนาคารดอยช์แบงก์ (Deutsche Bank)</MenuItem>
-                  <MenuItem value="anz">ธนาคาร ANZ (Australia and New Zealand Banking Group)</MenuItem>
-                  <MenuItem value="indianbank">ธนาคารอินเดีย (Indian Bank)</MenuItem>
-                  <MenuItem value="mega">ธนาคารเมกะ อินเตอร์เนชันแนล (Mega International Commercial Bank)</MenuItem>
+                  {/* More banks as needed */}
                 </Select>
               </FormControl>
-
-
             </div>
             <div className="inputbox">
               <div className="label-for-input">
@@ -1064,7 +1117,7 @@ export const Form = ({ mode, className, ...props }) => {
 
       <div className="divider-2" />
 
-      {/* --- Sale Person Section --- */}
+      {/* Sale Person Section */}
       <div className="content-19">
         <SectionLabel
           actions={false}
@@ -1097,7 +1150,7 @@ export const Form = ({ mode, className, ...props }) => {
       </div>
 
       <div className="divider-2" />
-    </div>
+    </form>
   );
 };
 

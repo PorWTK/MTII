@@ -26,7 +26,7 @@ export const View = () => {
             </div>
 
             <div className="actions-18">
-              <div className="actions-18">
+              {/* <div className="actions-18">
                 <ButtonsButton
                   className="design-component-instance-node-5"
                   hierarchy="secondary-gray"
@@ -45,7 +45,7 @@ export const View = () => {
                     src="/img/button-35.svg"
                   />
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
 

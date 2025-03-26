@@ -45,7 +45,9 @@
   flex: 0 0 auto;
   gap: 32px;
   position: relative;
-  width: 100%;
+  /* width: 100%; */
+  width: auto;
+
 }
 
 .form .input-field-3 {
@@ -188,7 +190,8 @@
   align-items: flex-start;
   display: flex;
   flex: none;
-  width: 405.33px;
+  /* width: 405.33px; */
+  width: auto;
   flex-direction: column;
   gap: 12px;
   height: 76px;

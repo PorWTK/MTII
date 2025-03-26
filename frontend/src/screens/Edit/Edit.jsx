@@ -23,11 +23,11 @@ export const Edit = () => {
         <div className="section-7">
           <div className="content-40">
             <div className="text-and-supporting-18">
-              <div className="text-52">Edit a new order</div>
+              <div className="text-52">Edit an order</div>
             </div>
 
             <div className="actions-17">
-              <div className="actions-17">
+              {/* <div className="actions-17">
                 <ButtonsButton
                   className="design-component-instance-node-4"
                   hierarchy="secondary-gray"
@@ -45,7 +45,7 @@ export const Edit = () => {
                     src="/img/button-33.svg"
                   />
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
 

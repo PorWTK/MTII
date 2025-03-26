@@ -28,7 +28,7 @@ export const Create = () => {
               </p>
             </div>
 
-            <div className="actions-19">
+            {/* <div className="actions-19">
               <div className="actions-19">
                 <ButtonsButton
                   className="design-component-instance-node-6"
@@ -49,7 +49,7 @@ export const Create = () => {
                   />
                 </Link>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <Form
