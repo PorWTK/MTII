@@ -782,7 +782,6 @@ export const Form = ({ mode, className, ...props }) => {
                   Bank
                 </InputLabel>
                 <Select labelId="status-label" defaultValue="">
-                  <MenuItem value="">เลือกธนาคาร</MenuItem>
 
                   {/* Thai Commercial Banks */}
                   <MenuItem value="bbl">ธนาคารกรุงเทพ (BBL)</MenuItem>

@@ -148,7 +148,7 @@
   display: flex;
   flex: 0 0 auto;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 1px; */
   max-width: var(--5-containers-container-max-width-desktop);
   position: relative;
   width: 100%;
