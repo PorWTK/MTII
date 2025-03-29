@@ -7,18 +7,18 @@
   position: relative;
 }
 
-.receipt .header-navigation-2 {
+.receipt .header-navigation-3 {
   flex: 0 0 auto !important;
   z-index: 1 !important;
 }
 
-.receipt .icon-instance-node {
+.receipt .icon-instance-node-2 {
   height: 20px !important;
   position: relative !important;
   width: 20px !important;
 }
 
-.receipt .main {
+.receipt .main-2 {
   align-items: flex-start;
   align-self: stretch;
   border-radius: 40px 0px 0px 0px;
@@ -33,7 +33,7 @@
   z-index: 0;
 }
 
-.receipt .section {
+.receipt .section-2 {
   align-items: center;
   align-self: stretch;
   display: flex;
@@ -44,7 +44,7 @@
   width: 100%;
 }
 
-.receipt .content-26 {
+.receipt .content-27 {
   align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
@@ -54,7 +54,7 @@
   width: 1280px;
 }
 
-.receipt .text-and-supporting-11 {
+.receipt .text-and-supporting-12 {
   align-items: flex-start;
   display: flex;
   flex: 1;
@@ -65,7 +65,7 @@
   position: relative;
 }
 
-.receipt .text-42 {
+.receipt .text-43 {
   align-self: stretch;
   color: var(--1-color-modes-colors-text-text-primary-900);
   font-family: var(--display-sm-semibold-font-family);
@@ -78,7 +78,7 @@
   position: relative;
 }
 
-.receipt .actions-10 {
+.receipt .actions-11 {
   align-items: center;
   display: inline-flex;
   flex: 0 0 auto;
@@ -86,11 +86,11 @@
   position: relative;
 }
 
-.receipt .button-6 {
+.receipt .button-8 {
   flex: 0 0 auto !important;
 }
 
-.receipt .button-7 {
+.receipt .button-9 {
   flex: 0 0 auto;
   margin-bottom: -3.00px;
   margin-right: -2.00px;
@@ -98,7 +98,7 @@
   position: relative;
 }
 
-.receipt .form-2 {
+.receipt .form-3 {
   align-items: flex-start;
   display: flex;
   flex: 0 0 auto;
@@ -108,7 +108,7 @@
   width: 1280px;
 }
 
-.receipt .divider-4 {
+.receipt .divider-5 {
   align-self: stretch;
   background-color: var(--1-color-modes-colors-border-border-secondary);
   height: 1px;
@@ -116,7 +116,7 @@
   width: 100%;
 }
 
-.receipt .PDF-format-wrapper {
+.receipt .frame-11 {
   align-items: center;
   align-self: stretch;
   display: flex;
@@ -127,7 +127,7 @@
   width: 100%;
 }
 
-.receipt .PDF-format {
+.receipt .PDF-format-2 {
   height: 842px;
   position: relative;
   width: 595px;

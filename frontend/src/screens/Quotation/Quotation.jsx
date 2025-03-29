@@ -49,6 +49,7 @@ export const Quotation = () => {
 
             <div className="frame-12">
             <PDF
+              docType="quotation"
               data={{
                 receiver_name: "John Doe",
                 receiver_address: "123 Main Street, City, Country",
