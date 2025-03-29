@@ -4,7 +4,6 @@ import { ButtonsButton } from "../../components/ButtonsButton";
 import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
 import { TableHeaderCell } from "../../components/TableHeaderCell";
-import { ArrowDown10 } from "../../icons/ArrowDown10";
 import { ChatBubble1 } from "../../icons/ChatBubble1";
 import { Check32 } from "../../icons/Check32";
 import { ReverseLeft1 } from "../../icons/ReverseLeft1";

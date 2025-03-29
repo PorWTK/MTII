@@ -45,7 +45,9 @@ const router = createBrowserRouter([
     element: <ProtectedRoute element={<Edit />} />,
   },
   {
-    path: "/view",
+    // path: "/view",
+    // element: <ProtectedRoute element={<View />} />,
+    path: "/view/:id",
     element: <ProtectedRoute element={<View />} />,
   },
   {
