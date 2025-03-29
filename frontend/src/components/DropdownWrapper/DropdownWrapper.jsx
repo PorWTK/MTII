@@ -7,7 +7,7 @@ import { Eye } from "../../icons/Eye";
 import { Dropdown } from "../Dropdown";
 import "./style.css";
 
-export const DropdownWrapper = ({ className, dropdownOpen = false }) => {
+export const DropdownWrapper = ({ className, dropdownOpen = false, id }) => {
   return (
     <div className={`dropdown-wrapper ${className}`}>
       <Dropdown
@@ -33,8 +33,8 @@ export const DropdownWrapper = ({ className, dropdownOpen = false }) => {
         menuItemsClassName="dropdown-4"
         open={dropdownOpen}
         override={<Edit1 className="icon-instance-node" color="#667085" />}
-        to="/view"
-        to1="/edit"
+        to={`/view/${id}`}
+        to1={`/edit/${id}`}
         type="icon"
         visible={false}
         visible1={false}

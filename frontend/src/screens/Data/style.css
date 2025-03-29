@@ -56,6 +56,7 @@
   position: relative;
   width: 100%;
   z-index: 0;
+  overflow: visible;
 }
 
 .data .main-4::-webkit-scrollbar {
@@ -71,6 +72,7 @@
   flex-grow: 1;
   gap: 24px;
   position: relative;
+  overflow: visible;
 }
 
 .data .content-29 {
@@ -152,6 +154,7 @@
   max-width: var(--5-containers-container-max-width-desktop);
   position: relative;
   width: 100%;
+  overflow: visible;
 }
 
 .data .table {

@@ -864,13 +864,28 @@ export const Form = ({ mode, className, ...props }) => {
                 </div>
               </div>
               <FormControl fullWidth sx={{ width: "468px" }} disabled={isDisabled}>
-                <InputLabel id="bank-label" sx={{ display: "none" }}>
-                  Bank
-                </InputLabel>
+                <InputLabel id="bank-label" sx={{ display: "none" }}>ธนาคาร</InputLabel>
                 <Select labelId="bank-label" defaultValue="">
                   <MenuItem value="bbl">ธนาคารกรุงเทพ (BBL)</MenuItem>
                   <MenuItem value="ktb">ธนาคารกรุงไทย (KTB)</MenuItem>
-                  {/* More banks as needed */}
+                  <MenuItem value="kbank">ธนาคารกสิกรไทย (KBank)</MenuItem>
+                  <MenuItem value="scb">ธนาคารไทยพาณิชย์ (SCB)</MenuItem>
+                  <MenuItem value="krungsri">ธนาคารกรุงศรีอยุธยา (Krungsri)</MenuItem>
+                  <MenuItem value="ttb">ธนาคารทหารไทยธนชาต (TTB)</MenuItem>
+                  <MenuItem value="gsb">ธนาคารออมสิน (GSB)</MenuItem>
+                  <MenuItem value="baac">ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (BAAC)</MenuItem>
+                  <MenuItem value="cimb">ธนาคารซีไอเอ็มบีไทย (CIMB)</MenuItem>
+                  <MenuItem value="ghb">ธนาคารอาคารสงเคราะห์ (GHB)</MenuItem>
+                  <MenuItem value="lhb">ธนาคารแลนด์แอนด์เฮ้าส์ (LHB)</MenuItem>
+                  <MenuItem value="tisco">ธนาคารทิสโก้ (TISCO)</MenuItem>
+                  <MenuItem value="kiatnakin">ธนาคารเกียรตินาคิน (Kiatnakin)</MenuItem>
+                  <MenuItem value="maybank">ธนาคารเมย์แบงก์ (Maybank)</MenuItem>
+                  <MenuItem value="hsbc">ธนาคารเอชเอสบีซี (HSBC)</MenuItem>
+                  <MenuItem value="stdchartered">ธนาคารสแตนดาร์ดชาร์เตอร์ (Standard Chartered)</MenuItem>
+                  <MenuItem value="uob">ธนาคารยูโอบี (UOB)</MenuItem>
+                  <MenuItem value="citi">ธนาคารซิตี้แบงก์ (Citibank)</MenuItem>
+                  <MenuItem value="ibank">ธนาคารอิสลามแห่งประเทศไทย (Islamic Bank of Thailand)</MenuItem>
+                  <MenuItem value="icbc">ธนาคารไอซีบีซี (ICBC)</MenuItem>
                 </Select>
               </FormControl>
             </div>

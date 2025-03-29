@@ -1,5 +1,5 @@
 import React from "react";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RouterProvider, createBrowserRouter, Navigate } from "react-router-dom";
 import { Analytics } from "./screens/Analytics";
 import { Create } from "./screens/Create";
 import { Data } from "./screens/Data";
@@ -10,6 +10,11 @@ import { Quotation } from "./screens/Quotation";
 import { Receipt } from "./screens/Receipt";
 import { View } from "./screens/View";
 
+const ProtectedRoute = ({ element }) => {
+  const isAuthenticated = localStorage.getItem("authToken") !== null;
+  return isAuthenticated ? element : <Navigate to="/" />;
+};
+
 const router = createBrowserRouter([
   {
     path: "/*",
@@ -17,41 +22,47 @@ const router = createBrowserRouter([
   },
   {
     path: "/invoice",
-    element: <Invoice />,
+    element: <ProtectedRoute element={<Invoice />} />,
   },
   {
     path: "/receipt",
-    element: <Receipt />,
+    element: <ProtectedRoute element={<Receipt />} />,
   },
   {
     path: "/quotation",
-    element: <Quotation />,
+    element: <ProtectedRoute element={<Quotation />} />,
   },
   {
     path: "/data",
-    element: <Data />,
+    element: <ProtectedRoute element={<Data />} />,
   },
   {
     path: "/analytics",
-    element: <Analytics />,
+    element: <ProtectedRoute element={<Analytics />} />,
   },
   {
-    path: "/log-in",
-    element: <LogIn />,
-  },
-  {
-    path: "/edit",
-    element: <Edit />,
+    path: "/edit/:id",
+    element: <ProtectedRoute element={<Edit />} />,
   },
   {
     path: "/view",
-    element: <View />,
+    element: <ProtectedRoute element={<View />} />,
   },
   {
     path: "/create",
-    element: <Create />,
+    element: <ProtectedRoute element={<Create />} />,
+  },
+  // Catch-all route: Redirect unknown paths to /log-in
+  {
+    path: "/*",
+    element: <Navigate to="/log-in" />,
   },
 ]);
+
+const EditPage = () => {
+  const { id } = useParams();  // Get the dynamic id from URL
+  return <Edit id={id} />;  // Pass id as a prop to Edit component
+};
 
 export const App = () => {
   return <RouterProvider router={router} />;

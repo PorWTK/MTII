@@ -1,87 +1,175 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ButtonsButton } from "../../components/ButtonsButton";
-import { DropdownWrapper } from "../../components/DropdownWrapper";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
-import { TableHeaderCell } from "../../components/TableHeaderCell";
-import { ArrowDown10 } from "../../icons/ArrowDown10";
+import { LogOut } from "../../icons/LogOut";
 import { ChatBubble1 } from "../../icons/ChatBubble1";
 import { Check32 } from "../../icons/Check32";
 import { ReverseLeft1 } from "../../icons/ReverseLeft1";
-import { Share } from "../../icons/Share";
 import { XClose30 } from "../../icons/XClose30";
-import "./style.css";
-import axios from "axios";
-import api from "../../api";
-import { LogOut } from "../../icons/LogOut";
+import { Share } from "../../icons/Share";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import { FormControl, Select, MenuItem, Table, TableBody, TableCell, TableHead, TableRow, Paper, Chip, TableSortLabel, IconButton, Menu } from "@mui/material";
-import { TableContainer } from "@mui/material";
+import "./style.css";
+import { FormControl, Select, MenuItem, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, TableSortLabel, IconButton, Menu } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
-import * as XLSX from "xlsx";
+
+// Component for action menu in each row
+const ActionMenu = ({ rowId, onDelete }) => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
+  const handleOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleView = () => {
+    // navigate(`/view/${rowId}`);
+    navigate(`/view`);
+    handleClose();
+  };
+
+  const handleEdit = () => {
+    // navigate(`/edit/${rowId}`);
+    navigate(`/edit`);
+    handleClose();
+  };
+
+  const handleDelete = () => {
+    onDelete(rowId);
+    handleClose();
+  };
+
+  return (
+    <>
+      <IconButton onClick={handleOpen}>
+        <MoreVertIcon />
+      </IconButton>
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <MenuItem onClick={handleView}>View</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
+      </Menu>
+    </>
+  );
+};
 
 export const Data = () => {
-  const [tableData, setTableData] = React.useState([]);
-  const [startDate, setStartDate] = React.useState(null);
-  const [endDate, setEndDate] = React.useState(null);
-
   // Sorting states
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
 
-  
-  const [searchValue, setSearchValue] = React.useState("");
-  
-  const [selectedStatus, setSelectedStatus] = React.useState("All");
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = React.useState("All");
-  const [selectedChannel, setSelectedChannel] = React.useState("All");
-  const [selectedPlatform, setSelectedPlatform] = React.useState("All");
+  // Filter & other states
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("All");
+  const [selectedChannel, setSelectedChannel] = useState("All");
+  const [selectedPlatform, setSelectedPlatform] = useState("All");
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await api.get("/income/");
-      if (Array.isArray(response.data.data)) {
-        setTableData(response.data.data);
-      } else {
-        console.error("Unexpected API response:", response.data);
-        setTableData([]); // Set default empty array to avoid errors
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setTableData([]); // Set empty array in case of an error
-    }
-  };
-  
+  // Table data stored in state for deletion to work
+  const [data, setData] = useState([
+    {
+      postingDate: "Jan 6, 2024",
+      invoiceId: "IV3066",
+      status: "Draft",
+      paymentMethod: "Full Payment",
+      client: { name: "Agent Name", contact: "Contacter Line" },
+      brand: "Eucerin Thailand",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+    },
+    {
+      postingDate: "Jan 6, 2024",
+      invoiceId: "IV3065",
+      status: "Paid",
+      paymentMethod: "Deposit",
+      client: { name: "Phoenix Baker", contact: "phoenix@untitledui.com" },
+      brand: "Oreo Rizz",
+      totalBalance: "10,000",
+      channel: "@Porpagin",
+      platform: "Instagram",
+    },
+    {
+      postingDate: "Jan 6, 2024",
+      invoiceId: "IV3064",
+      status: "Pending",
+      paymentMethod: "Credit Term",
+      client: { name: "Lana Steiner", contact: "lana@untitledui.com" },
+      brand: "MAC Cosmetics",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+    },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3063",
+      status: "Overdue",
+      paymentMethod: "Full Payment",
+      client: { name: "Demi Wilkinson", contact: "demi@untitledui.com" },
+      brand: "With that perfume",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+    },
+    {
+      postingDate: "Jan 5, 2024",
+      invoiceId: "IV3062",
+      status: "Paid",
+      paymentMethod: "Full Payment",
+      client: { name: "Candice Wu", contact: "candice@untitledui.com" },
+      brand: "Snacks Jumbo Th",
+      totalBalance: "10,000",
+      channel: "@PWPINN",
+      platform: "TikTok",
+    },
+    // ... additional rows as needed
+  ]);
 
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      // Implement your search logic here
       console.log("Searching for:", searchValue);
     }
   };
 
-  const filteredData = Array.isArray(tableData) ? tableData.filter((row) => (
-    (selectedStatus === "All" || row.status.name === selectedStatus) &&
-    (selectedPaymentMethod === "All" || row.payment_method.name === selectedPaymentMethod) &&
-    (selectedChannel === "All" || row.channel.name === selectedChannel) &&
-    (selectedPlatform === "All" || row.platform.name === selectedPlatform) &&
-    (searchValue === "" ||
-      // row.invoice_id_number.includes(searchValue) ||
-      row.agency_agency_name.toLowerCase().includes(searchValue.toLowerCase()) ||
-      row.brand_brand_name.toLowerCase().includes(searchValue.toLowerCase())
-    )
-  )) : []; 
+  const handleDeleteRow = (rowId) => {
+    setData((prevData) => prevData.filter((row) => row.invoiceId !== rowId));
+  };
 
+  // Filter data based on search and other filters
+  const filteredData = data.filter((row) => {
+    const rowDate = new Date(row.postingDate);
+    let isDateMatch = true;
+    if (startDate) {
+      isDateMatch = isDateMatch && rowDate >= startDate;
+    }
+    if (endDate) {
+      isDateMatch = isDateMatch && rowDate <= endDate;
+    }
+    return (
+      isDateMatch &&
+      (selectedStatus === "All" || row.status === selectedStatus) &&
+      (selectedPaymentMethod === "All" || row.paymentMethod === selectedPaymentMethod) &&
+      (selectedChannel === "All" || row.channel === selectedChannel) &&
+      (selectedPlatform === "All" || row.platform === selectedPlatform) &&
+      (searchValue === "" ||
+        row.invoiceId.toLowerCase().includes(searchValue.toLowerCase()) ||
+        row.client.name.toLowerCase().includes(searchValue.toLowerCase()) ||
+        row.brand.toLowerCase().includes(searchValue.toLowerCase()))
+    );
+  });
+
+  // Sorting helper functions
   const descendingComparator = (a, b, orderBy) => {
     if (orderBy === "postingDate") {
       const dateA = new Date(a[orderBy]);
@@ -162,26 +250,7 @@ export const Data = () => {
     );
   };
 
-  const exportToCSV = () => {
-    const ws = XLSX.utils.json_to_sheet(sortedData.map(row => ({
-      "Posting Date": row.influencer_posting_date,
-      "Invoice ID": row.invoice_id_number,
-      "Status": row.status?.name || "N/A",
-      "Payment Method": row.payment_method?.name || "N/A",
-      "Client": row.agency_agency_name || "N/A",
-      "Brand": row.brand_brand_name || "N/A",
-      "Total Balance": row.total_payment_amount,
-      "Channel": row.channel?.name || "N/A",
-      "Platform": row.platform?.name || "N/A"
-    })));
-  
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Income Data");
-  
-    XLSX.writeFile(wb, "income_data.xlsx");
-  };
-
-  return(
+  return (
     <div className="data">
       <HeaderNavigationWrapper
         className="header-navigation-5"
@@ -197,19 +266,16 @@ export const Data = () => {
               </p>
             </div>
             <div className="actions-13">
-              <div onClick={exportToCSV}>
-                  <ButtonsButton
-                    className="design-component-instance-node-2"
-                    hierarchy="secondary-gray"
-                    icon="default"
-                    iconTrailing={false}
-                    override={<Share className="icon-instance-node-4" />}
-                    size="md"
-                    stateProp="default"
-                    text="Export as CSV"
-                  />
-              </div>
-              {/* <Button onClick={exportToCSV} className="design-component-instance-node-2" override={<Share className="icon-instance-node-4" />}>Export CSV</Button>; */}
+              <ButtonsButton
+                className="design-component-instance-node-2"
+                hierarchy="secondary-gray"
+                icon="default"
+                iconTrailing={false}
+                override={<Share className="icon-instance-node-4" />}
+                size="md"
+                stateProp="default"
+                text="Export as CSV"
+              />
               <Link to="/create">
                 <img
                   className="button-12"
@@ -232,7 +298,7 @@ export const Data = () => {
                     </div>
                     <TextField
                       id="search-field"
-                      placeholder="Invoice ID, Client name, Brand"
+                      placeholder="Invoice ID, Client name"
                       value={searchValue}
                       onChange={(e) => setSearchValue(e.target.value)}
                       onKeyDown={handleKeyDown}
@@ -329,7 +395,7 @@ export const Data = () => {
                       inputProps={{ notched: false }}
                     >
                       <MenuItem value="All">All</MenuItem>
-                      <MenuItem value="@PinnPW">@PinnPW</MenuItem>
+                      <MenuItem value="@PWPINN">@PWPINN</MenuItem>
                       <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
                       <MenuItem value="@Porpagin">@Porpagin</MenuItem>
                     </Select>
@@ -354,8 +420,7 @@ export const Data = () => {
                 </div>
               </div>
             </div>
-          <div className="table-wrapper">
-            <TableContainer component={Paper} sx={{ overflow: 'visible' }}>
+            <TableContainer component={Paper}>
               <Table>
                 <TableHead
                   sx={{
@@ -395,24 +460,32 @@ export const Data = () => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                {sortedData.map((row, index) => (
-                  <TableRow key={index}>
-                    <TableCell>{row.influencer_posting_date}</TableCell>
-                    <TableCell>{row.invoice_id_number}</TableCell>
-                    <TableCell>{renderStatusCell(row.status.name)}</TableCell>
-                    <TableCell>{row.payment_method.name}</TableCell>
-                    <TableCell><div>{row.agency_agency_name}</div><div style={{ fontSize: "12px", color: "#667085" }}>{row.contactor_email}</div></TableCell>
-                    <TableCell>{row.brand_brand_name}</TableCell>
-                    <TableCell>{row.total_payment_amount}</TableCell>
-                    <TableCell>{row.channel.name}</TableCell>
-                    <TableCell>{row.platform.name}</TableCell>
-                    <TableCell><DropdownWrapper className="design-component-instance-node-2" id={row.invoice_id_number} /></TableCell>
-                  </TableRow>
-                ))}
+                  {sortedData.map((row, idx) => (
+                    <TableRow key={idx}>
+                      <TableCell>{row.postingDate}</TableCell>
+                      <TableCell>{row.invoiceId}</TableCell>
+                      <TableCell>{renderStatusCell(row.status)}</TableCell>
+                      <TableCell>{row.paymentMethod}</TableCell>
+                      <TableCell>
+                        <div>
+                          <div>{row.client.name}</div>
+                          <div style={{ fontSize: "12px", color: "#667085" }}>
+                            {row.client.contact}
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>{row.brand}</TableCell>
+                      <TableCell>{row.totalBalance}</TableCell>
+                      <TableCell>{row.channel}</TableCell>
+                      <TableCell>{row.platform}</TableCell>
+                      <TableCell>
+                        <ActionMenu rowId={row.invoiceId} onDelete={handleDeleteRow} />
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>
-          </div>
           </div>
         </div>
       </div>

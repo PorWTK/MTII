@@ -3,6 +3,7 @@ import { ButtonsButton } from "../../components/ButtonsButton";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
 import { ChevronLeft } from "../../icons/ChevronLeft";
 import { LogOut } from "../../icons/LogOut";
+import { PDF } from "../../components/PDF";
 import "./style.css";
 
 export const Receipt = () => {
@@ -47,11 +48,7 @@ export const Receipt = () => {
             <div className="divider-4" />
 
             <div className="PDF-format-wrapper">
-              <img
-                className="PDF-format"
-                alt="Pdf format"
-                src="/img/pdfformat.svg"
-              />
+              <PDF />
             </div>
 
             <div className="divider-4" />

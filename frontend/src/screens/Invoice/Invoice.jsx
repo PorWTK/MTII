@@ -3,6 +3,7 @@ import { ButtonsButton } from "../../components/ButtonsButton";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
 import { ChevronLeft } from "../../icons/ChevronLeft";
 import { LogOut } from "../../icons/LogOut";
+import { PDF } from "../../components/PDF";
 import "./style.css";
 
 export const Invoice = () => {
@@ -47,11 +48,7 @@ export const Invoice = () => {
             <div className="divider-5" />
 
             <div className="frame-11">
-              <img
-                className="PDF-format-2"
-                alt="Pdf format"
-                src="/img/pdfformat-1.svg"
-              />
+              <PDF /> 
             </div>
 
             <div className="divider-5" />

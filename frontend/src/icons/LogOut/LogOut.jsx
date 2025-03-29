@@ -1,11 +1,20 @@
-/*
-We're constantly improving the code you see. 
-Please share your feedback here: https://form.asana.com/?k=uvp-HPgd3_hyoXRBw1IcNg&d=1152665201300829
-*/
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../../api";
 
 export const LogOut = ({ className }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/user/logout"); // Call the logout API
+      localStorage.removeItem("token"); // Clear auth token if stored
+      navigate("/"); // Redirect to login page
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <svg
       className={`log-out ${className}`}
@@ -14,6 +23,8 @@ export const LogOut = ({ className }) => {
       viewBox="0 0 20 20"
       width="20"
       xmlns="http://www.w3.org/2000/svg"
+      onClick={handleLogout}
+      style={{ cursor: "pointer" }}
     >
       <path
         className="path"

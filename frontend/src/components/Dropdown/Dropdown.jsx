@@ -60,6 +60,7 @@ export const Dropdown = ({
   visible11 = true,
   to,
   to1,
+  to2,
 }) => {
   const [state, dispatch] = useReducer(reducer, {
     type: type || "icon",
@@ -115,6 +116,22 @@ export const Dropdown = ({
                 text1="⌘S"
                 textClassName={concreteComponentNodeTextClassNameOverride}
                 to={to1}
+              />
+              <ConcreteComponentNode
+                checkbox={false}
+                divider={false}
+                icon
+                iconAndTextClassName={
+                  concreteComponentNodeIconAndTextClassNameOverride
+                }
+                iconTrueCheckboxClassName="dropdown-list-item"
+                override={override}
+                shortcut={concreteComponentNodeShortcut1}
+                stateProp="default"
+                text={concreteComponentNodeText1}
+                text1="⌘S"
+                textClassName={concreteComponentNodeTextClassNameOverride}
+                to={to2}
               />
               <ConcreteComponentNode
                 checkbox={false}
@@ -512,4 +529,5 @@ Dropdown.propTypes = {
   visible11: PropTypes.bool,
   to: PropTypes.string,
   to1: PropTypes.string,
+  to2: PropTypes.string,
 };
