@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { PieChart as RechartsPieChart, Pie, Cell, Tooltip } from "recharts";
+import api from "../../api"; // Import API like in Data.jsx
 
 // Action menu component for each row
 const ActionMenu = ({ rowId, onDelete }) => {
@@ -26,14 +27,12 @@ const ActionMenu = ({ rowId, onDelete }) => {
   const handleClose = () => setAnchorEl(null);
 
   const handleView = () => {
-    // navigate(`/view/${rowId}`);
-    navigate(`/view`);
+    navigate(`/view/${rowId}`);
     handleClose();
   };
 
   const handleEdit = () => {
-    // navigate(`/edit/${rowId}`);
-    navigate(`/edit`);
+    navigate(`/edit/${rowId}`);
     handleClose();
   };
 
@@ -58,91 +57,125 @@ const ActionMenu = ({ rowId, onDelete }) => {
 
 export const Analytics = () => {
   const navigate = useNavigate();
+  const [tableData, setTableData] = useState([]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [receiver, setReceiver] = useState("All");
 
-  const handleReceiverChange = (event) => setReceiver(event.target.value);
-
-  const tableData = [
-    {
-      postingDate: "Jan 6, 2024",
-      invoiceId: "IV3066",
-      status: "Draft",
-      paymentMethod: "Full Payment",
-      brand: "Eucerin Thailand",
-      platform: "TikTok",
-      receiver: "@PWPINN",
-    },
-    {
-      postingDate: "Jan 6, 2024",
-      invoiceId: "IV3065",
-      status: "Paid",
-      paymentMethod: "Deposit",
-      brand: "Oreo Rizz",
-      platform: "Instagram",
-      receiver: "@PWPINN",
-    },
-    {
-      postingDate: "Jan 6, 2024",
-      invoiceId: "IV3064",
-      status: "Pending",
-      paymentMethod: "Credit Term",
-      brand: "MAC Cosmetics",
-      platform: "TikTok",
-      receiver: "@PWPINN",
-    },
-    {
-      postingDate: "Jan 5, 2024",
-      invoiceId: "IV3063",
-      status: "Overdue",
-      paymentMethod: "Full Payment",
-      brand: "With that perfume",
-      platform: "TikTok",
-      receiver: "@PWPINN",
-    },
-    {
-      postingDate: "Jan 5, 2024",
-      invoiceId: "IV3062",
-      status: "Paid",
-      paymentMethod: "Full Payment",
-      brand: "Snacks Jumbo Th",
-      platform: "TikTok",
-      receiver: "@PWPINN",
-    },
-    // ... additional rows if needed
-  ];
-
-  // Filter the data by date range and receiver
-  const filteredData = tableData.filter((row) => {
-    const rowDate = new Date(row.postingDate);
-    let isWithinDateRange = true;
-    if (startDate) isWithinDateRange = isWithinDateRange && rowDate >= startDate;
-    if (endDate) isWithinDateRange = isWithinDateRange && rowDate <= endDate;
-    const isReceiverMatch = receiver === "All" || row.receiver === receiver;
-    return isWithinDateRange && isReceiverMatch;
+  // States for computed metrics, pie chart data and recent activity table
+  const [metrics, setMetrics] = useState({
+    totalIncome: 0,
+    taxToPay: 0,
+    totalPending: 0,
+    totalOverdue: 0,
   });
+  const [pieData, setPieData] = useState([]);
+  const [recentData, setRecentData] = useState([]);
 
-  // Sort the data by posting date (newest first)
-  const sortedData = [...filteredData].sort(
-    (a, b) => new Date(b.postingDate) - new Date(a.postingDate)
-  );
-  // Use only the recent 5 rows for the sub table
-  const recentData = sortedData.slice(0, 5);
+  // Normalize dates so filtering is inclusive of the entire day
+  const normalizeStartDate = (date) => {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  };
 
-  // Pie chart data (if needed)
-  const [pieData, setPieData] = useState([
-    { name: "Paid", value: 20 },
-    { name: "Pending", value: 30 },
-    { name: "Overdue", value: 8 },
-    { name: "Draft", value: 29 },
-  ]);
-  const pieColors = ["#067647", "#DC8420", "#b42318", "#A0A6B2"];
+  const normalizeEndDate = (date) => {
+    const d = new Date(date);
+    d.setHours(23, 59, 59, 999);
+    return d;
+  };
+
+  // Fetch data from API on component mount
   useEffect(() => {
-    // fetch('/api/pieChartData').then(...) -> setPieData(...)
+    const fetchData = async () => {
+      try {
+        const response = await api.get("/income/");
+        if (Array.isArray(response.data.data)) {
+          setTableData(response.data.data);
+        } else {
+          console.error("Unexpected API response:", response.data);
+          setTableData([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setTableData([]);
+      }
+    };
+    fetchData();
   }, []);
 
-  // Helper to render the status cell as a Chip with border and regular text
+  // useEffect(() => {
+  //   if (tableData.length > 0) {
+  //     console.log("Sample row:", tableData[0]);
+  //   }
+  // }, [tableData]);
+  
+
+  // Function to filter data based on date range and receiver
+  const getFilteredData = () => {
+    return tableData.filter((row) => {
+      const rowDate = new Date(row.influencer_posting_date);
+      let isWithinDateRange = true;
+      if (startDate)
+        isWithinDateRange = isWithinDateRange && rowDate >= normalizeStartDate(startDate);
+      if (endDate)
+        isWithinDateRange = isWithinDateRange && rowDate <= normalizeEndDate(endDate);
+      let receiverMatch = true;
+
+      //not working here
+      if (receiver !== "All") {
+        receiverMatch = row.receiver && row.receiver.name === receiver;
+      }
+      return isWithinDateRange && receiverMatch;
+    });
+  };
+
+  // Recalculate metrics, pie chart data, and recent activity table whenever filters change
+  useEffect(() => {
+    const filteredData = getFilteredData();
+
+    // Metrics Calculation
+    const totalIncome = filteredData
+      .filter((row) => row.status.name === "Paid")
+      .reduce((acc, row) => acc + Number(row.total_payment_amount), 0);
+    const taxToPay = totalIncome * 0.015;
+    const totalPending = filteredData
+      .filter((row) => row.status.name === "Pending")
+      .reduce((acc, row) => acc + Number(row.unpaid_payment_amount), 0);
+    const totalOverdue = filteredData
+      .filter((row) => row.status.name === "Overdue")
+      .reduce((acc, row) => acc + Number(row.unpaid_payment_amount), 0);
+
+    setMetrics({ totalIncome, taxToPay, totalPending, totalOverdue });
+
+    // Pie Chart: Count the distribution of statuses
+    const statusCounts = filteredData.reduce((acc, row) => {
+      const status = row.status.name;
+      acc[status] = (acc[status] || 0) + 1;
+      return acc;
+    }, {});
+
+    const pieChartData = [
+      { name: "Paid", value: statusCounts["Paid"] || 0 },
+      { name: "Pending", value: statusCounts["Pending"] || 0 },
+      { name: "Overdue", value: statusCounts["Overdue"] || 0 },
+      { name: "Draft", value: statusCounts["Draft"] || 0 },
+    ];
+    setPieData(pieChartData);
+
+    // Recent Activity: Sort by posting date (newest first) and take the top 5
+    const sortedData = [...filteredData].sort(
+      (a, b) => new Date(b.influencer_posting_date) - new Date(a.influencer_posting_date)
+    );
+    setRecentData(sortedData.slice(0, 5));
+  }, [tableData, startDate, endDate, receiver]);
+
+  // Handle receiver selection change
+  const handleReceiverChange = (event) => {
+    setReceiver(event.target.value);
+  };
+
+  // Helper to render status cell with an icon and colored Chip
   const renderStatusCell = (status) => {
     let iconOverride = null;
     let badgeColorKey = "gray";
@@ -156,7 +189,6 @@ export const Analytics = () => {
       iconOverride = <XClose30 className="icon-instance-node-5" color="#F04438" />;
       badgeColorKey = "error";
     } else if (status === "Draft") {
-      // Add an extra CSS class 'draft-icon' so we can force it to 12x12 via CSS
       iconOverride = <ChatBubble1 className="draft-icon" color="#344054" />;
       badgeColorKey = "gray";
     }
@@ -180,8 +212,12 @@ export const Analytics = () => {
     );
   };
 
+  // Define colors for the pie chart slices
+  const pieColors = ["#067647", "#DC8420", "#b42318", "#A0A6B2"];
+
   return (
     <div className="analytics">
+
       <HeaderNavigationWrapper
         className="header-navigation-2"
         headerNavigationNavItemBaseCurrent={false}
@@ -245,9 +281,10 @@ export const Analytics = () => {
                     inputProps={{ notched: false }}
                   >
                     <MenuItem value="All">All</MenuItem>
-                    <MenuItem value="@PWPINN">@PWPINN</MenuItem>
+                    {/* Update these values as per available receiver IDs from your API */}
+                    <MenuItem value="@PinnPW">@PinnPW</MenuItem>
                     <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
-                    <MenuItem value="บริษัทโชคชัย 9672 จำกัด">บริษัทโชคชัย 9672 จำกัด</MenuItem>
+                    <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัทโชคชัย 9672 จำกัด</MenuItem>
                   </Select>
                 </FormControl>
               </div>
@@ -267,7 +304,7 @@ export const Analytics = () => {
             headingClassName="metric-item-2"
             numberClassName="metric-item-2"
             text="Total income (baht)"
-            text1="220,000"
+            text1={metrics.totalIncome.toLocaleString()}
             type="chart-01"
           />
           <MetricItem
@@ -280,7 +317,7 @@ export const Analytics = () => {
             headingClassName="metric-item-3"
             numberClassName="metric-item-3"
             text="Tax to pay (baht)"
-            text1="3,500"
+            text1={metrics.taxToPay.toLocaleString()}
             type="chart-01"
           />
           <MetricItem
@@ -293,7 +330,7 @@ export const Analytics = () => {
             headingClassName="metric-item-4"
             numberClassName="metric-item-4"
             text="Total pending amount (baht)"
-            text1="56,000"
+            text1={metrics.totalPending.toLocaleString()}
             type="chart-01"
           />
           <MetricItem
@@ -305,8 +342,8 @@ export const Analytics = () => {
             hasChangeAndText={false}
             headingClassName="metric-item-5"
             numberClassName="metric-item-5"
-            text="Total overdue amount(baht)"
-            text1="9,900"
+            text="Total overdue amount (baht)"
+            text1={metrics.totalOverdue.toLocaleString()}
             type="chart-01"
           />
         </div>
@@ -345,7 +382,6 @@ export const Analytics = () => {
                   <Tooltip />
                 </RechartsPieChart>
               </div>
-
               <div className="legend">
                 {pieData.map((item, index) => (
                   <div key={index} className="legend-series">
@@ -406,17 +442,19 @@ export const Analytics = () => {
                 <TableBody>
                   {recentData.map((row, idx) => (
                     <TableRow key={idx}>
-                      <TableCell>{row.invoiceId}</TableCell>
-                      <TableCell>{row.postingDate}</TableCell>
-                      <TableCell>{renderStatusCell(row.status)}</TableCell>
-                      <TableCell>{row.paymentMethod}</TableCell>
-                      <TableCell>{row.brand}</TableCell>
-                      <TableCell>{row.platform}</TableCell>
+                      <TableCell>{row.invoice_id_number}</TableCell>
+                      <TableCell>{new Date(row.influencer_posting_date).toLocaleDateString()}</TableCell>
+                      <TableCell>{renderStatusCell(row.status.name)}</TableCell>
+                      <TableCell>{row.payment_method.name}</TableCell>
+                      <TableCell>{row.brand_brand_name}</TableCell>
+                      <TableCell>{row.platform.name}</TableCell>
                       <TableCell>
-                        <ActionMenu rowId={row.invoiceId} onDelete={(id) => {
-                          // Optionally, add deletion logic for Analytics table rows here
-                          console.log("Delete", id);
-                        }} />
+                        <ActionMenu
+                          rowId={row.invoice_id_number}
+                          onDelete={(id) => {
+                            console.log("Delete", id);
+                          }}
+                        />
                       </TableCell>
                     </TableRow>
                   ))}
