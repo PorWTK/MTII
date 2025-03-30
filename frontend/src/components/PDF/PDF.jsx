@@ -38,8 +38,8 @@ export const PDF = ({ data, docType }) => {
 
           <div className="QI-rnumber">
             <div className="text-wrapper-3">Quotation number</div>
-            <div className="text-wrapper-4">{data.quotation_id_number}</div>
-          </div>
+                <div className="text-wrapper-4">QT {data.quotation_id_number}</div>
+          </div> 
 
           <div className="issue-date">
             <div className="text-wrapper-3">Issue date</div>
@@ -142,7 +142,7 @@ export const PDF = ({ data, docType }) => {
 
           <div className="QI-rnumber">
             <div className="text-wrapper-3">Invoice number</div>
-            <div className="text-wrapper-4">{data.invoice_id_number}</div>
+            <div className="text-wrapper-4">IV {data.invoice_id_number}</div>
           </div>
 
           <div className="issue-date">
@@ -236,7 +236,7 @@ export const PDF = ({ data, docType }) => {
 
           <div className="ref">
             <div className="text-wrapper-3">Reference</div>
-            <div className="text-wrapper-4">{data.quotation_id_number}</div>
+            <div className="text-wrapper-4">QT {data.quotation_id_number}</div>
           </div>
         </div>
         )}
@@ -250,7 +250,7 @@ export const PDF = ({ data, docType }) => {
 
             <div className="QI-rnumber">
                 <div className="text-wrapper-3">Receipt number</div>
-                <div className="text-wrapper-4">{data.receipt_id_number}</div>
+                <div className="text-wrapper-4">RC {data.receipt_id_number}</div>
             </div>
 
             <div className="issue-date">
@@ -329,7 +329,7 @@ export const PDF = ({ data, docType }) => {
 
             <div className="ref">
                 <div className="text-wrapper-3">Reference</div>
-                <div className="text-wrapper-4">{data.invoice_id_number}</div>
+                <div className="text-wrapper-4">IV {data.invoice_id_number}</div>
             </div>
             </div>
         )}

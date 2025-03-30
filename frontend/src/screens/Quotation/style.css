@@ -96,6 +96,9 @@
   margin-right: -2.00px;
   margin-top: -1.00px;
   position: relative;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 .quotation .form-4 {

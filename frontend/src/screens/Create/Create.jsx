@@ -1122,9 +1122,9 @@ export const Create = () => {
                     <FormControl fullWidth sx={{ width: "468px" }} >
                       <Select labelId="status-label" name="status_id" value={formData.status_id} onChange={handleChange} required defaultValue="">
                         <MenuItem value="1">Paid</MenuItem>
-                        <MenuItem value="2">Draft</MenuItem>
-                        <MenuItem value="3">Pending</MenuItem>
-                        <MenuItem value="4">Overdue</MenuItem>
+                        <MenuItem value="2">Pending</MenuItem>
+                        <MenuItem value="3">Overdue</MenuItem>
+                        <MenuItem value="4">Draft</MenuItem>
                       </Select>
                     </FormControl>
                   </div>

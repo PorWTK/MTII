@@ -21,15 +21,15 @@ const router = createBrowserRouter([
     element: <LogIn />,
   },
   {
-    path: "/invoice",
+    path: "/invoice/:id",
     element: <ProtectedRoute element={<Invoice />} />,
   },
   {
-    path: "/receipt",
+    path: "/receipt/:id",
     element: <ProtectedRoute element={<Receipt />} />,
   },
   {
-    path: "/quotation",
+    path: "/quotation/:id",
     element: <ProtectedRoute element={<Quotation />} />,
   },
   {

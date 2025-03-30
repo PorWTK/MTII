@@ -1433,7 +1433,7 @@ export const View = () => {
               size="xl"
               stateProp="default"
               text="Preview the Quotation"
-              to="/quotation"
+              to={`/quotation/${id}`}
             />
             <ButtonsButton
               className="design-component-instance-node-5"
@@ -1444,7 +1444,7 @@ export const View = () => {
               size="xl"
               stateProp="default"
               text="Preview the invoice"
-              to="/invoice"
+              to={`/invoice/${id}`}
             />
             <ButtonsButton
               className="design-component-instance-node-5"
@@ -1455,7 +1455,7 @@ export const View = () => {
               size="xl"
               stateProp="default"
               text="Preview the receipt"
-              to="/receipt"
+              to={`/receipt/${id}`}
             />
           </div>
         </div>

@@ -69,46 +69,85 @@ export const Data = () => {
     }
   };
 
-  const filteredData = Array.isArray(tableData) ? tableData.filter((row) => (
-    (selectedStatus === "All" || row.status.name === selectedStatus) &&
-    (selectedPaymentMethod === "All" || row.payment_method.name === selectedPaymentMethod) &&
-    (selectedChannel === "All" || row.channel.name === selectedChannel) &&
-    (selectedPlatform === "All" || row.platform.name === selectedPlatform) &&
-    (searchValue === "" ||
-      // row.invoice_id_number.includes(searchValue) ||
-      row.agency_agency_name.toLowerCase().includes(searchValue.toLowerCase()) ||
-      row.brand_brand_name.toLowerCase().includes(searchValue.toLowerCase())
-    )
-  )) : []; 
+  const normalizeStartDate = (date) => {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  };
+  
+  const normalizeEndDate = (date) => {
+    const d = new Date(date);
+    d.setHours(23, 59, 59, 999);
+    return d;
+  };  
+
+  const filteredData = Array.isArray(tableData)
+  ? tableData.filter((row) => {
+      const rowDate = new Date(row.influencer_posting_date);
+      return (
+        (selectedStatus === "All" || row.status.name === selectedStatus) &&
+        (selectedPaymentMethod === "All" || row.payment_method.name === selectedPaymentMethod) &&
+        (selectedChannel === "All" || row.channel.name === selectedChannel) &&
+        (selectedPlatform === "All" || row.platform.name === selectedPlatform) &&
+        (searchValue === "" ||
+          String(row.invoice_id_number).includes(searchValue) ||
+          row.agency_agency_name.toLowerCase().includes(searchValue.toLowerCase()) ||
+          row.brand_brand_name.toLowerCase().includes(searchValue.toLowerCase())
+        ) &&
+        (!startDate || rowDate >= normalizeStartDate(startDate)) &&
+        (!endDate || rowDate <= normalizeEndDate(endDate))
+      );
+    })
+  : [];
+
 
   const descendingComparator = (a, b, orderBy) => {
     if (orderBy === "postingDate") {
-      const dateA = new Date(a[orderBy]);
-      const dateB = new Date(b[orderBy]);
-      if (dateB < dateA) return -1;
-      if (dateB > dateA) return 1;
+      // Map "postingDate" to the actual property "influencer_posting_date"
+      const dateA = new Date(a.influencer_posting_date).getTime();
+      const dateB = new Date(b.influencer_posting_date).getTime();
+      return dateB - dateA;
+    }
+    if (orderBy === "invoiceId") {
+      // Map "invoiceId" to the actual property "invoice_id_number"
+      if (a.invoice_id_number < b.invoice_id_number) return -1;
+      if (a.invoice_id_number > b.invoice_id_number) return 1;
       return 0;
     }
+    // Generic comparator for other fields
     if (b[orderBy] < a[orderBy]) return -1;
     if (b[orderBy] > a[orderBy]) return 1;
     return 0;
   };
-
+  
   const getComparator = (order, orderBy) => {
     return order === "desc"
       ? (a, b) => descendingComparator(a, b, orderBy)
       : (a, b) => -descendingComparator(a, b, orderBy);
   };
-
+  
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
+  
   const sortedData = orderBy
     ? filteredData.slice().sort(getComparator(order, orderBy))
     : filteredData;
+  
+  // Call the filtering callback when dates change
+  const handleStartDateChange = (newValue) => {
+    setStartDate(newValue);
+    // onFilterChange(newValue, endDate);
+  };
+
+  const handleEndDateChange = (newValue) => {
+    setEndDate(newValue);
+    // onFilterChange(startDate, newValue);
+  };
+
+
 
   // Render status cell using Chip with border and regular text
   const renderStatusCell = (status) => {
@@ -259,7 +298,8 @@ export const Data = () => {
                           <DatePicker
                             label="Start Date"
                             value={startDate}
-                            onChange={(newValue) => setStartDate(newValue)}
+                            onChange={handleStartDateChange}
+                            inputFormat="MM/dd/yyyy"
                             renderInput={(params) => (
                               <TextField {...params} size="small" fullWidth />
                             )}
@@ -269,7 +309,8 @@ export const Data = () => {
                           <DatePicker
                             label="End Date"
                             value={endDate}
-                            onChange={(newValue) => setEndDate(newValue)}
+                            onChange={handleEndDateChange}
+                            inputFormat="MM/dd/yyyy"
                             renderInput={(params) => (
                               <TextField {...params} size="small" fullWidth />
                             )}
@@ -279,6 +320,7 @@ export const Data = () => {
                     </LocalizationProvider>
                   </div>
                 </div>
+
                 <div className="input-with-label-3">
                   <div className="label-wrapper-3">
                     <div className="label-3">Status</div>
@@ -396,7 +438,11 @@ export const Data = () => {
                 <TableBody>
                 {sortedData.map((row, index) => (
                   <TableRow key={index}>
-                    <TableCell>{row.influencer_posting_date}</TableCell>
+                    <TableCell>
+                      {row.influencer_posting_date
+                        ? new Intl.DateTimeFormat("en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date(row.influencer_posting_date))
+                        : ""}
+                    </TableCell>
                     <TableCell>{row.invoice_id_number}</TableCell>
                     <TableCell>{renderStatusCell(row.status.name)}</TableCell>
                     <TableCell>{row.payment_method.name}</TableCell>

@@ -90,12 +90,15 @@
   flex: 0 0 auto !important;
 }
 
-.receipt .button-9 {
+.receipt .button-11 {
   flex: 0 0 auto;
   margin-bottom: -3.00px;
   margin-right: -2.00px;
   margin-top: -1.00px;
   position: relative;
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 .receipt .form-3 {
