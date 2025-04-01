@@ -10,11 +10,7 @@ export const PDF = ({ data, docType }) => {
         <div className="receiver">
           <div className="details">
             <div className="name">{data.receiver_name}</div>
-            <input
-              className="email"
-              placeholder={data.receiver_email}
-              type="email"
-            />
+            <div className="email">{data.receiver_email}</div>
             <div className="phone">{data.receiver_phone_number}</div>
           </div>
 

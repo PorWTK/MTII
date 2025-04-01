@@ -1,8 +1,6 @@
 import React from "react";
 import { ButtonsButton } from "../../components/ButtonsButton";
-import { Form } from "../../components/Form";
 import { HeaderNavigationWrapper } from "../../components/HeaderNavigationWrapper";
-import { Calendar29 } from "../../icons/Calendar29";
 import { LogOut } from "../../icons/LogOut";
 import { Link } from "react-router-dom";
 import { SectionLabel } from "../../components/SectionLabel";
@@ -20,22 +18,28 @@ export const Create = () => {
     quotation_id_number: "",
     quotation_issue_date: "",
     quotation_due_date: "",
+
     invoice_id_number: "",
     invoice_issue_date: "",
     invoice_due_date: "",
+
     receipt_issue_date: "",
     receipt_id_number: "",
+
     agency_tax_payer_id_number: "",
     influencer_posting_date: "",
     agency_agency_name: "",
     agency_address: "",
     agency_phone_number: "",
+
     contactor_contactor_name: "",
     contactor_phone_number: "",
     contactor_line: "",
     contactor_email: "",
+
     brand_brand_name: "",
     brand_product: "",
+
     transaction_reference_number: "",
     terms_and_conditions: "",
     total_payment_amount: "",
@@ -46,6 +50,7 @@ export const Create = () => {
     notes_for_the_second_payment: "",
     unpaid_payment_amount: "",
     notes_for_the_unpaid_payment: "",
+
     platform_id: "",
     status_id: "",
     payment_method_id: "",
@@ -55,12 +60,23 @@ export const Create = () => {
     bank_id: "",
   });
 
+  const [formDataItem, setFormDataItem] = useState({
+    description: "",
+    notes: "",
+    quantity: "",
+    unit_price: "",
+    income_invoice_id_number: "",
+  });
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleChangeItem = (e) => {
+    setFormDataItem({ ...formDataItem, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
@@ -98,10 +114,22 @@ export const Create = () => {
       bank_id: Number(formData.bank_id) || null,
     };
 
+    const formattedItemData = {
+      ...formDataItem,
+      quantity: Number(formDataItem.quantity) || null,
+      unit_price: Number(formDataItem.unit_price) || null,
+      income_invoice_id_number: Number(formDataItem.income_invoice_id_number) || null,
+    };
+
     try {
-      const responses = await api.post("/income/", formattedData);
-      setMessage("Income successfully added!");
-      setFormData(formattedData);
+      const response1 = await api.post("/income/", formattedData);
+      console.log("Income API Response:", response1.data);
+
+      const response2 = await api.post("/detail/", formattedItemData);
+      console.log("Income Item API Response:", response2.data);
+
+      setMessage("Both forms submitted successfully!");
+
     } catch (error) {
       console.error("Error submitting income:", error);
       setMessage("Failed to add income.");
@@ -739,9 +767,9 @@ export const Create = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
+                            type="text" name="description" value={formDataItem.description} onChange={handleChangeItem} required
+                            // value={details[0].description}
+                            // onChange={(e) => handleDetailChange(0, e)}
                           />
                         </FormControl>
                       </div>
@@ -757,9 +785,7 @@ export const Create = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
+                            type="text" name="notes" value={formDataItem.notes} onChange={handleChangeItem} required
                           />
                         </FormControl>
                       </div>
@@ -777,16 +803,14 @@ export const Create = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
+                            type="number" name="quantity" value={formDataItem.quantity} onChange={handleChangeItem} required
                           />
                         </FormControl>
                       </div>
                       <div className="inputbox">
                         <div className="label-for-input">
                           <div className="label-wrapper">
-                            <div className="label">Unit price</div>
+                            <div className="label">Unit Price</div>
                           </div>
                         </div>
                         <FormControl fullWidth sx={{ width: "468px" }}>
@@ -795,9 +819,7 @@ export const Create = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
+                            type="number" name="unit_price" value={formDataItem.unit_price} onChange={handleChangeItem} required
                           />
                         </FormControl>
                       </div>
@@ -806,247 +828,7 @@ export const Create = () => {
                   </div>
 
                   {/* Details Section 2 */}
-                  <div className="frame-6">
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Description</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="description-2"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Notes</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="notes-2"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                            // name =
-                            // value =
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Quantity</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="quantity-2"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Unit price</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="unit-price-2"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="divider-3" />
-                  </div>
 
-                  {/* Details Section 3 */}
-                  <div className="frame-6">
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Description</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="description-3"
-                            // name =
-                            // value =
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Notes</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="notes-3"
-                            // name =
-                            // value =
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Quantity</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="quantity-3"
-                            variant="outlined"
-                            fullWidth
-                            // name =
-                            // value =
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Unit price</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="unit-price-3"
-                            variant="outlined"
-                            fullWidth
-                            // name =
-                            // value =
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="divider-3" />
-                  </div>
-
-                  {/* Details Section 4 */}
-                  <div className="frame-6">
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Description</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
-                          <TextField
-                            id="description-4"
-                            variant="outlined"
-                            fullWidth
-                            // name =
-                            // value =
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Notes</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
-                          <TextField
-                            id="notes-4"
-                            variant="outlined"
-                            fullWidth
-                            // name =
-                            // value =
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Quantity</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
-                          <TextField
-                            id="quantity-4"
-                            variant="outlined"
-                            fullWidth
-                            // name =
-                            // value =
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Unit price</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
-                          <TextField
-                            id="unit-price-4"
-                            variant="outlined"
-                            fullWidth
-                            // name =
-                            // value =
-                            sx={{ height: "44px" }}
-                            onChange={handleChange}
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="divider-3" />
-                  </div>
                 </div>
               </div>
               <div className="divider-2" />

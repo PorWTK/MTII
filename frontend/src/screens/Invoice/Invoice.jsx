@@ -116,8 +116,8 @@ export const Invoice = () => {
 
           <div className="form-3">
             <div className="divider-5" />
-
-            <div className="frame-11" ref={pdfRef} style={{ backgroundColor: "white", padding: "20px" }}> 
+            <div className="frame-11">
+            <div className="PDF-format-2" ref={pdfRef} style={{ backgroundColor: "white", padding: "20px" }}> 
               <PDF
               docType="invoice"
               data={{
@@ -176,7 +176,7 @@ export const Invoice = () => {
               }}
             />
             </div>
-
+            </div>
             <div className="divider-5" />
           </div>
         </div>

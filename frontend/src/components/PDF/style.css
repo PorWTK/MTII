@@ -32,7 +32,7 @@
     flex: 0 0 auto;
     flex-direction: column;
     gap: 2px;
-    height: 70px;
+    height: fi;
     position: relative;
   }
   
@@ -45,7 +45,7 @@
     line-height: normal;
     margin-top: -1.00px;
     position: relative;
-    width: 151px;
+    width: fit-content;
   }
   
   .receiver .email {
@@ -61,6 +61,7 @@
     position: relative;
     white-space: nowrap;
     width: fit-content;
+    height: fit-content;
   }
   
   .receiver .phone {

@@ -40,22 +40,24 @@ export const Quotation = () => {
     const input = pdfRef.current;
     if (!input) return;
 
-    setLoading(true); // Show loading while generating the PDF
+    setLoading(true);
 
     try {
       const canvas = await html2canvas(input, {
-        scale: 2, // Improves quality
-        useCORS: true, // Ensures images load correctly
-        logging: false, // Remove console clutter
+        scale: 2, // increases resolution
+        useCORS: true,
+        logging: false,
       });
 
       const imgData = canvas.toDataURL("image/png");
       const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210; // A4 width
+      const imgWidth = 210; // A4 width in mm
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      // Add image to PDF
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      // Calculate yOffset to center the image vertically on a 297mm tall A4 page
+      const yOffset = (297 - imgHeight) / 2;
+      
+       // Add image to PDF
+      pdf.addImage(imgData, "PNG", 0, yOffset, imgWidth, imgHeight);
       pdf.save(`QT${id}.pdf`);
 
       console.log("PDF saved successfully!");
@@ -116,8 +118,8 @@ export const Quotation = () => {
 
           <div className="form-4">
             <div className="divider-6" />
-
-            <div className="frame-12" ref={pdfRef} style={{ backgroundColor: "white", padding: "20px" }}>
+            <div className="frame-12">
+            <div className="PDF-format-3" ref={pdfRef} style={{ backgroundColor: "white", padding: "20px" }}>
             <PDF
               docType="quotation"
               data={{
@@ -176,7 +178,7 @@ export const Quotation = () => {
               }}
             />
             </div>
-
+            </div>
             <div className="divider-6" />
           </div>
         </div>
