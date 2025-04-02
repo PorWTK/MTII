@@ -14,32 +14,144 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 
 export const Create = () => {
+  // const [formData, setFormData] = useState({
+  //   quotation_id_number: "",
+  //   quotation_issue_date: "",
+  //   quotation_due_date: "",
+  //   invoice_id_number: "",
+  //   invoice_issue_date: "",
+  //   invoice_due_date: "",
+  //   receipt_issue_date: "",
+  //   receipt_id_number: "",
+  //   agency_tax_payer_id_number: "",
+  //   influencer_posting_date: "",
+  //   agency_agency_name: "",
+  //   agency_address: "",
+  //   agency_phone_number: "",
+  //   contactor_contactor_name: "",
+  //   contactor_phone_number: "",
+  //   contactor_line: "",
+  //   contactor_email: "",
+  //   brand_brand_name: "",
+  //   brand_product: "",
+  //   transaction_reference_number: "",
+  //   terms_and_conditions: "",
+  //   total_payment_amount: "",
+  //   notes_for_the_total_payment: "",
+  //   first_payment: "",
+  //   notes_for_the_first_payment: "",
+  //   second_payment: "",
+  //   notes_for_the_second_payment: "",
+  //   unpaid_payment_amount: "",
+  //   notes_for_the_unpaid_payment: "",
+  //   platform_id: "",
+  //   status_id: "",
+  //   payment_method_id: "",
+  //   receiver_id: "",
+  //   sale_person_id: "",
+  //   channel_id: "",
+  //   bank_id: "",
+  // });
+
+  // const [formDataItem, setFormDataItem] = useState({
+  //   description: "",
+  //   notes: "",
+  //   quantity: "",
+  //   unit_price: "",
+  //   income_invoice_id_number: "",
+  // });
+
+  // const [loading, setLoading] = useState(false);
+  // const [message, setMessage] = useState("");
+
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+
+  // const handleChangeItem = (e) => {
+  //   setFormDataItem({ ...formDataItem, [e.target.name]: e.target.value });
+  // };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setMessage("");
+
+  //   console.log("Form Data:", formData);
+  //   console.log("Form Data Item:", formDataItem);
+
+  //   const convertToISO = (date) => (date ? new Date(date).toISOString() : null);
+
+  //   const formattedData = {
+  //     ...formData,
+  //     quotation_issue_date: convertToISO(formData.quotation_issue_date),
+  //     quotation_due_date: convertToISO(formData.quotation_due_date),
+  //     invoice_issue_date: convertToISO(formData.invoice_issue_date),
+  //     invoice_due_date: convertToISO(formData.invoice_due_date),
+  //     receipt_issue_date: convertToISO(formData.receipt_issue_date),
+  //     influencer_posting_date: convertToISO(formData.influencer_posting_date),
+  //     quotation_id_number: Number(formData.quotation_id_number) || null,
+  //     invoice_id_number: Number(formData.invoice_id_number) || null,
+  //     receipt_id_number: Number(formData.receipt_id_number) || null,
+  //     agency_tax_payer_id_number: Number(formData.agency_tax_payer_id_number) || null,
+  //     transaction_reference_number: Number(formData.transaction_reference_number) || null,
+  //     total_payment_amount: Number(formData.total_payment_amount) || null,
+  //     first_payment: Number(formData.first_payment) || null,
+  //     second_payment: Number(formData.second_payment) || null,
+  //     unpaid_payment_amount: Number(formData.unpaid_payment_amount) || null,
+  //     platform_id: Number(formData.platform_id) || null,
+  //     status_id: Number(formData.status_id) || null,
+  //     payment_method_id: Number(formData.payment_method_id) || null,
+  //     receiver_id: Number(formData.receiver_id) || null,
+  //     sale_person_id: Number(formData.sale_person_id) || null,
+  //     channel_id: Number(formData.channel_id) || null,
+  //     bank_id: Number(formData.bank_id) || null,
+  //   };
+
+  //   const formattedItemData = {
+  //     ...formDataItem,
+  //     quantity: Number(formDataItem.quantity) || null,
+  //     unit_price: Number(formDataItem.unit_price) || null,
+  //     income_invoice_id_number: Number(formData.invoice_id_number) || null,
+  //   };
+
+
+  //   try {
+  //     const response1 = await api.post("/income/", formattedData);
+  //     console.log("Income API Response:", response1.data);
+
+  //     const response2 = await api.post("/detail/", formattedItemData);
+  //     console.log("Income Item API Response:", response2.data);
+
+  //     setMessage("Both forms submitted successfully!");
+
+  //   } catch (error) {
+  //     console.error("Error submitting income:", error);
+  //     setMessage("Failed to add income.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
   const [formData, setFormData] = useState({
     quotation_id_number: "",
     quotation_issue_date: "",
     quotation_due_date: "",
-
     invoice_id_number: "",
     invoice_issue_date: "",
     invoice_due_date: "",
-
     receipt_issue_date: "",
     receipt_id_number: "",
-
     agency_tax_payer_id_number: "",
     influencer_posting_date: "",
     agency_agency_name: "",
     agency_address: "",
     agency_phone_number: "",
-
     contactor_contactor_name: "",
     contactor_phone_number: "",
     contactor_line: "",
     contactor_email: "",
-
     brand_brand_name: "",
     brand_product: "",
-
     transaction_reference_number: "",
     terms_and_conditions: "",
     total_payment_amount: "",
@@ -50,7 +162,6 @@ export const Create = () => {
     notes_for_the_second_payment: "",
     unpaid_payment_amount: "",
     notes_for_the_unpaid_payment: "",
-
     platform_id: "",
     status_id: "",
     payment_method_id: "",
@@ -59,35 +170,41 @@ export const Create = () => {
     channel_id: "",
     bank_id: "",
   });
-
-  const [formDataItem, setFormDataItem] = useState({
-    description: "",
-    notes: "",
-    quantity: "",
-    unit_price: "",
-    income_invoice_id_number: "",
-  });
-
+  
+  // Initialize state with 4 detail objects
+  const [detailItems, setDetailItems] = useState([
+    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+  ]);
+  
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
-
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const handleChangeItem = (e) => {
-    setFormDataItem({ ...formDataItem, [e.target.name]: e.target.value });
+  
+  const handleDetailChange = (e, index) => {
+    const { name, value } = e.target;
+    const newDetails = [...detailItems];
+    newDetails[index][name] = value;
+    // Ensure the income invoice id is always updated from formData.invoice_id_number
+    newDetails[index].income_invoice_id_number = formData.invoice_id_number;
+    setDetailItems(newDetails);
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage("");
-
+  
     console.log("Form Data:", formData);
-
+    console.log("Detail Items:", detailItems);
+  
     const convertToISO = (date) => (date ? new Date(date).toISOString() : null);
-
+  
     const formattedData = {
       ...formData,
       quotation_issue_date: convertToISO(formData.quotation_issue_date),
@@ -113,30 +230,43 @@ export const Create = () => {
       channel_id: Number(formData.channel_id) || null,
       bank_id: Number(formData.bank_id) || null,
     };
-
-    const formattedItemData = {
-      ...formDataItem,
-      quantity: Number(formDataItem.quantity) || null,
-      unit_price: Number(formDataItem.unit_price) || null,
-      income_invoice_id_number: Number(formDataItem.income_invoice_id_number) || null,
-    };
-
+  
     try {
+      // Submit the income data
       const response1 = await api.post("/income/", formattedData);
       console.log("Income API Response:", response1.data);
-
-      const response2 = await api.post("/detail/", formattedItemData);
-      console.log("Income Item API Response:", response2.data);
-
-      setMessage("Both forms submitted successfully!");
-
+  
+      // Extract the invoice id from the nested data property
+      const invoiceId = response1.data.data.invoice_id_number;
+      console.log("Invoice ID:", invoiceId);
+  
+      // Prepare detail items payload using the returned invoice id
+      const updatedDetailItems = detailItems.map((item) => ({
+        description: item.description,
+        notes: item.notes,
+        quantity: Number(item.quantity) || null,
+        unit_price: Number(item.unit_price) || null,
+        income_invoice_id_number: invoiceId,
+      }));
+  
+      console.log("Updated Detail Items Payload:", updatedDetailItems);
+  
+      // Send each detail request sequentially to better isolate any issues
+      for (const detail of updatedDetailItems) {
+        console.log("Posting detail:", detail);
+        const res = await api.post("/detail/", detail);
+        console.log("Detail API Response:", res.data);
+      }
+  
+      setMessage("Income and details submitted successfully!");
     } catch (error) {
-      console.error("Error submitting income:", error);
-      setMessage("Failed to add income.");
+      console.error("Error submitting income or details:", error);
+      setMessage("Failed to submit income or details.");
     } finally {
       setLoading(false);
     }
   };
+  
   
   
   return (
@@ -204,23 +334,6 @@ export const Create = () => {
                         <div className="label-3">Quotation issue date</div>
                       </div>
                     </div>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        // type="datetime-local" 
-                        name="quotation_issue_date" 
-                        value={formData.quotation_issue_date} 
-                        onChange={handleChange} 
-                        // value={quotationIssueDate}
-                        // onChange={(newValue) => setQuotationIssueDate(newValue)}
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            error={false} 
-                            sx={{ height: "44px", width: "100% !important"}}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider> */}
                     <input
                         type="datetime-local"
                         name="quotation_issue_date"
@@ -238,21 +351,6 @@ export const Create = () => {
                         <div className="label-3">Quotation due date</div>
                       </div>
                     </div>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        // value={quotationDueDate}
-                        // onChange={(newValue) => setQuotationDueDate(newValue)}
-                        // type="datetime-local" 
-                        name="quotation_due_date" value={formData.quotation_due_date} onChange={handleChange} required 
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            sx={{ height: "44px", width: "308px" }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider> */}
                     <input
                         type="datetime-local"
                         name="quotation_due_date"
@@ -296,21 +394,6 @@ export const Create = () => {
                         <div className="label-3">Invoice issue date</div>
                       </div>
                     </div>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        // value={invoiceIssueDate}
-                        // onChange={(newValue) => setInvoiceIssueDate(newValue)}
-                        // type="datetime-local" 
-                        name="invoice_issue_date" value={formData.invoice_issue_date} onChange={handleChange} required
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            sx={{ height: "44px", width: "308px" }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider> */}
                     <input
                         type="datetime-local" name="invoice_issue_date" value={formData.invoice_issue_date} onChange={handleChange} required
                         style={{ height: "44px", width: "308px" }}
@@ -324,21 +407,6 @@ export const Create = () => {
                         <div className="label-3">Invoice due date</div>
                       </div>
                     </div>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        // value={invoiceDueDate}
-                        // onChange={(newValue) => setInvoiceDueDate(newValue)}
-                        // type="datetime-local" 
-                        name="invoice_due_date" value={formData.invoice_due_date} onChange={handleChange} required 
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            sx={{ height: "44px", width: "308px" }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider> */}
                     <input type="datetime-local" name="invoice_due_date" value={formData.invoice_due_date} onChange={handleChange} required
                         style={{ height: "44px", width: "308px" }}
                       />
@@ -377,21 +445,6 @@ export const Create = () => {
                         <div className="label-3">Receipt issue date</div>
                       </div>
                     </div>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        // value={receiptIssueDate}
-                        // onChange={(newValue) => setReceiptIssueDate(newValue)}
-                        // type="datetime-local" 
-                        name="receipt_issue_date" value={formData.receipt_issue_date} onChange={handleChange} required
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            sx={{ height: "44px", width: "308px" }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider> */}
                     <input type="datetime-local" name="receipt_issue_date" value={formData.receipt_issue_date} onChange={handleChange} required style={{ height: "44px", width: "308px" }}/>
                   </div>
                 </div>
@@ -498,20 +551,6 @@ export const Create = () => {
                       </div>
                     </div>
                     <input type="datetime-local" name="influencer_posting_date" value={formData.influencer_posting_date} onChange={handleChange} required style={{ height: "44px", width: "308px" }}/>
-                    {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
-                      <DatePicker
-                        // value={postingDate}
-                        // onChange={(newValue) => setPostingDate(newValue)}
-                        type="datetime-local" name="influencer_posting_date" value={formData.influencer_posting_date} onChange={handleChange} required 
-                        renderInput={(params) => (
-                          <TextField
-                            {...params}
-                            fullWidth
-                            sx={{ height: "44px", width: "468px" }}
-                          />
-                        )}
-                      />
-                    </LocalizationProvider> */}
                   </div>
                 </div>
               </div>
@@ -752,85 +791,51 @@ export const Create = () => {
                     text="Details"
                   />
 
-                  {/* Details Section 1 */}
-                  <div className="frame-6">
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Description</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="description-1"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            type="text" name="description" value={formDataItem.description} onChange={handleChangeItem} required
-                            // value={details[0].description}
-                            // onChange={(e) => handleDetailChange(0, e)}
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Notes</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="notes-1"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            type="text" name="notes" value={formDataItem.notes} onChange={handleChangeItem} required
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="frame">
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Quantity</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="quantity-1"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            type="number" name="quantity" value={formDataItem.quantity} onChange={handleChangeItem} required
-                          />
-                        </FormControl>
-                      </div>
-                      <div className="inputbox">
-                        <div className="label-for-input">
-                          <div className="label-wrapper">
-                            <div className="label">Unit Price</div>
-                          </div>
-                        </div>
-                        <FormControl fullWidth sx={{ width: "468px" }}>
-                          <TextField
-                            id="unit-price-1"
-                            variant="outlined"
-                            fullWidth
-                            sx={{ height: "44px" }}
-                            type="number" name="unit_price" value={formDataItem.unit_price} onChange={handleChangeItem} required
-                          />
-                        </FormControl>
-                      </div>
-                    </div>
-                    <div className="divider-3" />
-                  </div>
-
-                  {/* Details Section 2 */}
-
-                </div>
-              </div>
+                  {/* Hidden input for income_invoice_id_number */}
+                  <input
+                    type="hidden"
+                    name="income_invoice_id_number"
+                    value= {Number(formData.invoice_id_number)}
+                  />
+{detailItems.map((item, index) => (
+  <div key={index} className="detail-section">
+    <label>Description {index + 1}:</label>
+    <input
+      type="text"
+      name="description"
+      value={item.description}
+      onChange={(e) => handleDetailChange(e, index)}
+      required
+    />
+    <label>Notes {index + 1}:</label>
+    <input
+      type="text"
+      name="notes"
+      value={item.notes}
+      onChange={(e) => handleDetailChange(e, index)}
+      required
+    />
+    <label>Quantity {index + 1}:</label>
+    <input
+      type="number"
+      name="quantity"
+      value={item.quantity}
+      onChange={(e) => handleDetailChange(e, index)}
+      required
+    />
+    <label>Unit Price {index + 1}:</label>
+    <input
+      type="number"
+      name="unit_price"
+      value={item.unit_price}
+      onChange={(e) => handleDetailChange(e, index)}
+      required
+    />
+  </div>
+))}
+   </div>
+              
+            </div>
               <div className="divider-2" />
 
 

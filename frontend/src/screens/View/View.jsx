@@ -13,30 +13,43 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from "@m
 import { SectionLabel } from "../../components/SectionLabel";
 
 export const View = () => {
-  const { id } = useParams(); // Get income ID from URL
     const navigate = useNavigate(); // For navigation after update
   
-
+    const { id } = useParams(); // Get income ID from URL
     const [formData, setFormData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [detailData, setDetailData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    if (id) {
-      api
-        .get(`/income/${id}`)
-        .then((response) => {
-          console.log("Fetched Data:", response.data.data); // Debugging
-          setFormData(response.data.data);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          setMessage("Failed to load income data.");
-          setLoading(false);
-        });
-    }
-  }, [id]);
+    const filteredDetails = detailData.filter(
+      detail => detail.income.invoice_id_number === formData.invoice_id_number
+    );
+    
+    useEffect(() => {
+      if (id) {
+        setLoading(true);
+        api.get(`/income/${id}`)
+          .then((response) => {
+            setFormData(response.data.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching income data:", error);
+            setMessage("Failed to load income data.");
+          });
+        
+        api.get(`/detail/`)
+          .then((response) => {
+            setDetailData(response.data.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching detail data:", error);
+            setMessage("Failed to load detail data.");
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      }
+    }, [id]);
 
   if (loading) {
     return <p>Loading data...</p>;
@@ -45,6 +58,7 @@ export const View = () => {
   if (!formData) {
     return <p>{message || "No data available."}</p>;
   }
+
 
   return (
     <div className="view">
@@ -766,9 +780,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[0]?.description || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -784,9 +800,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[0]?.notes || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -804,9 +822,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[0]?.quantity || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -822,9 +842,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[0]?.unit_price || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -847,9 +869,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[1]?.description || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -865,9 +889,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            
-                            // name =
-                            // value =
+                            value={filteredDetails[1]?.notes || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -885,9 +911,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[1]?.quantity || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -903,9 +931,11 @@ export const View = () => {
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            // name =
-                            // value =
-                            
+                            value={filteredDetails[1]?.unit_price || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -925,12 +955,14 @@ export const View = () => {
                         <FormControl fullWidth sx={{ width: "468px" }}>
                           <TextField
                             id="description-3"
-                            // name =
-                            // value =
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[2]?.description || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -943,12 +975,14 @@ export const View = () => {
                         <FormControl fullWidth sx={{ width: "468px" }}>
                           <TextField
                             id="notes-3"
-                            // name =
-                            // value =
                             variant="outlined"
                             fullWidth
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[2]?.notes || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -965,10 +999,12 @@ export const View = () => {
                             id="quantity-3"
                             variant="outlined"
                             fullWidth
-                            // name =
-                            // value =
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[2]?.quantity || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -983,10 +1019,12 @@ export const View = () => {
                             id="unit-price-3"
                             variant="outlined"
                             fullWidth
-                            // name =
-                            // value =
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[2]?.unit_price || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -1003,15 +1041,17 @@ export const View = () => {
                             <div className="label">Description</div>
                           </div>
                         </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
+                        <FormControl fullWidth sx={{ width: "468px" }}>
                           <TextField
                             id="description-4"
                             variant="outlined"
                             fullWidth
-                            // name =
-                            // value =
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[3]?.description || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -1021,15 +1061,17 @@ export const View = () => {
                             <div className="label">Notes</div>
                           </div>
                         </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
+                        <FormControl fullWidth sx={{ width: "468px" }}>
                           <TextField
                             id="notes-4"
                             variant="outlined"
                             fullWidth
-                            // name =
-                            // value =
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[3]?.notes || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -1041,15 +1083,17 @@ export const View = () => {
                             <div className="label">Quantity</div>
                           </div>
                         </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
+                        <FormControl fullWidth sx={{ width: "468px" }}>
                           <TextField
                             id="quantity-4"
                             variant="outlined"
                             fullWidth
-                            // name =
-                            // value =
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[3]?.quantity || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
@@ -1059,15 +1103,17 @@ export const View = () => {
                             <div className="label">Unit price</div>
                           </div>
                         </div>
-                        <FormControl fullWidth sx={{ width: "468px" }} >
+                        <FormControl fullWidth sx={{ width: "468px" }}>
                           <TextField
                             id="unit-price-4"
                             variant="outlined"
                             fullWidth
-                            // name =
-                            // value =
                             sx={{ height: "44px" }}
-                            
+                            value={filteredDetails[3]?.unit_price || ""}
+                            InputProps={{
+                              readOnly: true,
+                              style: { backgroundColor: "#f5f5f5" },
+                            }}
                           />
                         </FormControl>
                       </div>
