@@ -15,15 +15,64 @@ import api from "../../api";
 import { LogOut } from "../../icons/LogOut";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { FormControl, Select, MenuItem, Table, TableBody, TableCell, TableHead, TableRow, Paper, Chip, TableSortLabel, IconButton, Menu } from "@mui/material";
+import { FormControl, 
+  Select, 
+  MenuItem, 
+  Table, 
+  TableBody, 
+  TableCell, 
+  TableHead, 
+  TableRow, 
+  Paper, 
+  Chip, 
+  TableSortLabel, 
+  IconButton, 
+  Menu,
+  TextField,
+  InputAdornment } from "@mui/material";
 import { TableContainer } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import TextField from "@mui/material/TextField";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import * as XLSX from "xlsx";
+
+const ActionMenu = ({ rowId, onDelete }) => {
+  const navigate = useNavigate();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleOpen = (event) => setAnchorEl(event.currentTarget);
+  const handleClose = () => setAnchorEl(null);
+
+  const handleView = () => {
+    navigate(`/view/${rowId}`);
+    handleClose();
+  };
+
+  const handleEdit = () => {
+    navigate(`/edit/${rowId}`);
+    handleClose();
+  };
+
+  const handleDelete = () => {
+    onDelete(rowId);
+    handleClose();
+  };
+
+  return (
+    <>
+      <IconButton onClick={handleOpen}>
+        <MoreVertIcon />
+      </IconButton>
+      <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <MenuItem onClick={handleView}>View</MenuItem>
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
+      </Menu>
+    </>
+  );
+};
 
 export const Data = () => {
   const [tableData, setTableData] = React.useState([]);
@@ -41,6 +90,8 @@ export const Data = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] = React.useState("All");
   const [selectedChannel, setSelectedChannel] = React.useState("All");
   const [selectedPlatform, setSelectedPlatform] = React.useState("All");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -451,7 +502,12 @@ export const Data = () => {
                     <TableCell>{row.total_payment_amount}</TableCell>
                     <TableCell>{row.channel.name}</TableCell>
                     <TableCell>{row.platform.name}</TableCell>
-                    <TableCell><DropdownWrapper className="design-component-instance-node-2" id={row.invoice_id_number} /></TableCell>
+                    <TableCell>
+                          <ActionMenu 
+                            rowId={row.invoice_id_number} 
+                            onDelete={(id) => console.log("Delete", id)}
+                          />
+                        </TableCell>
                   </TableRow>
                 ))}
                 </TableBody>

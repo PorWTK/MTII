@@ -441,9 +441,15 @@ export const Analytics = () => {
                 </TableHead>
                 <TableBody>
                   {recentData.map((row, idx) => (
-                    <TableRow key={idx}>
+                      <TableRow key={idx}>
+                        <TableCell>
+                        {row.influencer_posting_date
+                          ? new Intl.DateTimeFormat("en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date(row.influencer_posting_date))
+                          : ""}
+                      </TableCell>
                       <TableCell>{row.invoice_id_number}</TableCell>
-                      <TableCell>{new Date(row.influencer_posting_date).toLocaleDateString()}</TableCell>
+                      {/* <TableCell>{row.invoice_id_number}</TableCell>
+                      <TableCell>{new Date(row.influencer_posting_date).toLocaleDateString()}</TableCell> */}
                       <TableCell>{renderStatusCell(row.status.name)}</TableCell>
                       <TableCell>{row.payment_method.name}</TableCell>
                       <TableCell>{row.brand_brand_name}</TableCell>

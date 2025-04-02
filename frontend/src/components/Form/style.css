@@ -43,7 +43,7 @@
   align-self: stretch;
   display: flex;
   flex: 0 0 auto;
-  gap: 32px;
+  gap: 16px;
   position: relative;
   /* width: 100%; */
   width: auto;

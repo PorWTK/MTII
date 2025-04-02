@@ -132,141 +132,141 @@ export const Create = () => {
   //     setLoading(false);
   //   }
   // };
-  const [formData, setFormData] = useState({
-    quotation_id_number: "",
-    quotation_issue_date: "",
-    quotation_due_date: "",
-    invoice_id_number: "",
-    invoice_issue_date: "",
-    invoice_due_date: "",
-    receipt_issue_date: "",
-    receipt_id_number: "",
-    agency_tax_payer_id_number: "",
-    influencer_posting_date: "",
-    agency_agency_name: "",
-    agency_address: "",
-    agency_phone_number: "",
-    contactor_contactor_name: "",
-    contactor_phone_number: "",
-    contactor_line: "",
-    contactor_email: "",
-    brand_brand_name: "",
-    brand_product: "",
-    transaction_reference_number: "",
-    terms_and_conditions: "",
-    total_payment_amount: "",
-    notes_for_the_total_payment: "",
-    first_payment: "",
-    notes_for_the_first_payment: "",
-    second_payment: "",
-    notes_for_the_second_payment: "",
-    unpaid_payment_amount: "",
-    notes_for_the_unpaid_payment: "",
-    platform_id: "",
-    status_id: "",
-    payment_method_id: "",
-    receiver_id: "",
-    sale_person_id: "",
-    channel_id: "",
-    bank_id: "",
-  });
-  
-  // Initialize state with 4 detail objects
-  const [detailItems, setDetailItems] = useState([
-    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
-    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
-    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
-    { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
-  ]);
-  
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
-  
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+const [formData, setFormData] = useState({
+  quotation_id_number: "",
+  quotation_issue_date: "",
+  quotation_due_date: "",
+  invoice_id_number: "",
+  invoice_issue_date: "",
+  invoice_due_date: "",
+  receipt_issue_date: "",
+  receipt_id_number: "",
+  agency_tax_payer_id_number: "",
+  influencer_posting_date: "",
+  agency_agency_name: "",
+  agency_address: "",
+  agency_phone_number: "",
+  contactor_contactor_name: "",
+  contactor_phone_number: "",
+  contactor_line: "",
+  contactor_email: "",
+  brand_brand_name: "",
+  brand_product: "",
+  transaction_reference_number: "",
+  terms_and_conditions: "",
+  total_payment_amount: "",
+  notes_for_the_total_payment: "",
+  first_payment: "",
+  notes_for_the_first_payment: "",
+  second_payment: "",
+  notes_for_the_second_payment: "",
+  unpaid_payment_amount: "",
+  notes_for_the_unpaid_payment: "",
+  platform_id: "",
+  status_id: "",
+  payment_method_id: "",
+  receiver_id: "",
+  sale_person_id: "",
+  channel_id: "",
+  bank_id: "",
+});
+
+// Initialize state with 4 detail objects
+const [detailItems, setDetailItems] = useState([
+  { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+  { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+  { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+  { description: "", notes: "", quantity: "", unit_price: "", income_invoice_id_number: "" },
+]);
+
+const [loading, setLoading] = useState(false);
+const [message, setMessage] = useState("");
+
+const handleChange = (e) => {
+  setFormData({ ...formData, [e.target.name]: e.target.value });
+};
+
+const handleDetailChange = (e, index) => {
+  const { name, value } = e.target;
+  const newDetails = [...detailItems];
+  newDetails[index][name] = value;
+  // Ensure the income invoice id is always updated from formData.invoice_id_number
+  newDetails[index].income_invoice_id_number = formData.invoice_id_number;
+  setDetailItems(newDetails);
+};
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setMessage("");
+
+  console.log("Form Data:", formData);
+  console.log("Detail Items:", detailItems);
+
+  const convertToISO = (date) => (date ? new Date(date).toISOString() : null);
+
+  const formattedData = {
+    ...formData,
+    quotation_issue_date: convertToISO(formData.quotation_issue_date),
+    quotation_due_date: convertToISO(formData.quotation_due_date),
+    invoice_issue_date: convertToISO(formData.invoice_issue_date),
+    invoice_due_date: convertToISO(formData.invoice_due_date),
+    receipt_issue_date: convertToISO(formData.receipt_issue_date),
+    influencer_posting_date: convertToISO(formData.influencer_posting_date),
+    quotation_id_number: Number(formData.quotation_id_number) || null,
+    invoice_id_number: Number(formData.invoice_id_number) || null,
+    receipt_id_number: Number(formData.receipt_id_number) || null,
+    agency_tax_payer_id_number: Number(formData.agency_tax_payer_id_number) || null,
+    transaction_reference_number: Number(formData.transaction_reference_number) || null,
+    total_payment_amount: Number(formData.total_payment_amount) || null,
+    first_payment: Number(formData.first_payment) || null,
+    second_payment: Number(formData.second_payment) || null,
+    unpaid_payment_amount: Number(formData.unpaid_payment_amount) || null,
+    platform_id: Number(formData.platform_id) || null,
+    status_id: Number(formData.status_id) || null,
+    payment_method_id: Number(formData.payment_method_id) || null,
+    receiver_id: Number(formData.receiver_id) || null,
+    sale_person_id: Number(formData.sale_person_id) || null,
+    channel_id: Number(formData.channel_id) || null,
+    bank_id: Number(formData.bank_id) || null,
   };
-  
-  const handleDetailChange = (e, index) => {
-    const { name, value } = e.target;
-    const newDetails = [...detailItems];
-    newDetails[index][name] = value;
-    // Ensure the income invoice id is always updated from formData.invoice_id_number
-    newDetails[index].income_invoice_id_number = formData.invoice_id_number;
-    setDetailItems(newDetails);
-  };
-  
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage("");
-  
-    console.log("Form Data:", formData);
-    console.log("Detail Items:", detailItems);
-  
-    const convertToISO = (date) => (date ? new Date(date).toISOString() : null);
-  
-    const formattedData = {
-      ...formData,
-      quotation_issue_date: convertToISO(formData.quotation_issue_date),
-      quotation_due_date: convertToISO(formData.quotation_due_date),
-      invoice_issue_date: convertToISO(formData.invoice_issue_date),
-      invoice_due_date: convertToISO(formData.invoice_due_date),
-      receipt_issue_date: convertToISO(formData.receipt_issue_date),
-      influencer_posting_date: convertToISO(formData.influencer_posting_date),
-      quotation_id_number: Number(formData.quotation_id_number) || null,
-      invoice_id_number: Number(formData.invoice_id_number) || null,
-      receipt_id_number: Number(formData.receipt_id_number) || null,
-      agency_tax_payer_id_number: Number(formData.agency_tax_payer_id_number) || null,
-      transaction_reference_number: Number(formData.transaction_reference_number) || null,
-      total_payment_amount: Number(formData.total_payment_amount) || null,
-      first_payment: Number(formData.first_payment) || null,
-      second_payment: Number(formData.second_payment) || null,
-      unpaid_payment_amount: Number(formData.unpaid_payment_amount) || null,
-      platform_id: Number(formData.platform_id) || null,
-      status_id: Number(formData.status_id) || null,
-      payment_method_id: Number(formData.payment_method_id) || null,
-      receiver_id: Number(formData.receiver_id) || null,
-      sale_person_id: Number(formData.sale_person_id) || null,
-      channel_id: Number(formData.channel_id) || null,
-      bank_id: Number(formData.bank_id) || null,
-    };
-  
-    try {
-      // Submit the income data
-      const response1 = await api.post("/income/", formattedData);
-      console.log("Income API Response:", response1.data);
-  
-      // Extract the invoice id from the nested data property
-      const invoiceId = response1.data.data.invoice_id_number;
-      console.log("Invoice ID:", invoiceId);
-  
-      // Prepare detail items payload using the returned invoice id
-      const updatedDetailItems = detailItems.map((item) => ({
-        description: item.description,
-        notes: item.notes,
-        quantity: Number(item.quantity) || null,
-        unit_price: Number(item.unit_price) || null,
-        income_invoice_id_number: invoiceId,
-      }));
-  
-      console.log("Updated Detail Items Payload:", updatedDetailItems);
-  
-      // Send each detail request sequentially to better isolate any issues
-      for (const detail of updatedDetailItems) {
-        console.log("Posting detail:", detail);
-        const res = await api.post("/detail/", detail);
-        console.log("Detail API Response:", res.data);
-      }
-  
-      setMessage("Income and details submitted successfully!");
-    } catch (error) {
-      console.error("Error submitting income or details:", error);
-      setMessage("Failed to submit income or details.");
-    } finally {
-      setLoading(false);
+
+  try {
+    // Submit the income data
+    const response1 = await api.post("/income/", formattedData);
+    console.log("Income API Response:", response1.data);
+
+    // Extract the invoice id from the nested data property
+    const invoiceId = response1.data.data.invoice_id_number;
+    console.log("Invoice ID:", invoiceId);
+
+    // Prepare detail items payload using the returned invoice id
+    const updatedDetailItems = detailItems.map((item) => ({
+      description: item.description,
+      notes: item.notes,
+      quantity: Number(item.quantity) || null,
+      unit_price: Number(item.unit_price) || null,
+      income_invoice_id_number: invoiceId,
+    }));
+
+    console.log("Updated Detail Items Payload:", updatedDetailItems);
+
+    // Send each detail request sequentially to better isolate any issues
+    for (const detail of updatedDetailItems) {
+      console.log("Posting detail:", detail);
+      const res = await api.post("/detail/", detail);
+      console.log("Detail API Response:", res.data);
     }
-  };
-  
+
+    setMessage("Income and details submitted successfully!");
+  } catch (error) {
+    console.error("Error submitting income or details:", error);
+    setMessage("Failed to submit income or details.");
+  } finally {
+    setLoading(false);
+  }
+};
+
   
   
   return (
@@ -797,46 +797,97 @@ export const Create = () => {
                     name="income_invoice_id_number"
                     value= {Number(formData.invoice_id_number)}
                   />
-{detailItems.map((item, index) => (
-  <div key={index} className="detail-section">
-    <label>Description {index + 1}:</label>
-    <input
-      type="text"
-      name="description"
-      value={item.description}
-      onChange={(e) => handleDetailChange(e, index)}
-      required
-    />
-    <label>Notes {index + 1}:</label>
-    <input
-      type="text"
-      name="notes"
-      value={item.notes}
-      onChange={(e) => handleDetailChange(e, index)}
-      required
-    />
-    <label>Quantity {index + 1}:</label>
-    <input
-      type="number"
-      name="quantity"
-      value={item.quantity}
-      onChange={(e) => handleDetailChange(e, index)}
-      required
-    />
-    <label>Unit Price {index + 1}:</label>
-    <input
-      type="number"
-      name="unit_price"
-      value={item.unit_price}
-      onChange={(e) => handleDetailChange(e, index)}
-      required
-    />
-  </div>
-))}
-   </div>
-              
-            </div>
-              <div className="divider-2" />
+                  {detailItems.map((item, index) => (
+                    <div key={index} className="frame-6">
+                      <div className="frame">
+                        <div className="inputbox">
+                          <div className="label-for-input">
+                            <div className="label-wrapper">
+                              <div className="label">Description {index + 1}:</div>
+                            </div>
+                          </div>
+                          <FormControl fullWidth sx={{ width: "468px" }}>
+                            <TextField
+                              id={`description-${index}`}
+                              variant="outlined"
+                              fullWidth
+                              sx={{ height: "44px" }}
+                              name="description"
+                              value={item.description}
+                              onChange={(e) => handleDetailChange(e, index)}
+                              required
+                            />
+                          </FormControl>
+                        </div>
+                        <div className="inputbox">
+                          <div className="label-for-input">
+                            <div className="label-wrapper">
+                              <div className="label">Notes {index + 1}:</div>
+                            </div>
+                          </div>
+                          <FormControl fullWidth sx={{ width: "468px" }}>
+                            <TextField
+                              id={`notes-${index}`}
+                              variant="outlined"
+                              fullWidth
+                              sx={{ height: "44px" }}
+                              name="notes"
+                              value={item.notes}
+                              onChange={(e) => handleDetailChange(e, index)}
+                              required
+                            />
+                          </FormControl>
+                        </div>
+                      </div>
+                      <div className="frame">
+                        <div className="inputbox">
+                          <div className="label-for-input">
+                            <div className="label-wrapper">
+                              <div className="label">Quantity {index + 1}:</div>
+                            </div>
+                          </div>
+                          <FormControl fullWidth sx={{ width: "468px" }}>
+                            <TextField
+                              id={`quantity-${index}`}
+                              variant="outlined"
+                              fullWidth
+                              sx={{ height: "44px" }}
+                              name="quantity"
+                              type="number"
+                              value={item.quantity}
+                              onChange={(e) => handleDetailChange(e, index)}
+                              required
+                            />
+                          </FormControl>
+                        </div>
+                        <div className="inputbox">
+                          <div className="label-for-input">
+                            <div className="label-wrapper">
+                              <div className="label">Unit Price {index + 1}:</div>
+                            </div>
+                          </div>
+                          <FormControl fullWidth sx={{ width: "468px" }}>
+                            <TextField
+                              id={`unit-price-${index}`}
+                              variant="outlined"
+                              fullWidth
+                              sx={{ height: "44px" }}
+                              name="unit_price"
+                              type="number"
+                              value={item.unit_price}
+                              onChange={(e) => handleDetailChange(e, index)}
+                              required
+                            />
+                          </FormControl>
+                        </div>
+                      </div>
+                      <div className="divider-3" />
+                    </div>
+                  ))}
+
+                </div>
+              </div>
+            <div className="divider-2" />
 
 
             {/* --- Payment Section --- */}

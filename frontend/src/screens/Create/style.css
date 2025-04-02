@@ -104,14 +104,20 @@
 }
 
 .create .actions-19 {
-  align-items: center;
+  /* align-items: center;
   display: inline-flex;
   flex: 0 0 auto;
   gap: var(--3-spacing-spacing-lg);
   position: relative;
   padding: 28px 0px 0px 0px;
   width: fit-content;
-  height: fit-content;
+  height: fit-content; */
+    align-items: center;
+    display: inline-flex;
+    flex: 0 0 auto;
+    gap: var(--3-spacing-spacing-lg);
+    position: relative;
+    padding-top: 30px;
 }
 
 .custom-submit-button {
@@ -175,7 +181,7 @@
   width: 100%;
 }
 
-.form0 .QIR-tab {
+.create .QIR-tab {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -185,10 +191,14 @@
 }
 
 .create .frameQIR {
-  display: flex;
   align-items: center;
-  gap: 10px;
-  width: auto; /* or auto */
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 16px;
+  position: relative;
+  width: 100%;
+  height: fit-content;
 }
 
 
