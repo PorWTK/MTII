@@ -17,6 +17,30 @@ import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { PieChart as RechartsPieChart, Pie, Cell, Tooltip } from "recharts";
 import api from "../../api"; // Import API like in Data.jsx
 
+// Helper function: Calculate progressive tax based on income
+const calculateTax = (income) => {
+  let tax = 0;
+  let remainingIncome = income;
+  const brackets = [
+    { amount: 150000, rate: 0.0 },       // 0 – 150,000 Baht
+    { amount: 150000, rate: 0.05 },        // 150,001 – 300,000 Baht
+    { amount: 200000, rate: 0.10 },        // 300,001 – 500,000 Baht
+    { amount: 250000, rate: 0.15 },        // 500,001 – 750,000 Baht
+    { amount: 250000, rate: 0.20 },        // 750,001 – 1,000,000 Baht
+    { amount: 1000000, rate: 0.25 },       // 1,000,001 – 2,000,000 Baht
+    { amount: 3000000, rate: 0.30 },       // 2,000,001 – 5,000,000 Baht
+    { amount: Infinity, rate: 0.35 }       // Above 5,000,000 Baht
+  ];
+
+  for (const bracket of brackets) {
+    if (remainingIncome <= 0) break;
+    const taxableAmount = Math.min(remainingIncome, bracket.amount);
+    tax += taxableAmount * bracket.rate;
+    remainingIncome -= taxableAmount;
+  }
+  return tax;
+};
+
 // Action menu component for each row
 const ActionMenu = ({ rowId, onDelete }) => {
   const navigate = useNavigate();
@@ -138,7 +162,8 @@ export const Analytics = () => {
     const totalIncome = filteredData
       .filter((row) => row.status.name === "Paid")
       .reduce((acc, row) => acc + Number(row.total_payment_amount), 0);
-    const taxToPay = totalIncome * 0.015;
+    // Use the progressive tax calculation instead of a fixed rate
+    const taxToPay = calculateTax(totalIncome);
     const totalPending = filteredData
       .filter((row) => row.status.name === "Pending")
       .reduce((acc, row) => acc + Number(row.unpaid_payment_amount), 0);
