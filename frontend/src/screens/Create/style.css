@@ -730,10 +730,3 @@
   white-space: nowrap;
   width: fit-content;
 }
-
-.frame .rectangle {
-  background-color: #d9d9d9;
-  height: 44px;
-  position: relative;
-  width: 476px;
-}

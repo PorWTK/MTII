@@ -20,10 +20,6 @@ export const View = () => {
     const [detailData, setDetailData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
-
-    const filteredDetails = detailData.filter(
-      detail => detail.income.invoice_id_number === formData.invoice_id_number
-    );
     
     useEffect(() => {
       if (id) {
@@ -58,6 +54,14 @@ export const View = () => {
   if (!formData) {
     return <p>{message || "No data available."}</p>;
   }
+
+  // const filteredDetails = detailData.filter(
+  //   detail => detail.income.invoice_id_number === formData.invoice_id_number
+  // );
+
+  const filteredDetails = formData 
+  ? detailData.filter(detail => detail.income.invoice_id_number === formData.invoice_id_number)
+  : [];
 
 
   return (
