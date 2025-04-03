@@ -1,7 +1,59 @@
 import React from "react";
 import "./style.css";
 
-export const PDF = ({ data, docType }) => {
+export const PDF = ({ data, docType, details = []}) => {
+  const renderDetails = () => {
+    const detailList =
+      details && details.length > 0
+        ? details
+        : data.details && data.details.length > 0
+        ? data.details
+        : null;
+
+    if (detailList) {
+      return detailList.map((detail, index) => (
+        <div className="list" key={index}>
+          <div className="description-2">{detail.description}</div>
+          <div className="qty">{detail.quantity}</div>
+          <div className="text-wrapper-10">{detail.unit_price}</div>
+          <div className="text-wrapper-10">
+            {detail.total_price ||
+              (Number(detail.quantity) * Number(detail.unit_price)).toFixed(2)}
+          </div>
+        </div>
+      ));
+    }
+    // Fallback to legacy fields if no detail array is available
+    // return (
+    //   <>
+    //     <div className="list">
+    //       <div className="description-2">{data.details_description1}</div>
+    //       <div className="qty">{data.details_quantity1}</div>
+    //       <div className="text-wrapper-10">{data.details_unit_price1}</div>
+    //       <div className="text-wrapper-10">{data.details_total_price1}</div>
+    //     </div>
+    //     <div className="list">
+    //       <div className="description-2">{data.details_description2}</div>
+    //       <div className="qty">{data.details_quantity2}</div>
+    //       <div className="text-wrapper-10">{data.details_unit_price2}</div>
+    //       <div className="text-wrapper-10">{data.details_total_price2}</div>
+    //     </div>
+    //     <div className="list">
+    //       <div className="description-2">{data.details_description3}</div>
+    //       <div className="qty">{data.details_quantity3}</div>
+    //       <div className="text-wrapper-10">{data.details_unit_price3}</div>
+    //       <div className="text-wrapper-10">{data.details_total_price3}</div>
+    //     </div>
+    //     <div className="list">
+    //       <div className="description-2">{data.details_description4}</div>
+    //       <div className="qty">{data.details_quantity4}</div>
+    //       <div className="text-wrapper-10">{data.details_unit_price4}</div>
+    //       <div className="text-wrapper-10">{data.details_total_price4}</div>
+    //     </div>
+    //   </>
+    // );
+  };
+
   return (
     <div className="PDF-format">
       <div className="main">
@@ -82,7 +134,9 @@ export const PDF = ({ data, docType }) => {
             <div className="text-wrapper-9">AMOUNT</div>
           </div>
 
-          <div className="lists">
+          <div className="lists">{renderDetails()}</div>
+
+          {/* <div className="lists">
             <div className="list">
               <div className="description-2">{data.details_description1}</div>
               <div className="qty">{data.details_quantity1}</div>
@@ -109,7 +163,7 @@ export const PDF = ({ data, docType }) => {
               <div className="text-wrapper-10">{data.details_unit_price4}</div>
               <div className="text-wrapper-10">{data.details_total_price4}</div>
             </div>
-          </div>
+          </div> */}
 
           <div className="total">
             <div className="text-wrapper-11">Subtotal</div>
@@ -186,7 +240,9 @@ export const PDF = ({ data, docType }) => {
             <div className="text-wrapper-9">AMOUNT</div>
           </div>
 
-          <div className="lists">
+          <div className="lists">{renderDetails()}</div>
+
+          {/* <div className="lists">
             <div className="list">
               <div className="description-2">{data.details_description1}</div>
               <div className="qty">{data.details_quantity1}</div>
@@ -213,7 +269,7 @@ export const PDF = ({ data, docType }) => {
               <div className="text-wrapper-10">{data.details_unit_price4}</div>
               <div className="text-wrapper-10">{data.details_total_price4}</div>
             </div>
-          </div>
+          </div> */}
 
           <div className="total">
             <div className="text-wrapper-11">Subtotal</div>
@@ -289,7 +345,9 @@ export const PDF = ({ data, docType }) => {
                 <div className="text-wrapper-9">AMOUNT</div>
             </div>
 
-            <div className="lists">
+            <div className="lists">{renderDetails()}</div>
+
+            {/* <div className="lists">
                 <div className="list">
                 <div className="description-2">{data.details_description1}</div>
                 <div className="qty">{data.details_quantity1}</div>
@@ -316,7 +374,7 @@ export const PDF = ({ data, docType }) => {
                 <div className="text-wrapper-10">{data.details_unit_price4}</div>
                 <div className="text-wrapper-10">{data.details_total_price4}</div>
                 </div>
-            </div>
+            </div> */}
 
             <div className="total">
                 <div className="text-wrapper-11">Subtotal</div>

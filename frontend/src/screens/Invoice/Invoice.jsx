@@ -14,6 +14,7 @@ export const Invoice = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState(null);
+  const [detailData, setDetailData] = useState([]); // New state for details
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const pdfRef = useRef(null); // Ref for the PDF section
@@ -35,6 +36,23 @@ export const Invoice = () => {
         });
     }
   }, [id]);
+
+    // Once formData is loaded, fetch and filter the details
+    useEffect(() => {
+      if (formData) {
+        api.get(`/detail/`)
+          .then((response) => {
+            const filteredDetails = response.data.data.filter(
+              (detail) =>
+                detail.income.invoice_id_number === formData.invoice_id_number
+            );
+            setDetailData(filteredDetails);
+          })
+          .catch((error) => {
+            console.error("Error fetching detail data:", error);
+          });
+      }
+    }, [formData]);
 
   const saveAsPDF = async () => {
     const input = pdfRef.current;
@@ -174,6 +192,7 @@ export const Invoice = () => {
                 payment_method: formData.payment_method.name,
                 // Other variables for invoice/receipt can be left empty for now
               }}
+              details={detailData}
             />
             </div>
             </div>
