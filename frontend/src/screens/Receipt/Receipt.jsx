@@ -125,12 +125,12 @@ export const Receipt = () => {
                   to={`/view/${id}`}
                 />
                 <button className="button-11" onClick={saveAsPDF}>
-                <img
-                  className="button-11"
-                  alt="Button"
-                  src="/img/button-26.svg"
-                />
-              </button>
+                  <img
+                    className="button-11"
+                    alt="Button"
+                    src="/img/button-26.svg"
+                  />
+                </button>
               </div>
             </div>
           </div>
@@ -161,7 +161,6 @@ export const Receipt = () => {
 
                     contactor_contactor_name: formData.contactor_contactor_name,
                     contactor_phone_number: formData.contactor_phone_number,
-                    contactor_line: formData.contactor_line,
                     contactor_email: formData.contactor_email,
 
                     brand_brand_name: formData.brand_brand_name,

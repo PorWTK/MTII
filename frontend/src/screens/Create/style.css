@@ -118,6 +118,7 @@
     gap: var(--3-spacing-spacing-lg);
     position: relative;
     padding-top: 30px;
+    padding-left: 60px;
 }
 
 .custom-submit-button {
@@ -327,6 +328,14 @@
 
 .create .text-37::placeholder {
   color: #66708599;
+}
+
+.create .actions-11 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: var(--3-spacing-spacing-lg);
+  position: relative;
 }
 
 .create .frame-2 {

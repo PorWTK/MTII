@@ -7,6 +7,7 @@ import { SectionLabel } from "../../components/SectionLabel";
 import { TextField, FormControl, Select, MenuItem } from "@mui/material";
 import api from "../../api";
 import "./style.css";
+import { ChevronLeft } from "../../icons/ChevronLeft";
 
 export const Edit = () => {
   const { id } = useParams();
@@ -254,18 +255,33 @@ export const Edit = () => {
                 Update the fields below and submit to save changes.
               </p>
             </div>
+            <div className="actions-9">
+              <div className="actions-9">
+                <ButtonsButton
+                      className="design-component-instance-node-6"
+                      hierarchy="secondary-gray"
+                      icon="default"
+                      // iconLeading={false}
+                      iconTrailing={false}
+                      override={<ChevronLeft className="icon-instance-node-10" />}
+                      size="md"
+                      stateProp="default"
+                      text="Back"
+                      to="/data"
+                />
+              </div>
+            </div>
           </div>
           {message && <p>{message}</p>}
           <div className="form">
             <form onSubmit={handleSubmit}>
-              <div className="divider-2" />
-
+              {/* <div className="divider-2" /> */}
               {/* Quotation / Invoice / Receipt Section */}
-              <div className="content-19">
-                <div className="QIR-tab">
-                  <div className="frameQIR">
+              {/* <div className="content-19"> */}
+                {/* <div className="QIR-tab">
+                  <div className="frameQIR"> */}
                     {/* Quotation ID number */}
-                    <div className="input-field-3">
+                    {/* <div className="input-field-3">
                       <div className="input-with-label-3">
                         <div className="label-wrapper-3">
                           <div className="label-3">Quotation ID number</div>
@@ -290,9 +306,9 @@ export const Edit = () => {
                           sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
                         />
                       </div>
-                    </div>
+                    </div> */}
                     {/* Quotation issue date */}
-                    <div className="frame-88">
+                    {/* <div className="frame-88">
                       <div className="input-with-label-4">
                         <div className="label-wrapper-4">
                           <div className="label-3">Quotation issue date</div>
@@ -308,10 +324,10 @@ export const Edit = () => {
                           }}
                         style={{ height: "44px", width: "308px" }}
                       />
-                    </div>
+                    </div> */}
                     {/* Quotation due date */}
-                    <div className="frame-88">
-                      <div className="input-with-label-4">
+                    {/* <div className="frame-88"> */}
+                      {/* <div className="input-with-label-4">
                         <div className="label-wrapper-4">
                           <div className="label-3">Quotation due date</div>
                         </div>
@@ -329,9 +345,9 @@ export const Edit = () => {
                     </div>
                   </div>
 
-                  <div className="frameQIR">
+                  <div className="frameQIR"> */}
                     {/* Invoice ID number */}
-                    <div className="input-field-3">
+                    {/* <div className="input-field-3">
                       <div className="input-with-label-3">
                         <div className="label-wrapper-3">
                           <div className="label-3">Invoice ID number</div>
@@ -358,7 +374,7 @@ export const Edit = () => {
                       </div>
                     </div>
                     {/* Invoice issue date */}
-                    <div className="frame-88">
+                    {/* <div className="frame-88">
                       <div className="input-with-label-4">
                         <div className="label-wrapper-4">
                           <div className="label-3">Invoice issue date</div>
@@ -375,10 +391,10 @@ export const Edit = () => {
   }}
   required
   style={{ height: "44px", width: "308px" }}
-/>
-                    </div>
+/> 
+                    </div> */}
                     {/* Invoice due date */}
-                    <div className="frame-88">
+                    {/* <div className="frame-88">
                       <div className="input-with-label-4">
                         <div className="label-wrapper-4">
                           <div className="label-3">Invoice due date</div>
@@ -401,7 +417,7 @@ export const Edit = () => {
 
                   <div className="frameQIR">
                     {/* Receipt ID number */}
-                    <div className="input-field-3">
+                    {/* <div className="input-field-3">
                       <div className="input-with-label-3">
                         <div className="label-wrapper-3">
                           <div className="label-3">Receipt ID number</div>
@@ -426,9 +442,9 @@ export const Edit = () => {
                           sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
                         />
                       </div>
-                    </div>
+                    </div> */}
                     {/* Receipt issue date */}
-                    <div className="frame88">
+                    {/* <div className="frame88">
                       <div className="input-with-label-4">
                         <div className="label-wrapper-4">
                           <div className="label-3">Receipt issue date</div>
@@ -447,9 +463,9 @@ export const Edit = () => {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */} 
 
-                <div className="actions-19">
+                {/* <div className="actions-19">
                   <ButtonsButton
                     className="design-component-instance-node-6"
                     hierarchy="secondary-gray"
@@ -464,6 +480,237 @@ export const Edit = () => {
                   <button type="submit" disabled={loading} className="custom-submit-button">
                     {loading ? "Submitting..." : <img alt="Button" src="/img/button-36.svg" />}
                   </button>
+                </div> */}
+              {/* </div> */}
+
+              <div className="divider-2" />
+
+              {/*Quotation Section */}
+              <div className="content-19">
+                <SectionLabel
+                  actions={false}
+                  className="section-label-instance"
+                  helpIcon={false}
+                  size="sm"
+                  supportingText={false}
+                  text="Quotation"
+                />
+                <div className="input-fields-3">
+                  <div className="frame">
+                    <div className="input-with-label-3">
+                        <div className="label-wrapper-3">
+                          <div className="label-3">Quotation ID number</div>
+                          <div className="asterisk-5">*</div>
+                        </div>
+                        <TextField
+                          variant="outlined"
+                          fullWidth
+                          type="number"
+                          name="quotation_id_number"
+                          value={formData.quotation_id_number}
+                          onChange={handleChange}
+                          required
+                          InputProps={{
+                            startAdornment: (
+                              <div className="add-on">
+                                <div className="text-36" style={{ color: "#101828" }}>QT</div>
+                              </div>
+                            ),
+                          }}
+                          className="text-input-4"
+                          sx={{ "& .MuiOutlinedInput-root": { height: "44px" ,width: "470px"} }}
+                        />
+                      </div>
+                      {/* Quotation issue date */}
+                    <div className="frame-88">
+                      <div className="input-with-label-4">
+                        <div className="label-wrapper-4">
+                          <div className="label-3">Quotation issue date</div>
+                        </div>
+                      </div>
+                      <input
+                        type="datetime-local"
+                        name="quotation_issue_date"
+                        value={formData.quotation_issue_date}
+                        onChange={(e) => {
+                            const { name, value } = e.target;
+                            setFormData({ ...formData, [name]: value });
+                          }}
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                    </div>
+                    <div className ="actions-19">
+                      <button type="submit" disabled={loading} className="custom-submit-button">
+                        {loading ? "Submitting..." : <img alt="Button" src="/img/button-36.svg" />}
+                      </button>
+                    </div>
+                  </div>
+                  <div className="frame">
+                    {/* Quotation due date */}
+                    <div className="frame-88">
+                      <div className="input-with-label-4">
+                        <div className="label-wrapper-4">
+                          <div className="label-3">Quotation due date</div>
+                        </div>
+                      </div>
+                      <input
+                        type="datetime-local"
+                        name="quotation_due_date"
+                        value={formData.quotation_due_date }
+                        onChange={(e) => {
+                          const { name, value } = e.target;
+                          setFormData({ ...formData, [name]: value });
+                        }}
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="divider-2" />
+
+
+              {/*Invoice Section */}
+              <div className="content-19">
+                <SectionLabel
+                  actions={false}
+                  className="section-label-instance"
+                  helpIcon={false}
+                  size="sm"
+                  supportingText={false}
+                  text="Invoice"
+                />
+                <div className="input-fields-3">
+                  <div className="frame">
+                  <div className="input-with-label-3">
+                        <div className="label-wrapper-3">
+                          <div className="label-3">Invoice ID number</div>
+                          <div className="asterisk-5">*</div>
+                        </div>
+                        <TextField
+                          variant="outlined"
+                          fullWidth
+                          type="number"
+                          name="invoice_id_number"
+                          value={formData.invoice_id_number}
+                          InputProps={{
+                            readOnly: true,
+                            style: { backgroundColor: "#f5f5f5" },
+                            startAdornment: (
+                              <div className="add-on">
+                                <div className="text-36" style={{ color: "#101828" }}>IV</div>
+                              </div>
+                            ),
+                          }}
+                          className="text-input-4"
+                          sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
+                        />
+                      </div>
+                      {/* Invoice issue date */}
+                      <div className="frame-88">
+                      <div className="input-with-label-4">
+                        <div className="label-wrapper-4">
+                          <div className="label-3">Invoice issue date</div>
+                        </div>
+                      </div>
+                      <input
+                        type="datetime-local"
+                        name="invoice_issue_date"
+                        value={formData.invoice_issue_date || ""}
+                        onChange={(e) => {
+                          const { name, value } = e.target;
+                          console.log("[CHANGE] invoice_issue_date:", value);
+                          setFormData((prev) => ({ ...prev, [name]: value }));
+                        }}
+                        required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                    </div>
+                  </div>
+                  <div className="frame">
+                    {/* Invoice due date */}
+                    <div className="frame-88">
+                      <div className="input-with-label-4">
+                        <div className="label-wrapper-4">
+                          <div className="label-3">Invoice due date</div>
+                        </div>
+                      </div>
+                      <input
+                        type="datetime-local"
+                        name="invoice_due_date"
+                        value={formData.invoice_due_date || ""}
+                        onChange={(e) => {
+                          const { name, value } = e.target;
+                          console.log("[CHANGE] invoice_due_date:", value);
+                          setFormData((prev) => ({ ...prev, [name]: value }));
+                        }}
+                        required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="divider-2" />
+
+              {/*Receipt Section */}
+              <div className="content-19">
+                <SectionLabel
+                  actions={false}
+                  className="section-label-instance"
+                  helpIcon={false}
+                  size="sm"
+                  supportingText={false}
+                  text="Receipt"
+                />
+                <div className="input-fields-3">
+                  <div className="frame">
+                    <div className="input-with-label-3">
+                        <div className="label-wrapper-3">
+                          <div className="label-3">Receipt ID number</div>
+                          <div className="asterisk-5">*</div>
+                        </div>
+                        <TextField
+                          variant="outlined"
+                          fullWidth
+                          type="number"
+                          name="receipt_id_number"
+                          value={formData.receipt_id_number}
+                          onChange={handleChange}
+                          required
+                          InputProps={{
+                            startAdornment: (
+                              <div className="add-on">
+                                <div className="text-36" style={{ color: "#101828" }}>RC</div>
+                              </div>
+                            ),
+                          }}
+                          className="text-input-4"
+                          sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
+                        />
+                      </div>
+                      {/* Invoice issue date */}
+                      <div className="frame88">
+                      <div className="input-with-label-4">
+                        <div className="label-wrapper-4">
+                          <div className="label-3">Receipt issue date</div>
+                        </div>
+                      </div>
+                      <input
+                        type="datetime-local"
+                        name="receipt_issue_date"
+                        value={formData.receipt_issue_date }
+                        onChange={(e) => {
+                          const { name, value } = e.target;
+                          setFormData({ ...formData, [name]: value });
+                        }}
+                        required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -498,7 +745,7 @@ export const Edit = () => {
                         >
                           <MenuItem value="1">@PinnPW</MenuItem>
                           <MenuItem value="2">@Porpyyy_</MenuItem>
-                          <MenuItem value="3">บริษัท โชคชัย 9672 จำกัด</MenuItem>
+                          {/* <MenuItem value="3">บริษัท โชคชัย 9672 จำกัด</MenuItem> */}
                         </Select>
                       </FormControl>
                     </div>

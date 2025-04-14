@@ -111,6 +111,35 @@ export const Data = () => {
       setTableData([]); // Set empty array in case of an error
     }
   };
+
+  const handleDeleteIncome = async (incomeId) => {
+    try {
+      // Fetch all details
+      const detailsResponse = await api.get(`/detail/`);
+      const allDetails = detailsResponse.data.data;
+      
+      // Filter details that belong to the income using the same logic as in View.jsx
+      const relatedDetails = allDetails.filter(
+        (detail) => detail.income.invoice_id_number === incomeId
+      );
+      
+      // Delete details if they exist
+      if (relatedDetails && relatedDetails.length > 0) {
+        for (const detail of relatedDetails) {
+          await api.delete(`/detail/${detail.id}`);
+        }
+      }
+      
+      // Now delete the income record itself
+      await api.delete(`/income/${incomeId}`);
+      
+      // Refresh the data after deletion
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting income and its details:", error);
+    }
+  };
+  
   
 
   const handleKeyDown = (event) => {
@@ -295,7 +324,7 @@ export const Data = () => {
                     override={<Share className="icon-instance-node-4" />}
                     size="md"
                     stateProp="default"
-                    text="Export as CSV"
+                    text="Export as XLSX"
                   />
               </div>
               {/* <Button onClick={exportToCSV} className="design-component-instance-node-2" override={<Share className="icon-instance-node-4" />}>Export CSV</Button>; */}
@@ -341,7 +370,7 @@ export const Data = () => {
                 <div className="frame-13">
                   <div className="input-with-label-6">
                     <div className="label-wrapper-5">
-                      <div className="label-5">Dates</div>
+                      <div className="label-5">Duration for posting dates</div>
                     </div>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                       <div style={{ display: "flex", gap: "8px", width: "100%" }}>
@@ -499,15 +528,14 @@ export const Data = () => {
                     <TableCell>{row.payment_method.name}</TableCell>
                     <TableCell><div>{row.agency_agency_name}</div><div style={{ fontSize: "12px", color: "#667085" }}>{row.contactor_email}</div></TableCell>
                     <TableCell>{row.brand_brand_name}</TableCell>
-                    <TableCell>{row.total_payment_amount}</TableCell>
+                    {/* <TableCell>{row.total_payment_amount}</TableCell> */}
+                    <TableCell>{Number(row.total_payment_amount).toLocaleString()}</TableCell>
                     <TableCell>{row.channel.name}</TableCell>
                     <TableCell>{row.platform.name}</TableCell>
                     <TableCell>
-                          <ActionMenu 
-                            rowId={row.invoice_id_number} 
-                            onDelete={(id) => console.log("Delete", id)}
-                          />
-                        </TableCell>
+                      <ActionMenu rowId={row.invoice_id_number} onDelete={handleDeleteIncome} />
+
+                     </TableCell>
                   </TableRow>
                 ))}
                 </TableBody>

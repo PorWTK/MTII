@@ -80,12 +80,17 @@
 }
 
 .view .actions-18 {
+  /* align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: var(--3-spacing-spacing-lg);
+  position: relative; */
   align-items: center;
   display: inline-flex;
   flex: 0 0 auto;
   gap: var(--3-spacing-spacing-lg);
-  position: relative;
-  padding-top: 30px;
+  padding-top: 25px;
+  padding-left: 60px;
 }
 
 .view .design-component-instance-node-5 {
@@ -292,7 +297,7 @@
   flex-grow: 1;
   gap: var(--3-spacing-spacing-md);
   overflow: hidden;
-  padding: 10px 14px;
+  padding: 8px 0px;
   position: relative;
 }
 
@@ -351,7 +356,7 @@
   flex-direction: column;
   gap: var(--3-spacing-spacing-sm);
   position: relative;
-  width: 405.33px;
+  width: 468px;
 }
 
 .view .input-with-label-4 {

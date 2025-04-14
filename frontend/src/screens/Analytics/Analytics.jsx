@@ -8,7 +8,23 @@ import { Check32 } from "../../icons/Check32";
 import { LogOut } from "../../icons/LogOut";
 import { ReverseLeft1 } from "../../icons/ReverseLeft1";
 import { XClose30 } from "../../icons/XClose30";
-import { FormControl, Select, MenuItem, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Chip, IconButton, Menu as MuiMenu, MenuItem as MuiMenuItem } from "@mui/material";
+import {
+  FormControl,
+  Select,
+  MenuItem,
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Chip,
+  IconButton,
+  Menu as MuiMenu,
+  MenuItem as MuiMenuItem,
+} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./style.css";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +45,7 @@ const calculateTax = (income) => {
     { amount: 250000, rate: 0.20 },        // 750,001 – 1,000,000 Baht
     { amount: 1000000, rate: 0.25 },       // 1,000,001 – 2,000,000 Baht
     { amount: 3000000, rate: 0.30 },       // 2,000,001 – 5,000,000 Baht
-    { amount: Infinity, rate: 0.35 }       // Above 5,000,000 Baht
+    { amount: Infinity, rate: 0.35 },       // Above 5,000,000 Baht
   ];
 
   for (const bracket of brackets) {
@@ -109,31 +125,26 @@ export const Analytics = () => {
     return d;
   };
 
-  // Fetch data from API on component mount
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get("/income/");
-        if (Array.isArray(response.data.data)) {
-          setTableData(response.data.data);
-        } else {
-          console.error("Unexpected API response:", response.data);
-          setTableData([]);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  // Function to fetch income data
+  const fetchData = async () => {
+    try {
+      const response = await api.get("/income/");
+      if (Array.isArray(response.data.data)) {
+        setTableData(response.data.data);
+      } else {
+        console.error("Unexpected API response:", response.data);
         setTableData([]);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setTableData([]);
+    }
+  };
+
+  // Fetch data from API on component mount
+  useEffect(() => {
     fetchData();
   }, []);
-
-  // useEffect(() => {
-  //   if (tableData.length > 0) {
-  //     console.log("Sample row:", tableData[0]);
-  //   }
-  // }, [tableData]);
-  
 
   // Function to filter data based on date range and receiver
   const getFilteredData = () => {
@@ -145,8 +156,6 @@ export const Analytics = () => {
       if (endDate)
         isWithinDateRange = isWithinDateRange && rowDate <= normalizeEndDate(endDate);
       let receiverMatch = true;
-
-      //not working here
       if (receiver !== "All") {
         receiverMatch = row.receiver && row.receiver.name === receiver;
       }
@@ -162,7 +171,6 @@ export const Analytics = () => {
     const totalIncome = filteredData
       .filter((row) => row.status.name === "Paid")
       .reduce((acc, row) => acc + Number(row.total_payment_amount), 0);
-    // Use the progressive tax calculation instead of a fixed rate
     const taxToPay = calculateTax(totalIncome);
     const totalPending = filteredData
       .filter((row) => row.status.name === "Pending")
@@ -240,9 +248,37 @@ export const Analytics = () => {
   // Define colors for the pie chart slices
   const pieColors = ["#067647", "#DC8420", "#b42318", "#A0A6B2"];
 
+  // Deletion function that first deletes related detail records, then the income record
+  const handleDeleteIncome = async (incomeId) => {
+    try {
+      // Fetch all details
+      const detailsResponse = await api.get(`/detail/`);
+      const allDetails = detailsResponse.data.data;
+      
+      // Filter details that belong to the income
+      const relatedDetails = allDetails.filter(
+        (detail) => detail.income.invoice_id_number === incomeId
+      );
+      
+      // Delete details if they exist
+      if (relatedDetails && relatedDetails.length > 0) {
+        for (const detail of relatedDetails) {
+          await api.delete(`/detail/${detail.id}`);
+        }
+      }
+      
+      // Now delete the income record itself
+      await api.delete(`/income/${incomeId}`);
+      
+      // Refresh the data after deletion
+      fetchData();
+    } catch (error) {
+      console.error("Error deleting income and its details:", error);
+    }
+  };
+
   return (
     <div className="analytics">
-
       <HeaderNavigationWrapper
         className="header-navigation-2"
         headerNavigationNavItemBaseCurrent={false}
@@ -306,10 +342,9 @@ export const Analytics = () => {
                     inputProps={{ notched: false }}
                   >
                     <MenuItem value="All">All</MenuItem>
-                    {/* Update these values as per available receiver IDs from your API */}
                     <MenuItem value="@PinnPW">@PinnPW</MenuItem>
                     <MenuItem value="@Porpyyy_">@Porpyyy_</MenuItem>
-                    <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัทโชคชัย 9672 จำกัด</MenuItem>
+                    {/* <MenuItem value="บริษัท โชคชัย 9672 จำกัด">บริษัทโชคชัย 9672 จำกัด</MenuItem> */}
                   </Select>
                 </FormControl>
               </div>
@@ -466,15 +501,13 @@ export const Analytics = () => {
                 </TableHead>
                 <TableBody>
                   {recentData.map((row, idx) => (
-                      <TableRow key={idx}>
-                        <TableCell>
+                    <TableRow key={idx}>
+                      <TableCell>
                         {row.influencer_posting_date
                           ? new Intl.DateTimeFormat("en-US", { day: "numeric", month: "long", year: "numeric" }).format(new Date(row.influencer_posting_date))
                           : ""}
                       </TableCell>
                       <TableCell>{row.invoice_id_number}</TableCell>
-                      {/* <TableCell>{row.invoice_id_number}</TableCell>
-                      <TableCell>{new Date(row.influencer_posting_date).toLocaleDateString()}</TableCell> */}
                       <TableCell>{renderStatusCell(row.status.name)}</TableCell>
                       <TableCell>{row.payment_method.name}</TableCell>
                       <TableCell>{row.brand_brand_name}</TableCell>
@@ -482,9 +515,7 @@ export const Analytics = () => {
                       <TableCell>
                         <ActionMenu
                           rowId={row.invoice_id_number}
-                          onDelete={(id) => {
-                            console.log("Delete", id);
-                          }}
+                          onDelete={handleDeleteIncome}
                         />
                       </TableCell>
                     </TableRow>

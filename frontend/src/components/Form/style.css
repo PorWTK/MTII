@@ -22,7 +22,7 @@
   flex: 0 0 auto;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 16px 32px;
+  gap: 16px 0px;
   position: relative;
   width: 100%;
 }
@@ -67,7 +67,7 @@
   flex-direction: column;
   gap: var(--3-spacing-spacing-sm);
   position: relative;
-  width: 100%;
+  width: 476px;
 }
 
 .form .label-wrapper-3 {
@@ -157,7 +157,7 @@
   flex-grow: 1;
   gap: var(--3-spacing-spacing-md);
   overflow: hidden;
-  padding: 10px 14px;
+  padding: 2px 0px;
   position: relative;
 }
 
@@ -241,7 +241,7 @@
   flex: 1 !important;
   flex-grow: 1 !important;
   min-width: 200px !important;
-  width: unset !important;
+  max-width: 200px !important;
 }
 
 .form .input-fields-3 {

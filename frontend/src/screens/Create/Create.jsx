@@ -12,126 +12,10 @@ import { TextField, FormControl, InputLabel, Select, MenuItem, Button } from "@m
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { ChevronLeft } from "../../icons/ChevronLeft";
 
 export const Create = () => {
-  // const [formData, setFormData] = useState({
-  //   quotation_id_number: "",
-  //   quotation_issue_date: "",
-  //   quotation_due_date: "",
-  //   invoice_id_number: "",
-  //   invoice_issue_date: "",
-  //   invoice_due_date: "",
-  //   receipt_issue_date: "",
-  //   receipt_id_number: "",
-  //   agency_tax_payer_id_number: "",
-  //   influencer_posting_date: "",
-  //   agency_agency_name: "",
-  //   agency_address: "",
-  //   agency_phone_number: "",
-  //   contactor_contactor_name: "",
-  //   contactor_phone_number: "",
-  //   contactor_line: "",
-  //   contactor_email: "",
-  //   brand_brand_name: "",
-  //   brand_product: "",
-  //   transaction_reference_number: "",
-  //   terms_and_conditions: "",
-  //   total_payment_amount: "",
-  //   notes_for_the_total_payment: "",
-  //   first_payment: "",
-  //   notes_for_the_first_payment: "",
-  //   second_payment: "",
-  //   notes_for_the_second_payment: "",
-  //   unpaid_payment_amount: "",
-  //   notes_for_the_unpaid_payment: "",
-  //   platform_id: "",
-  //   status_id: "",
-  //   payment_method_id: "",
-  //   receiver_id: "",
-  //   sale_person_id: "",
-  //   channel_id: "",
-  //   bank_id: "",
-  // });
 
-  // const [formDataItem, setFormDataItem] = useState({
-  //   description: "",
-  //   notes: "",
-  //   quantity: "",
-  //   unit_price: "",
-  //   income_invoice_id_number: "",
-  // });
-
-  // const [loading, setLoading] = useState(false);
-  // const [message, setMessage] = useState("");
-
-  // const handleChange = (e) => {
-  //   setFormData({ ...formData, [e.target.name]: e.target.value });
-  // };
-
-  // const handleChangeItem = (e) => {
-  //   setFormDataItem({ ...formDataItem, [e.target.name]: e.target.value });
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setMessage("");
-
-  //   console.log("Form Data:", formData);
-  //   console.log("Form Data Item:", formDataItem);
-
-  //   const convertToISO = (date) => (date ? new Date(date).toISOString() : null);
-
-  //   const formattedData = {
-  //     ...formData,
-  //     quotation_issue_date: convertToISO(formData.quotation_issue_date),
-  //     quotation_due_date: convertToISO(formData.quotation_due_date),
-  //     invoice_issue_date: convertToISO(formData.invoice_issue_date),
-  //     invoice_due_date: convertToISO(formData.invoice_due_date),
-  //     receipt_issue_date: convertToISO(formData.receipt_issue_date),
-  //     influencer_posting_date: convertToISO(formData.influencer_posting_date),
-  //     quotation_id_number: Number(formData.quotation_id_number) || null,
-  //     invoice_id_number: Number(formData.invoice_id_number) || null,
-  //     receipt_id_number: Number(formData.receipt_id_number) || null,
-  //     agency_tax_payer_id_number: Number(formData.agency_tax_payer_id_number) || null,
-  //     transaction_reference_number: Number(formData.transaction_reference_number) || null,
-  //     total_payment_amount: Number(formData.total_payment_amount) || null,
-  //     first_payment: Number(formData.first_payment) || null,
-  //     second_payment: Number(formData.second_payment) || null,
-  //     unpaid_payment_amount: Number(formData.unpaid_payment_amount) || null,
-  //     platform_id: Number(formData.platform_id) || null,
-  //     status_id: Number(formData.status_id) || null,
-  //     payment_method_id: Number(formData.payment_method_id) || null,
-  //     receiver_id: Number(formData.receiver_id) || null,
-  //     sale_person_id: Number(formData.sale_person_id) || null,
-  //     channel_id: Number(formData.channel_id) || null,
-  //     bank_id: Number(formData.bank_id) || null,
-  //   };
-
-  //   const formattedItemData = {
-  //     ...formDataItem,
-  //     quantity: Number(formDataItem.quantity) || null,
-  //     unit_price: Number(formDataItem.unit_price) || null,
-  //     income_invoice_id_number: Number(formData.invoice_id_number) || null,
-  //   };
-
-
-  //   try {
-  //     const response1 = await api.post("/income/", formattedData);
-  //     console.log("Income API Response:", response1.data);
-
-  //     const response2 = await api.post("/detail/", formattedItemData);
-  //     console.log("Income Item API Response:", response2.data);
-
-  //     setMessage("Both forms submitted successfully!");
-
-  //   } catch (error) {
-  //     console.error("Error submitting income:", error);
-  //     setMessage("Failed to add income.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 const [formData, setFormData] = useState({
   quotation_id_number: "",
   quotation_issue_date: "",
@@ -241,13 +125,23 @@ const handleSubmit = async (e) => {
     console.log("Invoice ID:", invoiceId);
 
     // Prepare detail items payload using the returned invoice id
-    const updatedDetailItems = detailItems.map((item) => ({
-      description: item.description,
-      notes: item.notes,
-      quantity: Number(item.quantity) || null,
-      unit_price: Number(item.unit_price) || null,
-      income_invoice_id_number: invoiceId,
-    }));
+    const updatedDetailItems = detailItems
+      .filter(item => {
+        // Only include this detail if at least one field has been filled out.
+        return (
+          (item.description && item.description.trim() !== "") ||
+          (item.notes && item.notes.trim() !== "") ||
+          (item.quantity && item.quantity !== "") ||
+          (item.unit_price && item.unit_price !== "")
+        );
+      })
+      .map(item => ({
+        description: item.description,
+        notes: item.notes,
+        quantity: item.quantity !== "" ? Number(item.quantity) : null,
+        unit_price: item.unit_price !== "" ? Number(item.unit_price) : null,
+        income_invoice_id_number: invoiceId,
+      }));
 
     console.log("Updated Detail Items Payload:", updatedDetailItems);
 
@@ -289,19 +183,35 @@ const handleSubmit = async (e) => {
                 Fill out the form below to create a new invoice
               </p>
             </div>
+            <div className="actions-11">
+              <div className="actions-11">
+                <ButtonsButton
+                        className="design-component-instance-node-6"
+                        hierarchy="secondary-gray"
+                        icon="default"
+                        // iconLeading={false}
+                        iconTrailing={false}
+                        override={<ChevronLeft className="icon-instance-node-10" />}
+                        size="md"
+                        stateProp="default"
+                        text="Back"
+                        to="/data"
+                />
+              </div>
+            </div>
           </div>
           
           <div className="form">
           {message && <p>{message}</p>}
           <form onSubmit={handleSubmit}>
-            <div className="divider-2" />
+            {/* <div className="divider-2" /> */}
 
             {/* Quotation / Invoice / Receipt Section */}
-            <div className="content-19">
-              <div className="QIR-tab">
-                <div className="frameQIR">
+            {/* <div className="content-19"> */}
+              {/* <div className="QIR-tab">
+                <div className="frameQIR"> */}
                   {/* Quotation ID number */}
-                  <div className="input-field-3">
+                  {/* <div className="input-field-3">
                     <div className="input-with-label-3">
                       <div className="label-wrapper-3">
                         <div className="label-3">Quotation ID number</div>
@@ -325,10 +235,10 @@ const handleSubmit = async (e) => {
                         }}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Quotation issue date */}
-                  <div className="frame-88">
+                  {/* <div className="frame-88">
                     <div className="input-with-label-4">
                       <div className="label-wrapper-4">
                         <div className="label-3">Quotation issue date</div>
@@ -342,10 +252,10 @@ const handleSubmit = async (e) => {
                         //  required
                         style={{ height: "44px", width: "308px" }}
                       />
-                  </div>
+                  </div> */}
 
                   {/* Quotation due date */}
-                  <div className="frame-88">
+                  {/* <div className="frame-88">
                     <div className="input-with-label-4">
                       <div className="label-wrapper-4"> 
                         <div className="label-3">Quotation due date</div>
@@ -360,11 +270,11 @@ const handleSubmit = async (e) => {
                         style={{ height: "44px", width: "308px" }}
                       />
                   </div>
-                </div>
+                </div> */}
 
-                <div className="frameQIR">
+                {/* <div className="frameQIR"> */}
                   {/* Invoice ID number */}
-                  <div className="input-field-3">
+                  {/* <div className="input-field-3">
                     <div className="input-with-label-3">
                       <div className="label-wrapper-3">
                         <div className="label-3">Invoice ID number</div>
@@ -385,10 +295,10 @@ const handleSubmit = async (e) => {
                         sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Invoice issue date */}
-                  <div className="frame-88">
+                  {/* <div className="frame-88">
                     <div className="input-with-label-4">
                       <div className="label-wrapper-4">
                         <div className="label-3">Invoice issue date</div>
@@ -398,10 +308,10 @@ const handleSubmit = async (e) => {
                         type="datetime-local" name="invoice_issue_date" value={formData.invoice_issue_date} onChange={handleChange} required
                         style={{ height: "44px", width: "308px" }}
                       />
-                  </div>
+                  </div> */}
 
                   {/* Invoice due date */}
-                  <div className="frame-88">
+                  {/* <div className="frame-88">
                     <div className="input-with-label-4">
                       <div className="label-wrapper-4">
                         <div className="label-3">Invoice due date</div>
@@ -411,11 +321,11 @@ const handleSubmit = async (e) => {
                         style={{ height: "44px", width: "308px" }}
                       />
                   </div>
-                </div>
+                </div> */}
 
-                <div className="frameQIR">
+                {/* <div className="frameQIR"> */}
                   {/* Receipt ID number */}
-                  <div className="input-field-3">
+                  {/* <div className="input-field-3">
                     <div className="input-with-label-3">
                       <div className="label-wrapper-3">
                         <div className="label-3">Receipt ID number</div>
@@ -436,10 +346,218 @@ const handleSubmit = async (e) => {
                         sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
                       />
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* Receipt issue date */}
-                  <div className="frame88">
+                  {/* <div className="frame88">
+                    <div className="input-with-label-4">
+                      <div className="label-wrapper-4">
+                        <div className="label-3">Receipt issue date</div>
+                      </div>
+                    </div>
+                    <input type="datetime-local" name="receipt_issue_date" value={formData.receipt_issue_date} onChange={handleChange} required style={{ height: "44px", width: "308px" }}/>
+                  </div>
+                </div> */}
+              {/* </div> */}
+              {/* <div className="actions-19">
+                <ButtonsButton
+                        className="design-component-instance-node-6"
+                        hierarchy="secondary-gray"
+                        icon="default"
+                        iconLeading={false}
+                        iconTrailing={false}
+                        size="md"
+                        stateProp="default"
+                        text="Cancel"
+                        to="/data"
+                />
+                <button type="submit" disabled={loading} className="custom-submit-button ">
+                  {loading ? "Submitting..." : <img alt="Button" src="/img/button-36.svg" />}
+                </button>
+              </div> */}
+            {/* </div> */}
+
+            <div className="divider-2" />
+
+            {/* --- Quotation Section --- */}
+            <div className="content-19">
+              <SectionLabel
+                actions={false}
+                className="section-label-instance"
+                helpIcon={false}
+                size="sm"
+                supportingText={false}
+                text="Quotation"
+              />
+              <div className="input-fields-3">
+                <div className="frame">
+                  <div className="inputbox">
+                    <div className="label-for-input">
+                      <div className="label-wrapper">
+                        <div className="label">Quotation ID number</div>
+                      </div>
+                    </div>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        fullHeight
+                        type="number" name="quotation_id_number" value={formData.quotation_id_number} onChange={handleChange} required
+                        InputProps={{
+                          startAdornment: (
+                            <div className="add-on">
+                              <div className="text-36" style={{ color: "#101828" }} >QT</div>
+                            </div>
+                          ),
+                        }}
+                        className="text-input-4"
+                        sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
+                      />
+                  </div>
+
+                  {/* Quotation issue date */}
+                  <div className="frame-88">
+                    <div className="input-with-label-4">
+                      <div className="label-wrapper-4">
+                        <div className="label-3">Quotation issue date</div>
+                      </div>
+                    </div>
+                    <input
+                        type="datetime-local"
+                        name="quotation_issue_date"
+                        value={formData.quotation_issue_date}
+                        onChange={handleChange}
+                        //  required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                  </div>
+                  <div className="actions-19">
+                    <button type="submit" disabled={loading} className="custom-submit-button ">
+                      {loading ? "Submitting..." : <img alt="Button" src="/img/button-36.svg" />}
+                    </button>
+                  </div>
+                </div>
+                <div className="frame">
+                {/* Quotation due date */}
+                <div className="frame-88">
+                    <div className="input-with-label-4">
+                      <div className="label-wrapper-4"> 
+                        <div className="label-3">Quotation due date</div>
+                      </div>
+                    </div>
+                    <input
+                        type="datetime-local"
+                        name="quotation_due_date"
+                        value={formData.quotation_due_date}
+                        onChange={handleChange}
+                        //  required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="divider-2" />
+
+            {/* --- Invoice Section --- */}
+            <div className="content-19">
+              <SectionLabel
+                actions={false}
+                className="section-label-instance"
+                helpIcon={false}
+                size="sm"
+                supportingText={false}
+                text="Invoice"
+              />
+              <div className="input-fields-3">
+                <div className="frame">
+                  <div className="inputbox">
+                    <div className="label-for-input">
+                      <div className="label-wrapper">
+                        <div className="label">Invoice ID number</div>
+                      </div>
+                    </div>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        type="number" name="invoice_id_number" value={formData.invoice_id_number} onChange={handleChange} required 
+                        InputProps={{
+                          startAdornment: (
+                            <div className="add-on">
+                              <div className="text-36" style={{ color: "#101828" }}>IV</div>
+                            </div>
+                          ),
+                        }}
+                        className="text-input-4"
+                        sx={{ "& .MuiOutlinedInput-root": { height: "44px" } }}
+                      />
+                  </div>
+
+                  {/* Invoice issue date */}
+                  <div className="frame-88">
+                    <div className="input-with-label-4">
+                      <div className="label-wrapper-4">
+                        <div className="label-3">Invoice issue date</div>
+                      </div>
+                    </div>
+                    <input
+                        type="datetime-local" name="invoice_issue_date" value={formData.invoice_issue_date} onChange={handleChange} required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                  </div>
+                </div>
+                <div className="frame">
+                  {/* Invoice due date */}
+                  <div className="frame-88">
+                    <div className="input-with-label-4">
+                      <div className="label-wrapper-4">
+                        <div className="label-3">Invoice due date</div>
+                      </div>
+                    </div>
+                    <input type="datetime-local" name="invoice_due_date" value={formData.invoice_due_date} onChange={handleChange} required
+                        style={{ height: "44px", width: "308px" }}
+                      />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="divider-2" />
+
+            {/* --- Receipt Section --- */}
+            <div className="content-19">
+              <SectionLabel
+                actions={false}
+                className="section-label-instance"
+                helpIcon={false}
+                size="sm"
+                supportingText={false}
+                text="Receipt"
+              />
+              <div className="input-fields-3">
+                <div className="frame">
+                  <div className="inputbox">
+                    <div className="label-for-input">
+                      <div className="label-wrapper">
+                        <div className="label">Receipt ID number</div>
+                      </div>
+                    </div>
+                    <TextField
+                        variant="outlined"
+                        fullWidth
+                        type="number" name="receipt_id_number" value={formData.receipt_id_number} onChange={handleChange} required 
+                        InputProps={{
+                          startAdornment: (
+                            <div className="add-on">
+                              <div className="text-36" style={{ color: "#101828" }}>RC</div>
+                            </div>
+                          ),
+                        }}
+                        className="text-input-4"
+                        sx={{ "& .MuiOutlinedInput-root": { height: "44px", width:"470px"} }}
+                      />
+                  </div>
+                  <div className="frame-88">
                     <div className="input-with-label-4">
                       <div className="label-wrapper-4">
                         <div className="label-3">Receipt issue date</div>
@@ -448,22 +566,6 @@ const handleSubmit = async (e) => {
                     <input type="datetime-local" name="receipt_issue_date" value={formData.receipt_issue_date} onChange={handleChange} required style={{ height: "44px", width: "308px" }}/>
                   </div>
                 </div>
-              </div>
-              <div className="actions-19">
-              <ButtonsButton
-                      className="design-component-instance-node-6"
-                      hierarchy="secondary-gray"
-                      icon="default"
-                      iconLeading={false}
-                      iconTrailing={false}
-                      size="md"
-                      stateProp="default"
-                      text="Cancel"
-                      to="/data"
-                />
-                <button type="submit" disabled={loading} className="custom-submit-button ">
-                  {loading ? "Submitting..." : <img alt="Button" src="/img/button-36.svg" />}
-                </button>
               </div>
             </div>
 
@@ -491,9 +593,9 @@ const handleSubmit = async (e) => {
                       <Select labelId="receiver-label" name="receiver_id" value={formData.receiver_id} onChange={handleChange} required defaultValue="">
                         <MenuItem value="1">@PinnPW</MenuItem>
                         <MenuItem value="2">@Porpyyy_</MenuItem>
-                        <MenuItem value="3">
+                        {/* <MenuItem value="3">
                           บริษัท โชคชัย 9672 จำกัด
-                        </MenuItem>
+                        </MenuItem> */}
                       </Select>
                     </FormControl>
                   </div>
@@ -815,7 +917,6 @@ const handleSubmit = async (e) => {
                               name="description"
                               value={item.description}
                               onChange={(e) => handleDetailChange(e, index)}
-                              required
                             />
                           </FormControl>
                         </div>
@@ -834,7 +935,6 @@ const handleSubmit = async (e) => {
                               name="notes"
                               value={item.notes}
                               onChange={(e) => handleDetailChange(e, index)}
-                              required
                             />
                           </FormControl>
                         </div>
@@ -856,7 +956,6 @@ const handleSubmit = async (e) => {
                               type="number"
                               value={item.quantity}
                               onChange={(e) => handleDetailChange(e, index)}
-                              required
                             />
                           </FormControl>
                         </div>
@@ -876,7 +975,6 @@ const handleSubmit = async (e) => {
                               type="number"
                               value={item.unit_price}
                               onChange={(e) => handleDetailChange(e, index)}
-                              required
                             />
                           </FormControl>
                         </div>

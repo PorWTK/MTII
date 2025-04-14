@@ -161,7 +161,7 @@ export const Invoice = () => {
 
                 contactor_contactor_name: formData.contactor_contactor_name,
                 contactor_phone_number: formData.contactor_phone_number,
-                contactor_line: formData.contactor_line,
+                // contactor_line: formData.contactor_line,
                 contactor_email: formData.contactor_email,
 
                 brand_brand_name: formData.brand_brand_name,
