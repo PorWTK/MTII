@@ -72,6 +72,12 @@ export const Invoice = () => {
       const imgWidth = 210; // A4 width
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
+
+      const link = document.createElement("a");
+      link.href = imgData;
+      link.download = `IV${id}.png`;  
+      link.click();
+
       // Add image to PDF
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
       pdf.save(`IV${id}.pdf`);

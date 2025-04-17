@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 // });
 
 // Use an environment variable if available, falling back to localhost in development.
+
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8888/api";
 
 const api = axios.create({
