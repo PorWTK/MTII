@@ -74,12 +74,7 @@ export const LogIn = () => {
                 <div className="div-6">
                   <div className="div-6">
                     <div className="label-wrapper-7">
-                      <input
-                        className="label-7"
-                        htmlFor="username"
-                        placeholder="Username"
-                        type="text"
-                      />
+                      <label className="label-7" htmlFor="username">Username</label>
                     </div>
 
                     <div className="input-6">
@@ -100,9 +95,7 @@ export const LogIn = () => {
                 <div className="div-6">
                   <div className="div-6">
                     <div className="label-wrapper-7">
-                      <label className="label-8" htmlFor="password">
-                        Password
-                      </label>
+                      <label className="label-8" htmlFor="password">Password</label>
                     </div>
 
                     <div className="input-6">
