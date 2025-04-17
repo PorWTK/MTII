@@ -74,6 +74,11 @@ export const Invoice = () => {
 
 
       const link = document.createElement("a");
+      console.log("Preparing download…", {
+        id,                                         
+        fileName: `IV${id}.png`,                       
+        imgSizeKB: (imgData.length * 3) / 4 / 1024  
+      });
       link.href = imgData;
       link.download = `IV${id}.png`;  
       link.click();
