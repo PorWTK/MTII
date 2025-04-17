@@ -73,14 +73,14 @@ export const LogIn = () => {
               <div className="form-5">
                 <div className="div-6">
                   <div className="div-6">
-                    {/* <div className="label-wrapper-7">
+                    <div className="label-wrapper-7">
                       <input
                         className="label-7"
                         htmlFor="username"
                         placeholder="Username"
                         type="text"
                       />
-                    </div> */}
+                    </div>
 
                     <div className="input-6">
                       <input
@@ -99,11 +99,11 @@ export const LogIn = () => {
 
                 <div className="div-6">
                   <div className="div-6">
-                    {/* <div className="label-wrapper-7">
+                    <div className="label-wrapper-7">
                       <label className="label-8" htmlFor="password">
                         Password
                       </label>
-                    </div> */}
+                    </div>
 
                     <div className="input-6">
                       <input
