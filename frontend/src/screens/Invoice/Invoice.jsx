@@ -77,9 +77,9 @@ export const Invoice = () => {
 
       // console.log("imgData:", imgData);
 
-      link.href = imgData;
-      link.download = `IV${id}.png`;  
-      link.click();
+      // link.href = imgData;
+      // link.download = `IV${id}.png`;  
+      // link.click();
 
       // Add image to PDF
       pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
