@@ -28,16 +28,25 @@ const api = axios.create({
 // );
 
 api.interceptors.request.use(cfg => {
-  // absolute URL if cfg.baseURL is set, relative otherwise
-  const path = new URL(cfg.url, 'http://x').pathname;  // "/user/login"
+  // Normalise pathname regardless of absolute / relative URL
+  const path = new URL(cfg.url, 'http://x').pathname; // → "/user/login"
 
-  // 1) Never attach token on login or refresh‑token endpoints
+  // ─── 1) LOGIN: strip *every* Authorization header ────────────────
   if (path === "/user/login") {
-    delete cfg.headers.Authorization;   // <<<< KEY LINE
+    // Per‑request header
+    delete cfg.headers.Authorization;
+    delete cfg.headers.authorization;          // lowercase just in case
+
+    // Global defaults that Axios may have set earlier
+    delete axios.defaults.headers.common.Authorization;
+    delete axios.defaults.headers.common.authorization;
+
+    // (Optional) purge any token we stored during a previous attempt
+    localStorage.removeItem("authToken");
     return cfg;
   }
 
-  // 2) Attach token for every other request if present
+  // ─── 2) Other routes: attach token if we have one ────────────────
   const tok = localStorage.getItem("authToken");
   if (tok) cfg.headers.Authorization = `Bearer ${tok}`;
 
