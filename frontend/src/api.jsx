@@ -28,17 +28,22 @@ const api = axios.create({
 // );
 
 api.interceptors.request.use(cfg => {
-  // 1) Never attach token on the login call
-  if (cfg.url?.endsWith("/user/login")) {
-    delete cfg.headers.Authorization;
+  // absolute URL if cfg.baseURL is set, relative otherwise
+  const path = new URL(cfg.url, 'http://x').pathname;  // "/user/login"
+
+  // 1) Never attach token on login or refresh‑token endpoints
+  if (path === "/user/login") {
+    delete cfg.headers.Authorization;   // <<<< KEY LINE
     return cfg;
   }
 
-  // 2) Attach token for everything else (if one is stored)
+  // 2) Attach token for every other request if present
   const tok = localStorage.getItem("authToken");
   if (tok) cfg.headers.Authorization = `Bearer ${tok}`;
+
   return cfg;
 });
+
 
 // Add interceptor for response to handle token expiration
 api.interceptors.response.use(
