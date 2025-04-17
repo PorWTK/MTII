@@ -15,17 +15,30 @@ const api = axios.create({
 });
 
 // Add interceptor for request to include token
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("authToken");
+// api.interceptors.request.use(
+//   (config) => {
+//     const token = localStorage.getItem("authToken");
     
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`;
+//     }
+//     return config;
+//   },
+//   (error) => Promise.reject(error)
+// );
+
+api.interceptors.request.use(cfg => {
+  // 1) Never attach token on the login call
+  if (cfg.url?.endsWith("/user/login")) {
+    delete cfg.headers.Authorization;
+    return cfg;
+  }
+
+  // 2) Attach token for everything else (if one is stored)
+  const tok = localStorage.getItem("authToken");
+  if (tok) cfg.headers.Authorization = `Bearer ${tok}`;
+  return cfg;
+});
 
 // Add interceptor for response to handle token expiration
 api.interceptors.response.use(
