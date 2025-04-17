@@ -13,11 +13,16 @@ export const LogIn = () => {
     e.preventDefault(); // Prevent page refresh
   
     try {
-      const response = await apiRequests.login({
-        username,
-        password,
-      });
+      // const response = await apiRequests.login({
+      //   username,
+      //   password,
+      // });
   
+      const response = await apiRequests.login({
+        username: username.trim(),   // ← removes invisible blanks
+        password: password.trim(),
+      });
+      
       console.log("Full Response:", response); // Debugging: check response structure
   
       // Fix token retrieval: response.data.data.token instead of response.data.token
