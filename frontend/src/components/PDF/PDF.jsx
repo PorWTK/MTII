@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-export const PDF = ({ data, docType, details = []}) => {
+export const PDF = React.forwardRef(({ data, docType, details = [] }, ref) => {
   const renderDetails = () => {
     const detailList =
       details && details.length > 0
@@ -55,7 +55,7 @@ export const PDF = ({ data, docType, details = []}) => {
   };
 
   return (
-    <div className="PDF-format">
+    <div ref={ref} div className="PDF-format">
       <div className="main">
         
         {/* Receiver */}
@@ -477,6 +477,6 @@ export const PDF = ({ data, docType, details = []}) => {
       </div>
     </div>
   );
-};
+});
 
 export default PDF;

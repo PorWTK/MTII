@@ -146,6 +146,7 @@ export const Invoice = () => {
             <div className="frame-11">
             <div className="PDF-format-2" ref={pdfRef} style={{ backgroundColor: "white", padding: "20px" }}> 
               <PDF
+              ref={pdfRef}  
               docType="invoice"
               data={{
                 receiver_name: formData.receiver.name,
