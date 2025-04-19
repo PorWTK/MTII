@@ -98,40 +98,27 @@ export const Invoice = () => {
   
     setLoading(true);
     try {
-      /* 1. Snapshot the DOM  */
+      /* 1 — Work out the exact scale so HTML‑width = 210 mm in PDF */
+      const pxPerMM   = 96 / 25.4;                 // jsPDF’s internal dpi
+      const targetPx  = 210 * pxPerMM;             // ≈ 793 px
+      const htmlWidth = input.getBoundingClientRect().width;
+      const scale     = targetPx / htmlWidth;      // ≈ 1.333 for your 595 px
+  
+      /* 2 — Snapshot at that scale, keeping all colours */
       const canvas = await html2canvas(input, {
-        // leave colours exactly as they are in your CSS
-        backgroundColor: null,
-        // keep sharpness on any screen
-        scale: window.devicePixelRatio,
+        backgroundColor: null,     // respect CSS — grey frame stays
+        scale,                     // perfect physical size
         useCORS: true,
         logging: false,
       });
   
-      /* 2. Create an A4 PDF  */
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
-      const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
+      /* 3 — Create A4 PDF and paste image full width */
+      const pdf   = new jsPDF("p", "mm", "a4");
+      const pdfW  = pdf.internal.pageSize.getWidth(); // 210 mm
+      const imgH  = (canvas.height * pdfW) / canvas.width;
   
-      /* 3. Fit the image to full‑width A4  */
-      const imgData = canvas.toDataURL("image/png");
-      const imgW = pdfW;                               // stretch to 210 mm
-      const imgH = (canvas.height * imgW) / canvas.width;
-  
-      /* 4. If the section is taller than one page, add pages automatically  */
-      let posY = 0;
-      let remaining = imgH;
-      while (remaining > 0) {
-        pdf.addImage(imgData, "PNG", 0, posY, imgW, imgH);
-        remaining -= pdfH;
-        if (remaining > 0) {
-          pdf.addPage();
-          posY = posY - pdfH;      // move up for the next slice
-        }
-      }
-  
-      /* 5. Save */
-      pdf.save(`${docType.toUpperCase().slice(0, 2)}${id}.pdf`);
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfW, imgH);
+      pdf.save(`${docType.toUpperCase().slice(0,2)}${id}.pdf`);
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
