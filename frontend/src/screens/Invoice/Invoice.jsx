@@ -91,31 +91,42 @@ export const Invoice = () => {
   //     setLoading(false);
   //   }
   // };
-  const DPI_FIX = 96 / 72;   // 1.333...
-  
   const saveAsPDF = async () => {
     const input = pdfRef.current;
     if (!input) return;
   
     setLoading(true);
     try {
+      // 1) Compute the pixel width needed for 210 mm @96 dpi
+      const pxPerMM  = 96 / 25.4;           // ≈ 3.78 px/mm
+      const targetPx = 210 * pxPerMM;       // ≈ 793 px total width
+  
+      // 2) Measure current width of the element
+      const { width } = input.getBoundingClientRect();
+  
+      // 3) Temporarily scale the element so its CSS width → targetPx
+      const scale = targetPx / width;
+      input.style.transformOrigin = "top left";
+      input.style.transform       = `scale(${scale})`;
+  
+      // 4) Capture the scaled element (at scale:1, since we've already zoomed it)
       const canvas = await html2canvas(input, {
-        // backgroundColor: null,     // keeps grey boxes & borders
-        // scale: window.devicePixelRatio,  // good resolution
-        scale: window.devicePixelRatio * DPI_FIX,
+        backgroundColor: null,  // keep your grey frames & borders
+        scale: 1,               // no extra resolution scaling
         useCORS: true,
         logging: false,
       });
   
-      const imgData = canvas.toDataURL("image/png");
-      const pdf     = new jsPDF("p", "mm", "a4");
-      const pdfW    = pdf.internal.pageSize.getWidth();   // 210
-      const pdfH    = pdf.internal.pageSize.getHeight();  // 297
+      // 5) Revert the transform so the UI goes back to normal
+      input.style.transform = "";
   
-      // *** key line: make the image exactly A4 ***
-      pdf.addImage(imgData, "PNG", 0, 0, pdfW, pdfH);
+      // 6) Create A4 PDF and stretch the image to fill the page
+      const pdf  = new jsPDF("p", "mm", "a4");
+      const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
+      const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
   
-      pdf.save(`IV${id}.pdf`);          // "QT" / "RC" on the other pages
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfW, pdfH);
+      pdf.save(`IV${id}.pdf`);    // <-- inline “IV” prefix for Invoice
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
