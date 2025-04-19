@@ -13,8 +13,10 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { ChevronLeft } from "../../icons/ChevronLeft";
+import { useNavigate } from "react-router-dom";
 
 export const Create = () => {
+const navigate = useNavigate();
 
 const [formData, setFormData] = useState({
   quotation_id_number: "",
@@ -153,6 +155,7 @@ const handleSubmit = async (e) => {
     }
 
     setMessage("Income and details submitted successfully!");
+    navigate(`/view/${invoiceId}`);
   } catch (error) {
     console.error("Error submitting income or details:", error);
     setMessage("Failed to submit income or details.");
