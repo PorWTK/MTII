@@ -98,27 +98,22 @@ export const Invoice = () => {
   
     setLoading(true);
     try {
-      /* 1 — Work out the exact scale so HTML‑width = 210 mm in PDF */
-      const pxPerMM   = 96 / 25.4;                 // jsPDF’s internal dpi
-      const targetPx  = 210 * pxPerMM;             // ≈ 793 px
-      const htmlWidth = input.getBoundingClientRect().width;
-      const scale     = targetPx / htmlWidth;      // ≈ 1.333 for your 595 px
-  
-      /* 2 — Snapshot at that scale, keeping all colours */
       const canvas = await html2canvas(input, {
-        backgroundColor: null,     // respect CSS — grey frame stays
-        scale,                     // perfect physical size
+        backgroundColor: null,     // keeps grey boxes & borders
+        scale: window.devicePixelRatio,  // good resolution
         useCORS: true,
         logging: false,
       });
   
-      /* 3 — Create A4 PDF and paste image full width */
-      const pdf   = new jsPDF("p", "mm", "a4");
-      const pdfW  = pdf.internal.pageSize.getWidth(); // 210 mm
-      const imgH  = (canvas.height * pdfW) / canvas.width;
+      const imgData = canvas.toDataURL("image/png");
+      const pdf     = new jsPDF("p", "mm", "a4");
+      const pdfW    = pdf.internal.pageSize.getWidth();   // 210
+      const pdfH    = pdf.internal.pageSize.getHeight();  // 297
   
-      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfW, imgH);
-      pdf.save(`IV${id}.pdf`);
+      // *** key line: make the image exactly A4 ***
+      pdf.addImage(imgData, "PNG", 0, 0, pdfW, pdfH);
+  
+      pdf.save(`IV${id}.pdf`);          // "QT" / "RC" on the other pages
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
@@ -126,6 +121,7 @@ export const Invoice = () => {
       setLoading(false);
     }
   };
+  
 
   if (loading) {
     return <p>Loading data...</p>;
