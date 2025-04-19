@@ -97,36 +97,43 @@ export const Invoice = () => {
   
     setLoading(true);
     try {
-      // 1) Compute the pixel width needed for 210 mm @96 dpi
-      const pxPerMM  = 96 / 25.4;           // ≈ 3.78 px/mm
-      const targetPx = 210 * pxPerMM;       // ≈ 793 px total width
+      // 1) Measure the CSS size of the element
+      const { width: cssWidth, height: cssHeight } =
+        input.getBoundingClientRect();
   
-      // 2) Measure current width of the element
-      const { width } = input.getBoundingClientRect();
-  
-      // 3) Temporarily scale the element so its CSS width → targetPx
-      const scale = targetPx / width;
-      input.style.transformOrigin = "top left";
-      input.style.transform       = `scale(${scale})`;
-  
-      // 4) Capture the scaled element (at scale:1, since we've already zoomed it)
+      // 2) Rasterize at devicePixelRatio for crispness
       const canvas = await html2canvas(input, {
-        backgroundColor: null,  // keep your grey frames & borders
-        scale: 1,               // no extra resolution scaling
+        backgroundColor: null,      // keeps your grey frames & borders
+        scale: window.devicePixelRatio,
         useCORS: true,
         logging: false,
       });
+      const imgData = canvas.toDataURL("image/png");
   
-      // 5) Revert the transform so the UI goes back to normal
-      input.style.transform = "";
+      // 3) Prepare the PDF and compute scaling in mm
+      const pdf = new jsPDF("p", "mm", "a4");
+      const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
+      const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
   
-      // 6) Create A4 PDF and stretch the image to fill the page
-      const pdf  = new jsPDF("p", "mm", "a4");
-      const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
-      const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
+      // Convert CSS px → mm (assuming 96 dpi)
+      const mmPerPx = 25.4 / 96;
+      const imgWmm = cssWidth * mmPerPx;
+      const imgHmm = cssHeight * mmPerPx;
   
-      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfW, pdfH);
-      pdf.save(`IV${id}.pdf`);    // <-- inline “IV” prefix for Invoice
+      // Compute the maximum scale that fits both width & height
+      const scale = Math.min(pdfW / imgWmm, pdfH / imgHmm);
+  
+      // Final dimensions in mm
+      const finalW = imgWmm * scale;
+      const finalH = imgHmm * scale;
+  
+      // Optionally center on the page:
+      const xOffset = (pdfW - finalW) / 2;
+      const yOffset = (pdfH - finalH) / 2;
+  
+      // 4) Draw it and save
+      pdf.addImage(imgData, "PNG", xOffset, yOffset, finalW, finalH);
+      pdf.save(`IV${id}.pdf`);  // In Quotation.jsx use `QT${id}.pdf`, in Receipt.jsx `RC${id}.pdf`
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
@@ -134,7 +141,6 @@ export const Invoice = () => {
       setLoading(false);
     }
   };
-  
 
   if (loading) {
     return <p>Loading data...</p>;
