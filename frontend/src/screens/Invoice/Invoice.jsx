@@ -97,43 +97,35 @@ export const Invoice = () => {
   
     setLoading(true);
     try {
-      // 1) Measure the CSS size of the element
-      const { width: cssWidth, height: cssHeight } =
-        input.getBoundingClientRect();
-  
-      // 2) Rasterize at devicePixelRatio for crispness
+      // 1) rasterize at devicePixelRatio for crispness, keep your grey frames:
       const canvas = await html2canvas(input, {
-        backgroundColor: null,      // keeps your grey frames & borders
+        backgroundColor: null,
         scale: window.devicePixelRatio,
         useCORS: true,
         logging: false,
       });
       const imgData = canvas.toDataURL("image/png");
   
-      // 3) Prepare the PDF and compute scaling in mm
+      // 2) set up A4 in mm
       const pdf = new jsPDF("p", "mm", "a4");
-      const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
-      const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
+      const pdfW = pdf.internal.pageSize.getWidth();   // 210
+      const pdfH = pdf.internal.pageSize.getHeight();  // 297
   
-      // Convert CSS px → mm (assuming 96 dpi)
+      // 3) convert canvas px → mm
       const mmPerPx = 25.4 / 96;
-      const imgWmm = cssWidth * mmPerPx;
-      const imgHmm = cssHeight * mmPerPx;
+      const imgWmm = canvas.width * mmPerPx;
+      const imgHmm = canvas.height * mmPerPx;
   
-      // Compute the maximum scale that fits both width & height
-      const scale = Math.min(pdfW / imgWmm, pdfH / imgHmm);
+      // 4) scale so width exactly fills 210 mm, preserve aspect
+      const finalW = pdfW;
+      const finalH = imgHmm * (finalW / imgWmm);
   
-      // Final dimensions in mm
-      const finalW = imgWmm * scale;
-      const finalH = imgHmm * scale;
-  
-      // Optionally center on the page:
-      const xOffset = (pdfW - finalW) / 2;
+      // 5) center vertically if there's any leftover space
       const yOffset = (pdfH - finalH) / 2;
   
-      // 4) Draw it and save
-      pdf.addImage(imgData, "PNG", xOffset, yOffset, finalW, finalH);
-      pdf.save(`IV${id}.pdf`);  // In Quotation.jsx use `QT${id}.pdf`, in Receipt.jsx `RC${id}.pdf`
+      // 6) draw and save
+      pdf.addImage(imgData, "PNG", 0, yOffset, finalW, finalH);
+      pdf.save(`IV${id}.pdf`);  // Quotation.jsx: `QT${id}.pdf`, Receipt.jsx: `RC${id}.pdf`
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
