@@ -55,32 +55,56 @@ export const Receipt = () => {
 
 
   const saveAsPDF = async () => {
-    const input = pdfRef.current;
-    if (!input) return;
-
+    const original = pdfRef.current;
+    if (!original) return;
+  
     setLoading(true);
-
     try {
-      const canvas = await html2canvas(input, {
-        scale: 2, // increases resolution
-        useCORS: true,
-        logging: false,
+      // 1) Measure the original CSS size (px)
+      const { width: origW, height: origH } =
+        original.getBoundingClientRect();
+  
+      // 2) Compute the pixel width that maps to 210 mm @96 dpi
+      const pxPerMM  = 96 / 25.4;             // ≈ 3.78 px/mm
+      const targetPx = 210 * pxPerMM;         // ≈ 793 px
+  
+      // 3) Compute uniform scale factor
+      const scale = targetPx / origW;
+  
+      // 4) Clone the node & apply the scale off‑screen
+      const clone = original.cloneNode(true);
+      Object.assign(clone.style, {
+        position:         "absolute",
+        top:              "-9999px",
+        left:             "-9999px",
+        transformOrigin:  "top left",
+        transform:        `scale(${scale})`,
+        backgroundColor:  "white",    // ensure white behind
+        width:            `${origW}px`,
+        height:           `${origH}px`,
       });
-
+      document.body.appendChild(clone);
+  
+      // 5) Capture the **scaled clone** at devicePixelRatio for crispness
+      const canvas = await html2canvas(clone, {
+        backgroundColor: null,           // preserves your grey boxes
+        scale:           window.devicePixelRatio,
+        useCORS:         true,
+        logging:         false,
+      });
+  
+      // 6) Clean up the clone
+      document.body.removeChild(clone);
+  
+      // 7) Build A4 PDF & embed full‑page
       const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210; // A4 width in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      // Calculate yOffset to center the image vertically on a 297mm tall A4 page
-      const yOffset = (297 - imgHeight) / 2;
-      
-       // Add image to PDF
-      pdf.addImage(imgData, "PNG", 0, yOffset, imgWidth, imgHeight);
+      const pdf     = new jsPDF("p", "mm", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+  
+      // 8) Save with “IV” prefix
       pdf.save(`RC${id}.pdf`);
-
-      console.log("PDF saved successfully!");
-    } catch (error) {
-      console.error("Error generating PDF:", error);
+    } catch (err) {
+      console.error(err);
       setMessage("Failed to generate PDF.");
     } finally {
       setLoading(false);
