@@ -733,8 +733,7 @@ const handleSubmit = async (e) => {
                         id="phone-agency"
                         variant="outlined"
                         fullWidth
-                        type="text" name="agency_phone_number" value={formData.agency_phone_number} onChange={handleChange} 
-                        // required
+                        type="text" name="agency_phone_number" value={formData.agency_phone_number} onChange={handleChange} required
                         // type="tel"
                         sx={{ height: "44px" }}
                       />
@@ -785,8 +784,7 @@ const handleSubmit = async (e) => {
                         id="phone-contacter"
                         variant="outlined"
                         fullWidth
-                        type="text" name="contactor_phone_number" value={formData.contactor_phone_number} onChange={handleChange} 
-                        // required
+                        type="text" name="contactor_phone_number" value={formData.contactor_phone_number} onChange={handleChange} required
                         // type="tel"
                         sx={{ height: "44px" }}
                       />
@@ -821,8 +819,7 @@ const handleSubmit = async (e) => {
                         id="email"
                         variant="outlined"
                         fullWidth
-                        type="email" name="contactor_email" value={formData.contactor_email} onChange={handleChange} 
-                        // required
+                        type="email" name="contactor_email" value={formData.contactor_email} onChange={handleChange} required
                         // type="email"
                         sx={{ height: "44px" }}
                       />
@@ -1010,7 +1007,7 @@ const handleSubmit = async (e) => {
                       </div>
                     </div>
                     <FormControl fullWidth sx={{ width: "468px" }} >
-                      <Select labelId="bank-label" name="bank_id" value={formData.bank_id} onChange={handleChange}  defaultValue="">
+                      <Select labelId="bank-label" name="bank_id" value={formData.bank_id} onChange={handleChange} required  defaultValue="">
                         <MenuItem value="1">ธนาคารกรุงเทพ (BBL)</MenuItem>
                         <MenuItem value="2">ธนาคารกรุงไทย (KTB)</MenuItem>
                         <MenuItem value="3">ธนาคารกสิกรไทย (KBank)</MenuItem>
@@ -1045,8 +1042,7 @@ const handleSubmit = async (e) => {
                         id="transaction-ref"
                         variant="outlined"
                         fullWidth
-                        type="number" name="transaction_reference_number" value={formData.transaction_reference_number} onChange={handleChange} 
-                        // required
+                        type="number" name="transaction_reference_number" value={formData.transaction_reference_number} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1095,8 +1091,7 @@ const handleSubmit = async (e) => {
                         id="terms-conditions"
                         variant="outlined"
                         fullWidth
-                        name="terms_and_conditions" value={formData.terms_and_conditions} onChange={handleChange} 
-                        // required
+                        name="terms_and_conditions" value={formData.terms_and_conditions} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1130,8 +1125,7 @@ const handleSubmit = async (e) => {
                         id="notes-total-payment"
                         variant="outlined"
                         fullWidth
-                        type="text" name="notes_for_the_total_payment" value={formData.notes_for_the_total_payment} onChange={handleChange} 
-                        // required
+                        type="text" name="notes_for_the_total_payment" value={formData.notes_for_the_total_payment} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1149,8 +1143,7 @@ const handleSubmit = async (e) => {
                         id="first-payment"
                         variant="outlined"
                         fullWidth
-                        type="number" name="first_payment" value={formData.first_payment} onChange={handleChange} 
-                        // required
+                        type="number" name="first_payment" value={formData.first_payment} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1166,8 +1159,7 @@ const handleSubmit = async (e) => {
                         id="notes-first-payment"
                         variant="outlined"
                         fullWidth
-                        type="text" name="notes_for_the_first_payment" value={formData.notes_for_the_first_payment} onChange={handleChange} 
-                        // required
+                        type="text" name="notes_for_the_first_payment" value={formData.notes_for_the_first_payment} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1185,8 +1177,7 @@ const handleSubmit = async (e) => {
                         id="second-payment"
                         variant="outlined"
                         fullWidth
-                        type="number" name="second_payment" value={formData.second_payment} onChange={handleChange} 
-                        // required
+                        type="number" name="second_payment" value={formData.second_payment} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1202,8 +1193,7 @@ const handleSubmit = async (e) => {
                         id="notes-second-payment"
                         variant="outlined"
                         fullWidth
-                        type="text" name="notes_for_the_second_payment" value={formData.notes_for_the_second_payment} onChange={handleChange} 
-                        // required 
+                        type="text" name="notes_for_the_second_payment" value={formData.notes_for_the_second_payment} onChange={handleChange} required 
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1221,8 +1211,7 @@ const handleSubmit = async (e) => {
                         id="unpaid-payment"
                         variant="outlined"
                         fullWidth
-                        type="number" name="unpaid_payment_amount" value={formData.unpaid_payment_amount} onChange={handleChange} 
-                        // required
+                        type="number" name="unpaid_payment_amount" value={formData.unpaid_payment_amount} onChange={handleChange} required
                         sx={{ height: "44px" }}
                       />
                     </FormControl>
@@ -1243,7 +1232,7 @@ const handleSubmit = async (e) => {
                         name="notes_for_the_unpaid_payment" 
                         value={formData.notes_for_the_unpaid_payment} 
                         onChange={handleChange} 
-                        // required
+                        required
                       />
                     </FormControl>
                   </div>
