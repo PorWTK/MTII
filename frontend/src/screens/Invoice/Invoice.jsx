@@ -54,40 +54,86 @@ export const Invoice = () => {
       }
     }, [formData]);
 
+  // const saveAsPDF = async () => {
+  //   const input = pdfRef.current;
+  //   if (!input) return;
+
+  //   setLoading(true); // Show loading while generating the PDF
+
+  //   try {
+  //     const canvas = await html2canvas(input, {
+  //       scale: 2, // Improves quality
+  //       useCORS: true, // Ensures images load correctly
+  //       logging: false, // Remove console clutter
+  //     });
+
+  //     const imgData = canvas.toDataURL("image/png");
+  //     const pdf = new jsPDF("p", "mm", "a4");
+  //     const imgWidth = 210; // A4 width
+  //     const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+  //     const link = document.createElement("a");
+
+  //     // console.log("imgData:", imgData);
+  //     // link.href = imgData;
+  //     // link.download = `IV${id}.png`;  
+  //     // link.click();
+
+  //     // Add image to PDF
+  //     pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+  //     pdf.save(`IV${id}.pdf`);
+
+  //     console.log("PDF saved successfully!");
+  //   } catch (error) {
+  //     console.error("Error generating PDF:", error);
+  //     setMessage("Failed to generate PDF.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+
   const saveAsPDF = async () => {
     const input = pdfRef.current;
     if (!input) return;
-
-    setLoading(true); // Show loading while generating the PDF
-
+  
+    setLoading(true);
     try {
+      /* 1. Snapshot the DOM  */
       const canvas = await html2canvas(input, {
-        scale: 2, // Improves quality
-        useCORS: true, // Ensures images load correctly
-        logging: false, // Remove console clutter
+        // leave colours exactly as they are in your CSS
+        backgroundColor: null,
+        // keep sharpness on any screen
+        scale: window.devicePixelRatio,
+        useCORS: true,
+        logging: false,
       });
-
-      const imgData = canvas.toDataURL("image/png");
+  
+      /* 2. Create an A4 PDF  */
       const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 210; // A4 width
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-
-      const link = document.createElement("a");
-
-      // console.log("imgData:", imgData);
-
-      // link.href = imgData;
-      // link.download = `IV${id}.png`;  
-      // link.click();
-
-      // Add image to PDF
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      pdf.save(`IV${id}.pdf`);
-
-      console.log("PDF saved successfully!");
-    } catch (error) {
-      console.error("Error generating PDF:", error);
+      const pdfW = pdf.internal.pageSize.getWidth();   // 210 mm
+      const pdfH = pdf.internal.pageSize.getHeight();  // 297 mm
+  
+      /* 3. Fit the image to full‑width A4  */
+      const imgData = canvas.toDataURL("image/png");
+      const imgW = pdfW;                               // stretch to 210 mm
+      const imgH = (canvas.height * imgW) / canvas.width;
+  
+      /* 4. If the section is taller than one page, add pages automatically  */
+      let posY = 0;
+      let remaining = imgH;
+      while (remaining > 0) {
+        pdf.addImage(imgData, "PNG", 0, posY, imgW, imgH);
+        remaining -= pdfH;
+        if (remaining > 0) {
+          pdf.addPage();
+          posY = posY - pdfH;      // move up for the next slice
+        }
+      }
+  
+      /* 5. Save */
+      pdf.save(`${docType.toUpperCase().slice(0, 2)}${id}.pdf`);
+    } catch (err) {
+      console.error(err);
       setMessage("Failed to generate PDF.");
     } finally {
       setLoading(false);
