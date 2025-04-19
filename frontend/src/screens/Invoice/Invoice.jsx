@@ -90,42 +90,57 @@ export const Invoice = () => {
   //   } finally {
   //     setLoading(false);
   //   }
-  // };
+  
+  // … inside your Invoice component …
   const saveAsPDF = async () => {
-    const input = pdfRef.current;
-    if (!input) return;
+    const original = pdfRef.current;
+    if (!original) return;
   
     setLoading(true);
     try {
-      // 1) rasterize at devicePixelRatio for crispness, keep your grey frames:
-      const canvas = await html2canvas(input, {
-        backgroundColor: null,
-        scale: window.devicePixelRatio,
-        useCORS: true,
-        logging: false,
+      // 1) Measure the original CSS size (px)
+      const { width: origW, height: origH } =
+        original.getBoundingClientRect();
+  
+      // 2) Compute the pixel width that maps to 210 mm @96 dpi
+      const pxPerMM  = 96 / 25.4;             // ≈ 3.78 px/mm
+      const targetPx = 210 * pxPerMM;         // ≈ 793 px
+  
+      // 3) Compute uniform scale factor
+      const scale = targetPx / origW;
+  
+      // 4) Clone the node & apply the scale off‑screen
+      const clone = original.cloneNode(true);
+      Object.assign(clone.style, {
+        position:         "absolute",
+        top:              "-9999px",
+        left:             "-9999px",
+        transformOrigin:  "top left",
+        transform:        `scale(${scale})`,
+        backgroundColor:  "white",    // ensure white behind
+        width:            `${origW}px`,
+        height:           `${origH}px`,
       });
+      document.body.appendChild(clone);
+  
+      // 5) Capture the **scaled clone** at devicePixelRatio for crispness
+      const canvas = await html2canvas(clone, {
+        backgroundColor: null,           // preserves your grey boxes
+        scale:           window.devicePixelRatio,
+        useCORS:         true,
+        logging:         false,
+      });
+  
+      // 6) Clean up the clone
+      document.body.removeChild(clone);
+  
+      // 7) Build A4 PDF & embed full‑page
       const imgData = canvas.toDataURL("image/png");
+      const pdf     = new jsPDF("p", "mm", "a4");
+      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
   
-      // 2) set up A4 in mm
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfW = pdf.internal.pageSize.getWidth();   // 210
-      const pdfH = pdf.internal.pageSize.getHeight();  // 297
-  
-      // 3) convert canvas px → mm
-      const mmPerPx = 25.4 / 96;
-      const imgWmm = canvas.width * mmPerPx;
-      const imgHmm = canvas.height * mmPerPx;
-  
-      // 4) scale so width exactly fills 210 mm, preserve aspect
-      const finalW = pdfW;
-      const finalH = imgHmm * (finalW / imgWmm);
-  
-      // 5) center vertically if there's any leftover space
-      const yOffset = (pdfH - finalH) / 2;
-  
-      // 6) draw and save
-      pdf.addImage(imgData, "PNG", 0, yOffset, finalW, finalH);
-      pdf.save(`IV${id}.pdf`);  // Quotation.jsx: `QT${id}.pdf`, Receipt.jsx: `RC${id}.pdf`
+      // 8) Save with “IV” prefix
+      pdf.save(`IV${id}.pdf`);
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
@@ -133,6 +148,7 @@ export const Invoice = () => {
       setLoading(false);
     }
   };
+  
 
   if (loading) {
     return <p>Loading data...</p>;
