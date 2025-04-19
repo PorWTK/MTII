@@ -118,7 +118,7 @@ export const Invoice = () => {
       const imgH  = (canvas.height * pdfW) / canvas.width;
   
       pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdfW, imgH);
-      pdf.save(`${docType.toUpperCase().slice(0,2)}${id}.pdf`);
+      pdf.save(`IV${id}.pdf`);
     } catch (err) {
       console.error(err);
       setMessage("Failed to generate PDF.");
