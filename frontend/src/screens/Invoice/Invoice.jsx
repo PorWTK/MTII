@@ -91,7 +91,8 @@ export const Invoice = () => {
   //     setLoading(false);
   //   }
   // };
-
+  const DPI_FIX = 96 / 72;   // 1.333...
+  
   const saveAsPDF = async () => {
     const input = pdfRef.current;
     if (!input) return;
@@ -99,8 +100,9 @@ export const Invoice = () => {
     setLoading(true);
     try {
       const canvas = await html2canvas(input, {
-        backgroundColor: null,     // keeps grey boxes & borders
-        scale: window.devicePixelRatio,  // good resolution
+        // backgroundColor: null,     // keeps grey boxes & borders
+        // scale: window.devicePixelRatio,  // good resolution
+        scale: window.devicePixelRatio * DPI_FIX,
         useCORS: true,
         logging: false,
       });
