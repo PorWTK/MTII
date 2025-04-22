@@ -104,13 +104,10 @@ const handleSubmit = async (e) => {
     receipt_id_number: Number(formData.receipt_id_number) || null,
     agency_tax_payer_id_number: Number(formData.agency_tax_payer_id_number) || null,
     transaction_reference_number: Number(formData.transaction_reference_number) || null,
-
-
-    total_payment_amount: Number(formData.total_payment_amount ?? 0),
-    first_payment: Number(formData.first_payment ?? 0),
-    second_payment: Number(formData.second_payment ?? 0),
-    unpaid_payment_amount: Number(formData.unpaid_payment_amount ?? 0),
-    
+    total_payment_amount: Number(formData.total_payment_amount) || null,
+    first_payment: Number(formData.first_payment) || null,
+    second_payment: Number(formData.second_payment) || null,
+    unpaid_payment_amount: Number(formData.unpaid_payment_amount) || null,
     platform_id: Number(formData.platform_id) || null,
     status_id: Number(formData.status_id) || null,
     payment_method_id: Number(formData.payment_method_id) || null,
