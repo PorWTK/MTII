@@ -490,8 +490,8 @@ export const Analytics = () => {
                   }}
                 >
                   <TableRow>
-                    <TableCell>Invoice ID</TableCell>
                     <TableCell>Posting Date</TableCell>
+                    <TableCell>Invoice ID</TableCell>
                     <TableCell>Status</TableCell>
                     <TableCell>Payment Method</TableCell>
                     <TableCell>Brand</TableCell>
