@@ -57,8 +57,6 @@ const calculateTax = (income) => {
   return tax;
 };
 
-const totalCount = pieData.reduce((sum, item) => sum + item.value, 0);
-
 // Action menu component for each row
 const ActionMenu = ({ rowId, onDelete }) => {
   const navigate = useNavigate();
@@ -114,6 +112,8 @@ export const Analytics = () => {
   const [pieData, setPieData] = useState([]);
   const [recentData, setRecentData] = useState([]);
 
+  const totalCount = pieData.reduce((sum, item) => sum + item.value, 0);
+  
   // Normalize dates so filtering is inclusive of the entire day
   const normalizeStartDate = (date) => {
     const d = new Date(date);
