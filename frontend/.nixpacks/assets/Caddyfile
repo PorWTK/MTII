@@ -1,0 +1,9 @@
+:{$PORT}
+
+# Serve React’s build output
+root * /app/build
+
+# React Router fallback
+try_files {path} {path}/ /index.html
+
+file_server
