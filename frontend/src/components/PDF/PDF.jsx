@@ -14,11 +14,29 @@ export const PDF = ({ data, docType, details = []},ref) => {
       return detailList.map((detail, index) => (
         <div className="list" key={index}>
           <div className="description-2">{detail.description}</div>
-          <div className="qty">{detail.quantity}</div>
-          <div className="text-wrapper-10">{detail.unit_price}</div>
+          {/* <div className="qty">{detail.quantity}</div> */}
+          <div className="qty">
+            {Number(detail.quantity).toLocaleString()}
+          </div>
+          {/* <div className="text-wrapper-10">{detail.unit_price}</div> */}
           <div className="text-wrapper-10">
+            {Number(detail.unit_price).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })}
+          </div>
+          {/* <div className="text-wrapper-10">
             {detail.total_price ||
               (Number(detail.quantity) * Number(detail.unit_price)).toFixed(2)}
+          </div> */}
+          <div className="text-wrapper-10">
+            {Number(
+              detail.total_price ||
+              (Number(detail.quantity) * Number(detail.unit_price))
+            ).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2
+            })}
           </div>
         </div>
       ));
@@ -167,7 +185,13 @@ export const PDF = ({ data, docType, details = []},ref) => {
 
           <div className="total">
             <div className="text-wrapper-11">Subtotal</div>
-            <div className="text-wrapper-12">{data.total_payment_amount}</div>
+            {/* <div className="text-wrapper-12">{data.total_payment_amount}</div> */}
+            <div className="text-wrapper-12">
+              {Number(data.total_payment_amount).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </div>
           </div>
 
           <div className="notes">
@@ -271,9 +295,19 @@ export const PDF = ({ data, docType, details = []},ref) => {
             </div>
           </div> */}
 
-          <div className="total">
+          {/* <div className="total">
             <div className="text-wrapper-11">Subtotal</div>
             <div className="text-wrapper-12">{data.total_payment_amount}</div>
+          </div> */}
+          <div className="total">
+            <div className="text-wrapper-11">Subtotal</div>
+            {/* <div className="text-wrapper-12">{data.total_payment_amount}</div> */}
+            <div className="text-wrapper-12">
+              {Number(data.total_payment_amount).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
+            </div>
           </div>
 
           <div className="notes">
@@ -376,10 +410,20 @@ export const PDF = ({ data, docType, details = []},ref) => {
                 </div>
             </div> */}
 
-            <div className="total">
+            {/* <div className="total">
                 <div className="text-wrapper-11">Subtotal</div>
                 <div className="text-wrapper-12">{data.total_payment_amount}</div>
+            </div> */}
+            <div className="total">
+            <div className="text-wrapper-11">Subtotal</div>
+            {/* <div className="text-wrapper-12">{data.total_payment_amount}</div> */}
+            <div className="text-wrapper-12">
+              {Number(data.total_payment_amount).toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              })}
             </div>
+          </div>
 
             <div className="ref">
                 <div className="text-wrapper-3">Reference</div>
