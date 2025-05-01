@@ -57,6 +57,8 @@ const calculateTax = (income) => {
   return tax;
 };
 
+const totalCount = pieData.reduce((sum, item) => sum + item.value, 0);
+
 // Action menu component for each row
 const ActionMenu = ({ rowId, onDelete }) => {
   const navigate = useNavigate();
@@ -439,29 +441,36 @@ export const Analytics = () => {
                       <Cell key={`cell-${index}`} fill={pieColors[index % pieColors.length]} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  {/* <Tooltip /> */}
+                  <Tooltip separator=": " />
                 </RechartsPieChart>
               </div>
               <div className="legend">
-                {pieData.map((item, index) => (
-                  <div key={index} className="legend-series">
-                    <div className="color-wrapper">
-                      <div
-                        className={
-                          index === 0
-                            ? "color"
-                            : index === 1
-                            ? "color-2"
-                            : index === 2
-                            ? "color-3"
-                            : "color-4"
-                        }
-                      />
+                {pieData.map((item, index) => {
+                  const percent = totalCount > 0
+                    ? Math.round((item.value / totalCount) * 100)
+                    : 0;
+                  return (
+                    <div key={index} className="legend-series">
+                      <div className="color-wrapper">
+                        <div
+                          className={
+                            index === 0
+                              ? "color"
+                              : index === 1
+                              ? "color-2"
+                              : index === 2
+                              ? "color-3"
+                              : "color-4"
+                          }
+                        />
+                      </div>
+                      <div className="text-wrapper-8">
+                        {item.name}: {item.value} ({percent}%)
+                      </div>
                     </div>
-                    <div className="text-wrapper-8">{item.name}</div>
-                    <div className="text-wrapper-8">({item.value})</div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </div>
