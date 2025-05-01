@@ -113,7 +113,7 @@ export const Analytics = () => {
   const [recentData, setRecentData] = useState([]);
 
   const totalCount = pieData.reduce((sum, item) => sum + item.value, 0);
-  
+
   // Normalize dates so filtering is inclusive of the entire day
   const normalizeStartDate = (date) => {
     const d = new Date(date);
@@ -391,7 +391,7 @@ export const Analytics = () => {
             hasChangeAndText={false}
             headingClassName="metric-item-4"
             numberClassName="metric-item-4"
-            text="Total pending amount (baht)"
+            text="Total pending (baht)"
             text1={metrics.totalPending.toLocaleString()}
             type="chart-01"
           />
@@ -404,7 +404,7 @@ export const Analytics = () => {
             hasChangeAndText={false}
             headingClassName="metric-item-5"
             numberClassName="metric-item-5"
-            text="Total overdue amount (baht)"
+            text="Total overdue (baht)"
             text1={metrics.totalOverdue.toLocaleString()}
             type="chart-01"
           />
