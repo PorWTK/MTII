@@ -194,6 +194,15 @@ export const Data = () => {
       if (a.invoice_id_number > b.invoice_id_number) return 1;
       return 0;
     }
+    if (orderBy === "client") {
+      // Compare agency_agency_name alphabetically
+      return b.agency_agency_name.localeCompare(a.agency_agency_name);
+    }
+    if (orderBy === "brand") {
+      // Compare brand_brand_name alphabetically
+      return b.brand_brand_name.localeCompare(a.brand_brand_name);
+    }
+
     // Generic comparator for other fields
     if (b[orderBy] < a[orderBy]) return -1;
     if (b[orderBy] > a[orderBy]) return 1;
@@ -507,8 +516,26 @@ export const Data = () => {
                     </TableCell>
                     <TableCell>Status</TableCell>
                     <TableCell>Payment Method</TableCell>
-                    <TableCell>Client</TableCell>
-                    <TableCell>Brand</TableCell>
+                    {/* <TableCell>Client</TableCell>
+                    <TableCell>Brand</TableCell> */}
+                    <TableCell>
+                      <TableSortLabel
+                        active={orderBy === "client"}
+                        direction={orderBy === "client" ? order : "asc"}
+                        onClick={() => handleRequestSort("client")}
+                      >
+                        Client
+                      </TableSortLabel>
+                    </TableCell>
+                    <TableCell>
+                      <TableSortLabel
+                        active={orderBy === "brand"}
+                        direction={orderBy === "brand" ? order : "asc"}
+                        onClick={() => handleRequestSort("brand")}
+                      >
+                        Brand
+                      </TableSortLabel>
+                    </TableCell>
                     <TableCell>Total Balance</TableCell>
                     <TableCell>Channel</TableCell>
                     <TableCell>Platform</TableCell>
