@@ -421,7 +421,7 @@ export const Analytics = () => {
               img="/img/divider-194.svg"
               supportingText={false}
               tabs={false}
-              text="Sessions by payment status"
+              text="Payment status overview"
               type="buttons"
             />
             <div className="pie-chart">

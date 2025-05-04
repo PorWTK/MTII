@@ -184,7 +184,7 @@ export const PDF = ({ data, docType, details = []},ref) => {
           </div> */}
 
           <div className="total">
-            <div className="text-wrapper-11">Subtotal</div>
+            <div className="text-wrapper-11">Total</div>
             {/* <div className="text-wrapper-12">{data.total_payment_amount}</div> */}
             <div className="text-wrapper-12">
               {Number(data.total_payment_amount).toLocaleString(undefined, {
@@ -300,7 +300,7 @@ export const PDF = ({ data, docType, details = []},ref) => {
             <div className="text-wrapper-12">{data.total_payment_amount}</div>
           </div> */}
           <div className="total">
-            <div className="text-wrapper-11">Subtotal</div>
+            <div className="text-wrapper-11">Total</div>
             {/* <div className="text-wrapper-12">{data.total_payment_amount}</div> */}
             <div className="text-wrapper-12">
               {Number(data.total_payment_amount).toLocaleString(undefined, {
@@ -415,7 +415,7 @@ export const PDF = ({ data, docType, details = []},ref) => {
                 <div className="text-wrapper-12">{data.total_payment_amount}</div>
             </div> */}
             <div className="total">
-            <div className="text-wrapper-11">Subtotal</div>
+            <div className="text-wrapper-11">Total</div>
             {/* <div className="text-wrapper-12">{data.total_payment_amount}</div> */}
             <div className="text-wrapper-12">
               {Number(data.total_payment_amount).toLocaleString(undefined, {
